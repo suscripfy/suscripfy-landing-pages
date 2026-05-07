@@ -29,6 +29,7 @@
         <a href="#features" class="navbar__link">Funcionalidades</a>
         <a href="#capacidades" class="navbar__link">Capacidades</a>
         <a href="#planes" class="navbar__link">Planes</a>
+        <a href="#faq" class="navbar__link">FAQ</a>
         <a href="#demo" class="btn btn--primary btn--sm">Agenda una demo</a>
       </div>
       <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
@@ -539,6 +540,7 @@
               </div>
             </div>
           </div>
+          </div>
           <div class="feature__content">
             <span class="feature__num" aria-hidden="true">03</span>
             <h3 class="feature__title">Portal de clientes autónomo</h3>
@@ -943,6 +945,101 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECCIÓN: PREGUNTAS FRECUENTES                                -->
+    <!-- ============================================================ -->
+    <section id="faq" class="section section--alt" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="faq-title">Preguntas frecuentes</h2>
+          <p class="section__subtitle">Todo lo que necesitas saber antes de empezar.</p>
+        </div>
+        <div class="faq-list animate-on-scroll">
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Mis datos de pago y los de mis clientes están seguros?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>SuscripFy nunca almacena datos de tarjeta (número, CVV, fecha). La tokenización ocurre directamente entre el navegador del cliente y MercadoPago mediante su SDK. Solo guardamos tokens opacos que son inútiles sin las credenciales del merchant, las cuales están encriptadas en nuestra base de datos.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿SuscripFy afecta el rendimiento de mi tienda Shopify?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>No. SuscripFy opera como un servicio externo que se comunica vía API. El widget se carga de forma asíncrona y pesa menos de 15KB. Si SuscripFy estuviera caído, tu tienda sigue funcionando normalmente con su botón de compra nativo.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Pueden mis clientes cambiar su tarjeta sin cancelar la suscripción?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Sí. Desde el portal del cliente, el suscriptor puede actualizar su tarjeta ingresando los nuevos datos. El cambio aplica al próximo ciclo de cobro y la tarjeta anterior queda desvinculada automáticamente en MercadoPago.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Puedo ofrecer suscripción en varios productos a la vez?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Sí. Puedes asociar múltiples productos al mismo plan de suscripción. Si un cliente quiere suscribirse a 3 productos, tendrá 3 suscripciones independientes, cada una con su propio ciclo de cobro y frecuencia configurable.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Cómo garantizan que no haya doble cobro?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Cada cobro usa una clave de idempotencia única en MercadoPago. Si por alguna razón el sistema intenta cobrar dos veces el mismo ciclo, MercadoPago rechaza el duplicado automáticamente. Además, el estado del ciclo se actualiza en base de datos antes de intentar el cobro.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Puedo migrar suscriptores que ya tengo de otra plataforma?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Parcialmente. Los datos del cliente (email, nombre, dirección) y la configuración del plan se pueden migrar. Sin embargo, el cliente deberá re-ingresar su tarjeta en el checkout de SuscripFy — ninguna plataforma puede exportar datos de tarjeta por razones de seguridad PCI-DSS.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿SuscripFy tiene API para conectar con mi ERP o CRM?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Sí. SuscripFy incluye una API REST completa autenticada con API Key. Permite exportar datos de suscripciones, transacciones y órdenes completadas. La API está disponible en todos los planes, incluido el gratuito.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Dónde puedo ver el historial de cobros de cada suscriptor?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Cada suscripción tiene un historial completo de ciclos con fecha, monto base, descuento, IVA, envío y estado del pago. Puedes verlo desde el panel admin dentro de Shopify, y tus clientes también lo ven desde su portal.</p>
+            </div>
+          </details>
+
+        </div>
       </div>
     </section>
 
