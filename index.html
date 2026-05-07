@@ -63,6 +63,10 @@
             </li>
             <li>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/></svg>
+              Envío gratis siempre en cada entrega
+            </li>
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/></svg>
               Incrementa el lifetime value de cada cliente
             </li>
             <li>
@@ -118,8 +122,17 @@
               </div>
               <div class="hero-pdp-mock__body">
                 <div class="hero-pdp-mock__image">
-                  <div class="hero-pdp-mock__image-gradient"></div>
-                  <span class="hero-pdp-mock__image-label">Sérum Facial</span>
+                  <div class="hero-product-bottle">
+                    <div class="hero-product-bottle__cap"></div>
+                    <div class="hero-product-bottle__body">
+                      <div class="hero-product-bottle__label">
+                        <span class="hero-product-bottle__brand">BEAUTÉ</span>
+                        <span class="hero-product-bottle__line">Vitamina C</span>
+                        <span class="hero-product-bottle__ml">30ml</span>
+                      </div>
+                    </div>
+                    <div class="hero-product-bottle__shadow"></div>
+                  </div>
                 </div>
                 <div class="hero-pdp-mock__info">
                   <div class="hero-pdp-mock__brand">BEAUTÉ CO.</div>
@@ -136,6 +149,7 @@
                     </div>
                     <div class="hero-widget-sim__benefits">
                       <span>Ahorra 15% en cada entrega</span>
+                      <span>Envío gratis en cada entrega</span>
                       <span>Modifica, pausa o cancela cuando quieras</span>
                     </div>
                     <div class="hero-widget-sim__freq">
@@ -277,7 +291,12 @@
                 <div class="widget-showcase__page">
                   <div class="widget-showcase__product">
                     <div class="widget-showcase__product-img">
-                      <div class="widget-showcase__product-gradient"></div>
+                      <div class="showcase-product-jar">
+                        <div class="showcase-product-jar__lid"></div>
+                        <div class="showcase-product-jar__body">
+                          <span class="showcase-product-jar__label">Hidratante</span>
+                        </div>
+                      </div>
                     </div>
                     <div class="widget-showcase__product-info">
                       <div class="widget-showcase__product-name">Crema Hidratante 50ml</div>
@@ -288,6 +307,11 @@
                           <span>Suscríbete y ahorra</span>
                           <span class="widget-showcase__badge-disc">-15%</span>
                           <span class="widget-showcase__price-new">$32.300</span>
+                        </div>
+                        <div class="widget-showcase__benefits">
+                          <span>Ahorra 15% en cada entrega</span>
+                          <span>Envío gratis siempre</span>
+                          <span>Modifica, pausa o cancela cuando quieras</span>
                         </div>
                         <div class="widget-showcase__pills-row">
                           <span class="widget-showcase__fpill">Semanal</span>
@@ -307,12 +331,26 @@
               <div class="widget-showcase__customize">
                 <div class="widget-showcase__customize-title">Personalizar widget</div>
                 <div class="widget-showcase__customize-row">
-                  <span>Color</span>
-                  <div class="widget-showcase__color-dots">
-                    <span class="widget-showcase__cdot" style="background:#2563EB"></span>
-                    <span class="widget-showcase__cdot widget-showcase__cdot--ring" style="background:#10B981"></span>
-                    <span class="widget-showcase__cdot" style="background:#7C3AED"></span>
+                  <span>Color principal</span>
+                  <div class="showcase-color-pick">
+                    <span class="showcase-color-pick__swatch" style="background:#2563EB"></span>
+                    <div class="showcase-color-pick__palette">
+                      <span style="background:#EF4444"></span>
+                      <span style="background:#F59E0B"></span>
+                      <span style="background:#10B981"></span>
+                      <span style="background:#2563EB" class="showcase-color-pick__selected"></span>
+                      <span style="background:#7C3AED"></span>
+                      <span style="background:#EC4899"></span>
+                    </div>
                   </div>
+                </div>
+                <div class="widget-showcase__customize-row">
+                  <span>Color de relleno</span>
+                  <span class="showcase-color-pick__swatch" style="background:#EFF6FF"></span>
+                </div>
+                <div class="widget-showcase__customize-row">
+                  <span>Color del descuento</span>
+                  <span class="showcase-color-pick__swatch" style="background:#10B981"></span>
                 </div>
                 <div class="widget-showcase__customize-row">
                   <span>Descuento visible</span>
@@ -357,18 +395,85 @@
             </ul>
           </div>
           <div class="feature__visual">
-            <div class="browser-mockup">
-              <div class="browser-mockup__bar">
-                <div class="browser-mockup__dots" aria-hidden="true">
-                  <span class="browser-mockup__dot browser-mockup__dot--red"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--yellow"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--green"></span>
+            <div class="dash-showcase">
+              <div class="dash-showcase__sidebar">
+                <div class="dash-showcase__logo">
+                  <div class="dash-showcase__logo-icon"></div>
+                  <span>SuscripFy</span>
                 </div>
-                <div class="browser-mockup__url" aria-hidden="true">
-                  <span class="browser-mockup__url-text">app.suscripfy.co/dashboard</span>
+                <div class="dash-showcase__nav">
+                  <div class="dash-showcase__nav-item">Onboarding</div>
+                  <div class="dash-showcase__nav-item">Config. planes</div>
+                  <div class="dash-showcase__nav-item">Personalización</div>
+                  <div class="dash-showcase__nav-item">Pasarela</div>
+                  <div class="dash-showcase__nav-item dash-showcase__nav-item--active">Métricas</div>
+                  <div class="dash-showcase__nav-item">Suscripciones</div>
+                  <div class="dash-showcase__nav-item">Reconciliación</div>
+                  <div class="dash-showcase__nav-item">API</div>
                 </div>
               </div>
-              <img src="assets/screenshots/dashboard.jpg" alt="Dashboard con MRR, LTV, churn y cohortes de retención en tiempo real" class="browser-mockup__screen" loading="lazy" width="800" height="500" />
+              <div class="dash-showcase__main">
+                <div class="dash-showcase__topbar">Métricas del negocio</div>
+                <div class="dash-showcase__kpis">
+                  <div class="dash-showcase__kpi">
+                    <span class="dash-showcase__kpi-label">Suscripciones activas</span>
+                    <span class="dash-showcase__kpi-value dash-showcase__kpi-value--primary">127</span>
+                  </div>
+                  <div class="dash-showcase__kpi">
+                    <span class="dash-showcase__kpi-label">MRR (COP)</span>
+                    <span class="dash-showcase__kpi-value">$4.850.000</span>
+                  </div>
+                  <div class="dash-showcase__kpi">
+                    <span class="dash-showcase__kpi-label">LTV promedio</span>
+                    <span class="dash-showcase__kpi-value">$89.500</span>
+                  </div>
+                  <div class="dash-showcase__kpi">
+                    <span class="dash-showcase__kpi-label">Churn</span>
+                    <span class="dash-showcase__kpi-value dash-showcase__kpi-value--success">3.2%</span>
+                  </div>
+                </div>
+                <div class="dash-showcase__charts">
+                  <div class="dash-showcase__chart">
+                    <span class="dash-showcase__chart-title">Evolución acumulada</span>
+                    <div class="dash-showcase__chart-bars">
+                      <div class="dash-showcase__bar" style="height:25%"></div>
+                      <div class="dash-showcase__bar" style="height:35%"></div>
+                      <div class="dash-showcase__bar" style="height:42%"></div>
+                      <div class="dash-showcase__bar" style="height:55%"></div>
+                      <div class="dash-showcase__bar" style="height:60%"></div>
+                      <div class="dash-showcase__bar" style="height:72%"></div>
+                      <div class="dash-showcase__bar" style="height:85%"></div>
+                      <div class="dash-showcase__bar dash-showcase__bar--current" style="height:95%"></div>
+                    </div>
+                  </div>
+                  <div class="dash-showcase__chart">
+                    <span class="dash-showcase__chart-title">Retención por cohorte</span>
+                    <div class="dash-showcase__cohort-grid">
+                      <div class="dash-showcase__cohort-row">
+                        <span class="dash-showcase__cohort-week">W1</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--100">100%</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--80">82%</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--70">71%</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--70">68%</span>
+                      </div>
+                      <div class="dash-showcase__cohort-row">
+                        <span class="dash-showcase__cohort-week">W2</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--100">100%</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--80">79%</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--70">65%</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--dim">—</span>
+                      </div>
+                      <div class="dash-showcase__cohort-row">
+                        <span class="dash-showcase__cohort-week">W3</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--100">100%</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--80">85%</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--dim">—</span>
+                        <span class="dash-showcase__cohort-cell dash-showcase__cc--dim">—</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -376,18 +481,47 @@
         <!-- Feature 3: Portal de clientes — imagen izquierda, texto derecha -->
         <div class="feature animate-on-scroll">
           <div class="feature__visual">
-            <div class="browser-mockup">
-              <div class="browser-mockup__bar">
-                <div class="browser-mockup__dots" aria-hidden="true">
-                  <span class="browser-mockup__dot browser-mockup__dot--red"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--yellow"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--green"></span>
+            <div class="portal-showcase">
+              <div class="portal-showcase__header">
+                <div class="portal-showcase__store-logo">BEAUTÉ</div>
+                <span class="portal-showcase__email">maria@correo.com</span>
+              </div>
+              <div class="portal-showcase__filters">
+                <span class="portal-showcase__filter portal-showcase__filter--active">Todas</span>
+                <span class="portal-showcase__filter">Activas</span>
+                <span class="portal-showcase__filter">Pausadas</span>
+                <span class="portal-showcase__filter">Canceladas</span>
+              </div>
+              <div class="portal-showcase__cards">
+                <div class="portal-showcase__card">
+                  <div class="portal-showcase__card-product">
+                    <div class="portal-showcase__card-img" style="background:linear-gradient(135deg,#DBEAFE,#93C5FD)"></div>
+                    <div>
+                      <div class="portal-showcase__card-name">Sérum Facial</div>
+                      <div class="portal-showcase__card-status">ACTIVA</div>
+                      <div class="portal-showcase__card-price">$38.250 COP</div>
+                      <div class="portal-showcase__card-freq">Cada 1 mes</div>
+                    </div>
+                  </div>
+                  <div class="portal-showcase__card-actions">
+                    <span class="portal-showcase__action">Pausar</span>
+                    <span class="portal-showcase__action">Cambiar frecuencia</span>
+                    <span class="portal-showcase__action">Cambiar cantidad</span>
+                    <span class="portal-showcase__action">Actualizar tarjeta</span>
+                    <span class="portal-showcase__action portal-showcase__action--danger">Cancelar</span>
+                  </div>
                 </div>
-                <div class="browser-mockup__url" aria-hidden="true">
-                  <span class="browser-mockup__url-text">portal.tutienda.co/suscripciones</span>
+                <div class="portal-showcase__card portal-showcase__card--dim">
+                  <div class="portal-showcase__card-product">
+                    <div class="portal-showcase__card-img" style="background:linear-gradient(135deg,#FEE2E2,#FCA5A5)"></div>
+                    <div>
+                      <div class="portal-showcase__card-name">Crema Hidratante</div>
+                      <div class="portal-showcase__card-status">ACTIVA</div>
+                      <div class="portal-showcase__card-price">$32.300 COP</div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <img src="assets/screenshots/portal-cliente-dentro.jpg" alt="Portal del cliente con gestión completa de suscripciones" class="browser-mockup__screen" loading="lazy" width="800" height="500" />
             </div>
           </div>
           <div class="feature__content">
@@ -417,18 +551,53 @@
             </ul>
           </div>
           <div class="feature__visual">
-            <div class="browser-mockup">
-              <div class="browser-mockup__bar">
-                <div class="browser-mockup__dots" aria-hidden="true">
-                  <span class="browser-mockup__dot browser-mockup__dot--red"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--yellow"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--green"></span>
+            <div class="checkout-showcase">
+              <div class="checkout-showcase__bar">
+                <span class="checkout-showcase__store">BEAUTÉ CO.</span>
+                <span class="checkout-showcase__back">← Volver a la tienda</span>
+              </div>
+              <div class="checkout-showcase__body">
+                <div class="checkout-showcase__form">
+                  <div class="checkout-showcase__section-title">Datos de suscripción</div>
+                  <div class="checkout-showcase__field"><span>tu@correo.com</span></div>
+                  <div class="checkout-showcase__section-title">Datos de pago</div>
+                  <div class="checkout-showcase__field"><span>•••• •••• •••• 4242</span></div>
+                  <div class="checkout-showcase__field-row">
+                    <div class="checkout-showcase__field"><span>12/28</span></div>
+                    <div class="checkout-showcase__field"><span>•••</span></div>
+                  </div>
+                  <div class="checkout-showcase__section-title">Datos de envío</div>
+                  <div class="checkout-showcase__field"><span>Calle 85 #11-53, Bogotá</span></div>
                 </div>
-                <div class="browser-mockup__url" aria-hidden="true">
-                  <span class="browser-mockup__url-text">checkout.suscripfy.co/order</span>
+                <div class="checkout-showcase__summary">
+                  <div class="checkout-showcase__summary-title">Resumen del pedido</div>
+                  <div class="checkout-showcase__summary-product">
+                    <div class="checkout-showcase__summary-img" style="background:linear-gradient(135deg,#DBEAFE,#93C5FD)"></div>
+                    <div>
+                      <div class="checkout-showcase__summary-name">Sérum Facial</div>
+                      <div class="checkout-showcase__summary-freq">Suscripción · Cada mes · -15%</div>
+                      <div class="checkout-showcase__summary-price">$38.250</div>
+                    </div>
+                  </div>
+                  <div class="checkout-showcase__upsell">
+                    <div class="checkout-showcase__upsell-title">¿Quieres agregar algo más?</div>
+                    <div class="checkout-showcase__upsell-item">
+                      <div class="checkout-showcase__upsell-img" style="background:linear-gradient(135deg,#FEE2E2,#FCA5A5)"></div>
+                      <div>
+                        <div class="checkout-showcase__upsell-name">Crema Hidratante</div>
+                        <div class="checkout-showcase__upsell-price">$32.300</div>
+                      </div>
+                      <span class="checkout-showcase__upsell-btn">+ Agregar</span>
+                    </div>
+                  </div>
+                  <div class="checkout-showcase__totals">
+                    <div class="checkout-showcase__total-row"><span>Subtotal</span><span>$38.250</span></div>
+                    <div class="checkout-showcase__total-row"><span>IVA 19%</span><span>$7.268</span></div>
+                    <div class="checkout-showcase__total-row"><span>Envío</span><span style="color:var(--c-success);font-weight:600">Gratis</span></div>
+                    <div class="checkout-showcase__total-row checkout-showcase__total-row--final"><span>Total</span><span>$45.518</span></div>
+                  </div>
                 </div>
               </div>
-              <img src="assets/screenshots/checkout.jpg" alt="Checkout dedicado con upsell y cupones integrado con MercadoPago" class="browser-mockup__screen" loading="lazy" width="800" height="500" />
             </div>
           </div>
         </div>
@@ -436,18 +605,53 @@
         <!-- Feature 5: Admin Shopify — ilustración izquierda, texto derecha -->
         <div class="feature animate-on-scroll">
           <div class="feature__visual">
-            <div class="browser-mockup">
-              <div class="browser-mockup__bar">
-                <div class="browser-mockup__dots" aria-hidden="true">
-                  <span class="browser-mockup__dot browser-mockup__dot--red"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--yellow"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--green"></span>
+            <div class="admin-showcase">
+              <div class="admin-showcase__shopify-bar">
+                <div class="admin-showcase__shopify-logo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                  <span>Shopify Admin</span>
                 </div>
-                <div class="browser-mockup__url" aria-hidden="true">
-                  <span class="browser-mockup__url-text">tutienda.myshopify.com/admin/apps/suscripfy</span>
+                <span class="admin-showcase__shop-name">tutienda.myshopify.com</span>
+              </div>
+              <div class="admin-showcase__body">
+                <div class="admin-showcase__shopify-sidebar">
+                  <div class="admin-showcase__sh-item">Inicio</div>
+                  <div class="admin-showcase__sh-item">Pedidos</div>
+                  <div class="admin-showcase__sh-item">Productos</div>
+                  <div class="admin-showcase__sh-item">Clientes</div>
+                  <div class="admin-showcase__sh-item admin-showcase__sh-item--active">Apps</div>
+                  <div class="admin-showcase__sh-sub">SuscripFy</div>
+                </div>
+                <div class="admin-showcase__content">
+                  <div class="admin-showcase__app-header">
+                    <div class="admin-showcase__app-logo"></div>
+                    <div>
+                      <div class="admin-showcase__app-name">SuscripFy</div>
+                      <div class="admin-showcase__app-desc">Gestión de suscripciones</div>
+                    </div>
+                  </div>
+                  <div class="admin-showcase__app-tabs">
+                    <span class="admin-showcase__tab admin-showcase__tab--active">Métricas</span>
+                    <span class="admin-showcase__tab">Planes</span>
+                    <span class="admin-showcase__tab">Emails</span>
+                    <span class="admin-showcase__tab">Pasarela</span>
+                  </div>
+                  <div class="admin-showcase__app-content">
+                    <div class="admin-showcase__mini-kpi">
+                      <span class="admin-showcase__mk-val">127</span>
+                      <span class="admin-showcase__mk-lab">activas</span>
+                    </div>
+                    <div class="admin-showcase__mini-kpi">
+                      <span class="admin-showcase__mk-val">$4.8M</span>
+                      <span class="admin-showcase__mk-lab">MRR</span>
+                    </div>
+                    <div class="admin-showcase__mini-kpi">
+                      <span class="admin-showcase__mk-val">3.2%</span>
+                      <span class="admin-showcase__mk-lab">churn</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <img src="assets/screenshots/portal-tienda-login.jpg" alt="Panel de administración de SuscripFy embebido dentro de Shopify Admin" class="browser-mockup__screen" loading="lazy" width="800" height="500" />
             </div>
           </div>
           <div class="feature__content">
