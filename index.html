@@ -55,7 +55,7 @@
           <h1 class="hero__headline" id="hero-headline">
             Deja de depender de la publicidad para lograr recompras.
           </h1>
-          <p class="hero__tagline">Configúralo en 15 minutos, sin código.</p>
+          <p class="hero__tagline">Configúralo en 15 minutos, <span class="hero__tagline-accent">sin código.</span></p>
           <ul class="hero__bullets">
             <li>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/></svg>
@@ -495,7 +495,12 @@
               <div class="portal-showcase__cards">
                 <div class="portal-showcase__card">
                   <div class="portal-showcase__card-product">
-                    <div class="portal-showcase__card-img" style="background:linear-gradient(135deg,#DBEAFE,#93C5FD)"></div>
+                    <div class="portal-showcase__card-img" style="background:linear-gradient(135deg,#DBEAFE,#93C5FD)">
+                      <div class="portal-mini-bottle">
+                        <div class="portal-mini-bottle__cap"></div>
+                        <div class="portal-mini-bottle__body"></div>
+                      </div>
+                    </div>
                     <div>
                       <div class="portal-showcase__card-name">Sérum Facial</div>
                       <div class="portal-showcase__card-status">ACTIVA</div>
@@ -508,12 +513,19 @@
                     <span class="portal-showcase__action">Cambiar frecuencia</span>
                     <span class="portal-showcase__action">Cambiar cantidad</span>
                     <span class="portal-showcase__action">Actualizar tarjeta</span>
+                    <span class="portal-showcase__action">Cambiar dirección</span>
+                    <span class="portal-showcase__action">Cambiar día de cobro</span>
                     <span class="portal-showcase__action portal-showcase__action--danger">Cancelar</span>
                   </div>
                 </div>
                 <div class="portal-showcase__card portal-showcase__card--dim">
                   <div class="portal-showcase__card-product">
-                    <div class="portal-showcase__card-img" style="background:linear-gradient(135deg,#FEE2E2,#FCA5A5)"></div>
+                    <div class="portal-showcase__card-img" style="background:linear-gradient(135deg,#FEE2E2,#FCA5A5)">
+                      <div class="portal-mini-jar">
+                        <div class="portal-mini-jar__lid"></div>
+                        <div class="portal-mini-jar__body"></div>
+                      </div>
+                    </div>
                     <div>
                       <div class="portal-showcase__card-name">Crema Hidratante</div>
                       <div class="portal-showcase__card-status">ACTIVA</div>
@@ -521,6 +533,9 @@
                     </div>
                   </div>
                 </div>
+              <div class="portal-showcase__history-link">
+                <span>Ver historial de pagos</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </div>
             </div>
           </div>
@@ -648,6 +663,20 @@
                     <div class="admin-showcase__mini-kpi">
                       <span class="admin-showcase__mk-val">3.2%</span>
                       <span class="admin-showcase__mk-lab">churn</span>
+                    </div>
+                  </div>
+                  <div class="admin-showcase__mini-table">
+                    <div class="admin-showcase__mt-header">
+                      <span>Producto</span><span>Activos</span><span>% Total</span>
+                    </div>
+                    <div class="admin-showcase__mt-row">
+                      <span>Sérum Facial</span><span>68</span><span>54%</span>
+                    </div>
+                    <div class="admin-showcase__mt-row">
+                      <span>Crema Hidratante</span><span>42</span><span>33%</span>
+                    </div>
+                    <div class="admin-showcase__mt-row">
+                      <span>Tónico Facial</span><span>17</span><span>13%</span>
                     </div>
                   </div>
                 </div>
