@@ -53,8 +53,9 @@
             Exclusivo para tiendas Shopify en Colombia
           </div>
           <h1 class="hero__headline" id="hero-headline">
-            Deja de depender de la publicidad para lograr recompras. Configúralo en 15 minutos.
+            Deja de depender de la publicidad para lograr recompras.
           </h1>
+          <p class="hero__tagline">Configúralo en 15 minutos, sin código.</p>
           <ul class="hero__bullets">
             <li>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/></svg>
@@ -107,24 +108,62 @@
         </div>
 
         <div class="hero__visual animate-on-scroll animate-delay-1" aria-hidden="true">
-          <div class="browser-mockup browser-mockup--hero">
-            <div class="browser-mockup__bar">
-              <div class="browser-mockup__dots">
-                <span class="browser-mockup__dot browser-mockup__dot--red"></span>
-                <span class="browser-mockup__dot browser-mockup__dot--yellow"></span>
-                <span class="browser-mockup__dot browser-mockup__dot--green"></span>
+          <div class="hero-composition">
+            <div class="hero-pdp-mock">
+              <div class="hero-pdp-mock__header">
+                <div class="hero-pdp-mock__dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="hero-pdp-mock__url">tutienda.com.co/productos/serum-facial</div>
               </div>
-              <div class="browser-mockup__url">
-                <span class="browser-mockup__url-text">app.suscripfy.co/dashboard</span>
+              <div class="hero-pdp-mock__body">
+                <div class="hero-pdp-mock__image">
+                  <div class="hero-pdp-mock__image-gradient"></div>
+                  <span class="hero-pdp-mock__image-label">Sérum Facial</span>
+                </div>
+                <div class="hero-pdp-mock__info">
+                  <div class="hero-pdp-mock__brand">BEAUTÉ CO.</div>
+                  <div class="hero-pdp-mock__name">Sérum Facial Vitamina C</div>
+                  <div class="hero-pdp-mock__price">$45.000 COP</div>
+                  <div class="hero-widget-sim">
+                    <div class="hero-widget-sim__option hero-widget-sim__option--active">
+                      <div class="hero-widget-sim__radio hero-widget-sim__radio--on"></div>
+                      <div class="hero-widget-sim__text">
+                        <span class="hero-widget-sim__label">Suscríbete y ahorra</span>
+                        <span class="hero-widget-sim__discount">-15%</span>
+                      </div>
+                      <span class="hero-widget-sim__sub-price">$38.250</span>
+                    </div>
+                    <div class="hero-widget-sim__benefits">
+                      <span>Ahorra 15% en cada entrega</span>
+                      <span>Modifica, pausa o cancela cuando quieras</span>
+                    </div>
+                    <div class="hero-widget-sim__freq">
+                      <span class="hero-widget-sim__freq-label">Entregar cada:</span>
+                      <div class="hero-widget-sim__freq-pills">
+                        <span class="hero-widget-sim__pill">2 sem</span>
+                        <span class="hero-widget-sim__pill hero-widget-sim__pill--active">1 mes</span>
+                        <span class="hero-widget-sim__pill">2 meses</span>
+                      </div>
+                    </div>
+                    <div class="hero-widget-sim__option">
+                      <div class="hero-widget-sim__radio"></div>
+                      <span class="hero-widget-sim__label">Compra única</span>
+                      <span class="hero-widget-sim__sub-price" style="color:var(--c-muted)">$45.000</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <img
-              src="assets/screenshots/dashboard.jpg"
-              alt="Dashboard de métricas de SuscripFy"
-              class="browser-mockup__screen"
-              loading="eager"
-              width="960" height="600"
-            />
+            <div class="hero-notif">
+              <div class="hero-notif__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              <div class="hero-notif__text">
+                <strong>Suscripción activada</strong>
+                <span>Recibirás tu Sérum Facial cada mes de forma automática</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -226,69 +265,67 @@
 
         <!-- Feature 1: Widget — imagen izquierda, texto derecha -->
         <div class="feature animate-on-scroll">
-          <div class="feature__visual feature__visual-wrap">
-            <div class="browser-mockup">
-              <div class="browser-mockup__bar">
-                <div class="browser-mockup__dots" aria-hidden="true">
-                  <span class="browser-mockup__dot browser-mockup__dot--red"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--yellow"></span>
-                  <span class="browser-mockup__dot browser-mockup__dot--green"></span>
+          <div class="feature__visual">
+            <div class="widget-showcase">
+              <div class="widget-showcase__browser">
+                <div class="widget-showcase__bar">
+                  <span class="widget-showcase__dot" style="background:#FF5F57"></span>
+                  <span class="widget-showcase__dot" style="background:#FEBC2E"></span>
+                  <span class="widget-showcase__dot" style="background:#28C840"></span>
+                  <span class="widget-showcase__url">tutienda.com.co/productos/crema-hidratante</span>
                 </div>
-                <div class="browser-mockup__url" aria-hidden="true">
-                  <span class="browser-mockup__url-text">tutienda.myshopify.com/products/cafe-premium</span>
-                </div>
-              </div>
-              <div class="widget-preview" aria-hidden="true">
-                <div class="widget-preview__page">
-                  <div class="widget-preview__img-placeholder"></div>
-                  <div class="widget-preview__details">
-                    <div class="widget-preview__title">Café Premium 250g</div>
-                    <div class="widget-preview__price">$32.000 COP</div>
-                    <div class="widget-box">
-                      <div class="widget-box__opt widget-box__opt--selected">
-                        <div class="widget-box__radio-dot widget-box__radio-dot--filled"></div>
-                        <div class="widget-box__opt-text">
+                <div class="widget-showcase__page">
+                  <div class="widget-showcase__product">
+                    <div class="widget-showcase__product-img">
+                      <div class="widget-showcase__product-gradient"></div>
+                    </div>
+                    <div class="widget-showcase__product-info">
+                      <div class="widget-showcase__product-name">Crema Hidratante 50ml</div>
+                      <div class="widget-showcase__product-price">$38.000 COP</div>
+                      <div class="widget-showcase__widget-box">
+                        <div class="widget-showcase__radio-row">
+                          <div class="widget-showcase__radio-active"></div>
                           <span>Suscríbete y ahorra</span>
-                          <span class="widget-box__discount">-10%</span>
+                          <span class="widget-showcase__badge-disc">-15%</span>
+                          <span class="widget-showcase__price-new">$32.300</span>
                         </div>
-                        <span class="widget-box__opt-price">$28.800</span>
-                      </div>
-                      <div class="widget-box__opt">
-                        <div class="widget-box__radio-dot"></div>
-                        <div class="widget-box__opt-text">
+                        <div class="widget-showcase__pills-row">
+                          <span class="widget-showcase__fpill">Semanal</span>
+                          <span class="widget-showcase__fpill widget-showcase__fpill--on">Mensual</span>
+                          <span class="widget-showcase__fpill">Bimestral</span>
+                        </div>
+                        <div class="widget-showcase__radio-row widget-showcase__radio-row--dim">
+                          <div class="widget-showcase__radio-off"></div>
                           <span>Compra única</span>
+                          <span class="widget-showcase__price-old">$38.000</span>
                         </div>
-                        <span class="widget-box__opt-price">$32.000</span>
-                      </div>
-                      <div class="widget-box__freq">
-                        <span class="widget-freq-pill">Semanal</span>
-                        <span class="widget-freq-pill widget-freq-pill--active">Mensual</span>
-                        <span class="widget-freq-pill">Trimestral</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="float-card float-card--customize" aria-hidden="true">
-              <div class="float-card__ttl">Personalizar widget</div>
-              <div class="float-card__row">
-                <span class="float-card__lbl">Color</span>
-                <div class="float-color-dots">
-                  <span class="float-color-dot" style="background:#2563EB;outline:2px solid #2563EB;outline-offset:2px;"></span>
-                  <span class="float-color-dot" style="background:#10B981;"></span>
-                  <span class="float-color-dot" style="background:#7C3AED;"></span>
+              <div class="widget-showcase__customize">
+                <div class="widget-showcase__customize-title">Personalizar widget</div>
+                <div class="widget-showcase__customize-row">
+                  <span>Color</span>
+                  <div class="widget-showcase__color-dots">
+                    <span class="widget-showcase__cdot" style="background:#2563EB"></span>
+                    <span class="widget-showcase__cdot widget-showcase__cdot--ring" style="background:#10B981"></span>
+                    <span class="widget-showcase__cdot" style="background:#7C3AED"></span>
+                  </div>
                 </div>
-              </div>
-              <div class="float-card__row">
-                <span class="float-card__lbl">Descuento visible</span>
-                <span class="float-toggle float-toggle--on"></span>
-              </div>
-              <div class="float-card__row">
-                <span class="float-card__lbl">Bordes</span>
-                <div class="float-border-opts">
-                  <span class="float-border-opt"></span>
-                  <span class="float-border-opt float-border-opt--round float-border-opt--active"></span>
+                <div class="widget-showcase__customize-row">
+                  <span>Descuento visible</span>
+                  <div class="widget-showcase__toggle widget-showcase__toggle--on">
+                    <div class="widget-showcase__toggle-knob"></div>
+                  </div>
+                </div>
+                <div class="widget-showcase__customize-row">
+                  <span>Bordes</span>
+                  <div class="widget-showcase__border-opts">
+                    <span class="widget-showcase__bopt"></span>
+                    <span class="widget-showcase__bopt widget-showcase__bopt--rounded widget-showcase__bopt--active"></span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -319,7 +356,7 @@
               <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Próximos cobros programados y suscriptores por producto</li>
             </ul>
           </div>
-          <div class="feature__visual feature__visual-wrap">
+          <div class="feature__visual">
             <div class="browser-mockup">
               <div class="browser-mockup__bar">
                 <div class="browser-mockup__dots" aria-hidden="true">
@@ -333,24 +370,12 @@
               </div>
               <img src="assets/screenshots/dashboard.jpg" alt="Dashboard con MRR, LTV, churn y cohortes de retención en tiempo real" class="browser-mockup__screen" loading="lazy" width="800" height="500" />
             </div>
-            <div class="float-metric float-metric--mrr" aria-hidden="true">
-              <span class="float-metric__lbl">MRR</span>
-              <span class="float-metric__val">$16.400</span>
-            </div>
-            <div class="float-metric float-metric--ret" aria-hidden="true">
-              <span class="float-metric__lbl">Retención</span>
-              <span class="float-metric__val">71%</span>
-            </div>
-            <div class="float-metric float-metric--active" aria-hidden="true">
-              <span class="float-metric__lbl">Activas</span>
-              <span class="float-metric__val">4</span>
-            </div>
           </div>
         </div>
 
         <!-- Feature 3: Portal de clientes — imagen izquierda, texto derecha -->
         <div class="feature animate-on-scroll">
-          <div class="feature__visual feature__visual-wrap">
+          <div class="feature__visual">
             <div class="browser-mockup">
               <div class="browser-mockup__bar">
                 <div class="browser-mockup__dots" aria-hidden="true">
@@ -363,18 +388,6 @@
                 </div>
               </div>
               <img src="assets/screenshots/portal-cliente-dentro.jpg" alt="Portal del cliente con gestión completa de suscripciones" class="browser-mockup__screen" loading="lazy" width="800" height="500" />
-            </div>
-            <div class="float-chip float-chip--pause" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
-              Pausar
-            </div>
-            <div class="float-chip float-chip--freq" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4"/></svg>
-              Cambiar frecuencia
-            </div>
-            <div class="float-chip float-chip--card" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-              Actualizar tarjeta
             </div>
           </div>
           <div class="feature__content">
@@ -403,7 +416,7 @@
               <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Un solo formulario para envío, pago y suscripción</li>
             </ul>
           </div>
-          <div class="feature__visual feature__visual-wrap">
+          <div class="feature__visual">
             <div class="browser-mockup">
               <div class="browser-mockup__bar">
                 <div class="browser-mockup__dots" aria-hidden="true">
@@ -416,17 +429,6 @@
                 </div>
               </div>
               <img src="assets/screenshots/checkout.jpg" alt="Checkout dedicado con upsell y cupones integrado con MercadoPago" class="browser-mockup__screen" loading="lazy" width="800" height="500" />
-            </div>
-            <div class="float-upsell" aria-hidden="true">
-              <div class="float-upsell__label">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Agregar producto
-              </div>
-              <div class="float-upsell__price">$12.000</div>
-            </div>
-            <div class="float-mp-badge" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              MercadoPago
             </div>
           </div>
         </div>
