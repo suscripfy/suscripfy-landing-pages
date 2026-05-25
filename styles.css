@@ -430,6 +430,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   to   { transform: translateX(-50%); }
 }
 
+/* Title brand accent */
+.title-brand {
+  color: var(--c-primary);
+  font-style: italic;
+}
+
 /* ============================================================
    STOREFRONT DEMO (tienda real)
    ============================================================ */
@@ -438,6 +444,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   grid-template-columns: 1fr 1.2fr;
   gap: clamp(2.5rem, 5vw, 4rem);
   align-items: center;
+  padding-top: var(--s-12);
   padding-bottom: var(--s-16);
   margin-bottom: var(--s-8);
   border-bottom: 1px solid var(--c-border);
