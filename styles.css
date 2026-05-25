@@ -433,15 +433,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ============================================================
    STOREFRONT DEMO (tienda real)
    ============================================================ */
-.storefront-demo-section {
-  background: var(--c-surface);
-  padding: clamp(3rem, 6vw, 5rem) 0;
-}
 .storefront-demo {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   gap: clamp(2.5rem, 5vw, 4rem);
   align-items: center;
+  padding-bottom: var(--s-16);
+  margin-bottom: var(--s-8);
+  border-bottom: 1px solid var(--c-border);
 }
 .storefront-demo__content {
   max-width: 480px;
