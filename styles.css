@@ -759,7 +759,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--s-3);
+  gap: var(--s-4);
 }
 .powered-badge__text {
   font-size: var(--text-sm);
@@ -769,19 +769,29 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .powered-badge__logos {
   display: flex;
   align-items: center;
-  gap: var(--s-5);
+  gap: var(--s-6);
+}
+.powered-badge__brand {
+  font-family: var(--font);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--c-text);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.powered-badge__brand em {
+  font-style: italic;
+  font-weight: 700;
+  color: var(--c-muted);
 }
 .powered-badge__logo {
-  height: 30px;
+  height: 32px;
   width: auto;
   object-fit: contain;
 }
-.powered-badge__logo--dark {
-  filter: brightness(0) saturate(100%);
-}
 .powered-badge__divider {
   width: 1.5px;
-  height: 30px;
+  height: 36px;
   background: var(--c-border);
 }
 
