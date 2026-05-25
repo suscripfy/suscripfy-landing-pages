@@ -785,7 +785,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--c-muted);
 }
 .powered-badge__logo {
-  height: 44px;
+  height: 58px;
   width: auto;
   object-fit: contain;
 }
