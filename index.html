@@ -269,33 +269,46 @@
         <div class="journey-grid animate-on-scroll">
 
           <div class="journey-visual" aria-hidden="true">
-            <svg class="journey-svg" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M80 280 C120 280, 140 220, 175 220" stroke="#CBD5E1" stroke-width="2.5" stroke-dasharray="6 5" fill="none" class="journey-path"/>
-              <path d="M215 220 C250 220, 260 155, 290 155" stroke="#CBD5E1" stroke-width="2.5" stroke-dasharray="6 5" fill="none" class="journey-path"/>
-              <path d="M330 155 C360 155, 365 85, 400 85" stroke="#38BDF8" stroke-width="2.5" stroke-dasharray="6 5" fill="none" class="journey-path journey-path--accent"/>
-              <circle cx="60" cy="280" r="42" fill="#F9A8D4" opacity="0.15"/>
-              <circle cx="60" cy="280" r="34" fill="#EC4899"/>
-              <text x="60" y="283" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700">Lead</text>
-              <text x="60" y="326" text-anchor="middle" fill="#94A3B8" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="500">1. Descubre tu marca</text>
-              <circle cx="195" cy="220" r="42" fill="#A78BFA" opacity="0.15"/>
-              <circle cx="195" cy="220" r="34" fill="#7C3AED"/>
-              <text x="195" y="216" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700">Primera</text>
-              <text x="195" y="229" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700">compra</text>
-              <text x="195" y="266" text-anchor="middle" fill="#94A3B8" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="500">2. Realiza su primer pedido</text>
-              <circle cx="320" cy="155" r="42" fill="#67E8F9" opacity="0.15"/>
-              <circle cx="320" cy="155" r="34" fill="#06B6D4"/>
-              <text x="320" y="151" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700">Compra</text>
-              <text x="320" y="164" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700">recurrente</text>
-              <text x="320" y="201" text-anchor="middle" fill="#94A3B8" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="500">3. Vuelve a comprar</text>
-              <circle cx="420" cy="80" r="56" fill="#DBEAFE" opacity="0.3"/>
-              <circle cx="420" cy="80" r="48" fill="#2563EB"/>
-              <circle cx="420" cy="80" r="56" fill="none" stroke="#2563EB" stroke-width="1.5" opacity="0.3"/>
-              <text x="420" y="78" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="13" font-weight="800">Suscriptor</text>
-              <text x="420" y="94" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="500">cobro automático</text>
-              <text x="420" y="148" text-anchor="middle" fill="#2563EB" font-family="Plus Jakarta Sans, sans-serif" font-size="9.5" font-weight="700">4. Se suscribe y recompra</text>
-              <text x="420" y="160" text-anchor="middle" fill="#2563EB" font-family="Plus Jakarta Sans, sans-serif" font-size="9.5" font-weight="700">sin intervención</text>
-              <path d="M388 92 L395 85 L388 78" stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            </svg>
+            <div class="journey-card">
+              <svg class="journey-svg" viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Connecting paths — azul progresivo, terminan ANTES del borde del círculo Suscriptor -->
+                <path d="M80 280 C120 280, 140 220, 175 220" stroke="#93C5FD" stroke-width="2.5" stroke-dasharray="6 5" fill="none" class="journey-path"/>
+                <path d="M215 220 C250 220, 260 155, 290 155" stroke="#60A5FA" stroke-width="2.5" stroke-dasharray="6 5" fill="none" class="journey-path"/>
+                <!-- Path termina en x=362, justo fuera del anillo glow (cx=420 - r=56 → borde en x=364) -->
+                <path d="M330 155 C358 155, 360 80, 362 80" stroke="#3B82F6" stroke-width="2.5" stroke-dasharray="6 5" fill="none" class="journey-path journey-path--accent"/>
+                <!-- Flecha apuntando al círculo desde afuera (tip en x=363) -->
+                <path d="M356 86 L363 80 L356 74" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                <!-- Nodo 1: Lead (azul muy claro) -->
+                <circle cx="60" cy="280" r="42" fill="#DBEAFE" opacity="0.4"/>
+                <circle cx="60" cy="280" r="34" fill="#93C5FD"/>
+                <text x="60" y="283" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700">Lead</text>
+                <text x="60" y="326" text-anchor="middle" fill="#94A3B8" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="500">1. Descubre tu marca</text>
+
+                <!-- Nodo 2: Primera compra (azul claro) -->
+                <circle cx="195" cy="220" r="42" fill="#BFDBFE" opacity="0.4"/>
+                <circle cx="195" cy="220" r="34" fill="#60A5FA"/>
+                <text x="195" y="216" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700">Primera</text>
+                <text x="195" y="229" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700">compra</text>
+                <text x="195" y="266" text-anchor="middle" fill="#94A3B8" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="500">2. Realiza su primer pedido</text>
+
+                <!-- Nodo 3: Compra recurrente (azul medio) -->
+                <circle cx="320" cy="155" r="42" fill="#93C5FD" opacity="0.3"/>
+                <circle cx="320" cy="155" r="34" fill="#3B82F6"/>
+                <text x="320" y="151" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700">Compra</text>
+                <text x="320" y="164" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="10" font-weight="700">recurrente</text>
+                <text x="320" y="201" text-anchor="middle" fill="#94A3B8" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="500">3. Vuelve a comprar</text>
+
+                <!-- Nodo 4: Suscriptor (azul primario, enfatizado) -->
+                <circle cx="420" cy="80" r="56" fill="#DBEAFE" opacity="0.3"/>
+                <circle cx="420" cy="80" r="48" fill="#2563EB"/>
+                <circle cx="420" cy="80" r="56" fill="none" stroke="#2563EB" stroke-width="1.5" opacity="0.3"/>
+                <text x="420" y="78" text-anchor="middle" fill="#fff" font-family="Plus Jakarta Sans, sans-serif" font-size="13" font-weight="800">Suscriptor</text>
+                <text x="420" y="94" text-anchor="middle" fill="rgba(255,255,255,0.75)" font-family="Plus Jakarta Sans, sans-serif" font-size="9" font-weight="500">cobro automático</text>
+                <text x="420" y="148" text-anchor="middle" fill="#2563EB" font-family="Plus Jakarta Sans, sans-serif" font-size="9.5" font-weight="700">4. Se suscribe y recompra</text>
+                <text x="420" y="160" text-anchor="middle" fill="#2563EB" font-family="Plus Jakarta Sans, sans-serif" font-size="9.5" font-weight="700">sin intervención</text>
+              </svg>
+            </div>
           </div>
 
           <div class="journey-content">

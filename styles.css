@@ -2276,6 +2276,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   align-items: center;
   justify-content: center;
 }
+.journey-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-2xl);
+  padding: var(--s-6) var(--s-5);
+  box-shadow: var(--sh-xl);
+  width: 100%;
+}
 .journey-svg {
   width: 100%;
   max-width: 500px;
