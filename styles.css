@@ -376,6 +376,61 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero__visual { position: relative; }
 
 /* ============================================================
+   BRANDS CAROUSEL (marcas líderes)
+   ============================================================ */
+.brands-section {
+  background: var(--c-surface);
+  padding: var(--s-16) 0 var(--s-12);
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+  overflow: hidden;
+}
+.brands-section .section__header {
+  margin-bottom: var(--s-8);
+}
+.brands-carousel {
+  position: relative;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+.brands-carousel__track {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  width: max-content;
+  animation: brandScroll 35s linear infinite;
+}
+.brands-carousel:hover .brands-carousel__track {
+  animation-play-state: paused;
+}
+.brands-carousel__item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(120px, 15vw, 170px);
+  height: 70px;
+  padding: var(--s-2) var(--s-4);
+  transition: opacity var(--t-base);
+}
+.brands-carousel__item img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.4;
+  transition: opacity var(--t-base);
+}
+.brands-carousel__item:hover img {
+  opacity: 0.7;
+}
+@keyframes brandScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ============================================================
    STOREFRONT DEMO (tienda real)
    ============================================================ */
 .storefront-demo-section {
