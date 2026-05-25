@@ -376,6 +376,128 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero__visual { position: relative; }
 
 /* ============================================================
+   STOREFRONT DEMO (tienda real)
+   ============================================================ */
+.storefront-demo-section {
+  background: var(--c-surface);
+  padding: clamp(3rem, 6vw, 5rem) 0;
+}
+.storefront-demo {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: center;
+}
+.storefront-demo__content {
+  max-width: 480px;
+}
+.storefront-demo__title {
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-3xl));
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--c-text);
+  margin-bottom: var(--s-6);
+}
+.storefront-demo__bullets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  margin-bottom: var(--s-8);
+}
+.storefront-demo__bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-3);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--c-muted);
+  line-height: 1.5;
+}
+.storefront-demo__bullets li svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.storefront-demo__actions {
+  display: flex;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+.storefront-demo__visual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  align-items: flex-start;
+}
+.storefront-demo__frame {
+  display: block;
+  background: white;
+  border-radius: var(--r-2xl);
+  box-shadow: var(--sh-xl);
+  overflow: hidden;
+  border: 1px solid var(--c-border);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.storefront-demo__frame:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-2xl);
+}
+.storefront-demo__frame-header {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  background: #F8FAFC;
+  border-bottom: 1px solid var(--c-border);
+}
+.storefront-demo__dots {
+  display: flex;
+  gap: 5px;
+}
+.storefront-demo__dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.storefront-demo__dots span:nth-child(1) { background: #FF5F57; }
+.storefront-demo__dots span:nth-child(2) { background: #FEBC2E; }
+.storefront-demo__dots span:nth-child(3) { background: #28C840; }
+.storefront-demo__url {
+  flex: 1;
+  font-size: 11px;
+  color: var(--c-muted);
+  background: white;
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-full);
+  padding: 3px 10px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.storefront-demo__frame-body {
+  line-height: 0;
+}
+.storefront-demo__img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.storefront-demo__live-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--c-primary);
+  transition: color var(--t-fast), gap var(--t-fast);
+}
+.storefront-demo__live-link:hover {
+  color: var(--c-primary-hover);
+  gap: var(--s-3);
+}
+
+/* ============================================================
    PROBLEM / SOLUTION
    ============================================================ */
 .problem-grid {
@@ -2077,6 +2199,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     justify-content: center;
   }
   .problem-divider__line { width: 80px; height: 1px; }
+  .storefront-demo {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .storefront-demo__content { max-width: 100%; }
+  .storefront-demo__bullets { align-items: flex-start; text-align: left; }
+  .storefront-demo__actions { justify-content: center; }
+  .storefront-demo__visual { max-width: 580px; margin: 0 auto; width: 100%; align-items: center; }
+
   .section__header { margin-bottom: var(--s-12); }
 }
 
@@ -2117,9 +2248,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     width: 100%;
   }
 
-  /* Hero */
-  .hero__actions { flex-direction: column; }
-  .hero__actions .btn { width: 100%; justify-content: center; }
+  /* Storefront demo */
+  .storefront-demo__actions { flex-direction: column; }
+  .storefront-demo__actions .btn { width: 100%; justify-content: center; }
+  .storefront-demo__frame:hover { transform: none; }
 
   /* Pricing */
   .pricing-grid { grid-template-columns: 1fr; }
