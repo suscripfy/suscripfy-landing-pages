@@ -2259,6 +2259,81 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 /* ============================================================
+   JOURNEY SECTION (between brands and features)
+   ============================================================ */
+.journey-section {
+  background: var(--c-surface);
+  padding: var(--s-12) 0 var(--s-16);
+}
+.journey-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: center;
+}
+.journey-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.journey-svg {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+.journey-path {
+  animation: journey-dash 1.2s linear infinite;
+}
+.journey-path--accent {
+  animation: journey-dash-accent 1.2s linear infinite;
+}
+@keyframes journey-dash {
+  from { stroke-dashoffset: 22; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes journey-dash-accent {
+  from { stroke-dashoffset: 22; }
+  to   { stroke-dashoffset: 0; }
+}
+.journey-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.journey-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+}
+.journey-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-4);
+}
+.journey-bullet-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--c-primary-50);
+  border: 1px solid var(--c-primary-light);
+  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.journey-bullets p {
+  font-size: var(--text-base);
+  color: var(--c-muted);
+  line-height: 1.65;
+}
+.journey-bullets strong {
+  color: var(--c-text);
+  font-weight: 700;
+}
+
+/* ============================================================
    RESPONSIVE — TABLET  (< 1024px)
    ============================================================ */
 @media (max-width: 1023px) {
@@ -2310,6 +2385,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .storefront-demo__bullets { align-items: flex-start; text-align: left; }
   .storefront-demo__actions { justify-content: center; }
   .storefront-demo__visual { max-width: 580px; margin: 0 auto; width: 100%; align-items: center; }
+
+  .journey-grid {
+    grid-template-columns: 1fr;
+    gap: var(--s-8);
+  }
+  .journey-visual {
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
 
   .section__header { margin-bottom: var(--s-12); }
 }
@@ -2442,6 +2527,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .widget-showcase__customize {
     padding: var(--s-3) var(--s-4);
+  }
+
+  .journey-svg {
+    max-width: 100%;
+  }
+  .journey-bullets li {
+    gap: var(--s-3);
+  }
+  .journey-bullet-icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+  }
+  .journey-bullets p {
+    font-size: var(--text-sm);
   }
 
   /* Disable hover lift on touch devices */
