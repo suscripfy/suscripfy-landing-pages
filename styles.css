@@ -745,13 +745,45 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 4px 12px;
 }
 
-/* Dark illustration (MercadoPago) */
+/* Dark illustration (Wompi) */
 .feature__illus--dark {
   background: linear-gradient(140deg, #1E3A6E 0%, var(--c-dark) 100%);
   border-color: var(--c-dark-border);
 }
 .feature__illus--dark .feature__illus-label { color: var(--c-dark-text); }
 .feature__illus--dark .feature__illus-sub   { color: var(--c-dark-muted); }
+
+/* Powered-by badge */
+.powered-badge {
+  margin-top: var(--s-8);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-3);
+}
+.powered-badge__text {
+  font-size: var(--text-sm);
+  color: var(--c-muted);
+  font-weight: 500;
+}
+.powered-badge__logos {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+}
+.powered-badge__logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+}
+.powered-badge__logo--dark {
+  filter: brightness(0) saturate(100%);
+}
+.powered-badge__divider {
+  width: 1.5px;
+  height: 30px;
+  background: var(--c-border);
+}
 
 /* ============================================================
    HERO COMPOSITION (CSS product page + widget simulation)
