@@ -114,6 +114,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .section { padding: var(--section-py) 0; }
 .section--alt  { background: var(--c-bg); }
 .section--dark { background: var(--c-dark); }
+.section--tint { background: var(--c-primary-50); }
 
 .section__header {
   text-align: center;
@@ -2550,6 +2551,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .journey-bullets p {
     font-size: var(--text-sm);
+  }
+
+  .powered-badge {
+    align-items: center;
+    text-align: center;
+  }
+  .powered-badge__logos {
+    justify-content: center;
   }
 
   /* Disable hover lift on touch devices */
