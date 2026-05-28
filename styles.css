@@ -2222,6 +2222,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: var(--text-xs);
   color: var(--c-dark-muted);
 }
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.footer__nav-link {
+  font-size: var(--text-sm);
+  color: var(--c-dark-muted);
+  transition: color var(--t-fast);
+}
+.footer__nav-link:hover {
+  color: var(--c-dark-text);
+}
 
 /* ============================================================
    SCROLL ANIMATIONS
@@ -2508,6 +2521,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   /* Footer */
   .footer__inner { flex-direction: column; }
   .footer__copy  { align-self: flex-start; }
+  .footer__nav { flex-direction: row; flex-wrap: wrap; gap: var(--s-2) var(--s-4); }
 
   /* Global overflow prevention */
   html, body {

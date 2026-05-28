@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidad — SuscripFy</title>
+  <meta name="description" content="Política de privacidad y tratamiento de datos personales de SuscripFy." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,-apple-system,sans-serif' font-size='19' font-weight='800' fill='white'%3ES%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .privacy { max-width: 760px; margin: 0 auto; padding: calc(var(--nav-h) + 3rem) var(--container-pad) 4rem; }
+    .privacy h1 { font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl)); font-weight: 800; letter-spacing: -0.025em; color: var(--c-text); margin-bottom: var(--s-2); }
+    .privacy .privacy__date { font-size: var(--text-sm); color: var(--c-muted); margin-bottom: var(--s-12); }
+    .privacy h2 { font-size: var(--text-lg); font-weight: 700; color: var(--c-text); margin: var(--s-10) 0 var(--s-3); }
+    .privacy p { font-size: var(--text-base); color: var(--c-muted); line-height: 1.8; margin-bottom: var(--s-4); }
+    .privacy a { color: var(--c-primary); text-decoration: underline; }
+    .privacy a:hover { color: var(--c-primary-hover); }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar" class="navbar is-scrolled" aria-label="Navegación">
+    <div class="container navbar__inner">
+      <a href="/" class="navbar__logo" aria-label="SuscripFy — inicio">
+        <img src="assets/logos/logo-light.svg" alt="SuscripFy" width="160" height="35" />
+      </a>
+      <div class="navbar__links">
+        <a href="/" class="btn btn--outline btn--sm">Volver al inicio</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="privacy">
+    <h1>Política de Privacidad</h1>
+    <p class="privacy__date">Última actualización: 27 de mayo de 2026</p>
+
+    <h2>1. Responsable del tratamiento</h2>
+    <p>SuscripFy es una plataforma de gestión de suscripciones para tiendas Shopify, operada desde Colombia. Para cualquier consulta relacionada con el tratamiento de datos personales, puede contactarnos en <a href="mailto:comercial@suscripfy.co">comercial@suscripfy.co</a>.</p>
+
+    <h2>2. Datos que recopilamos</h2>
+    <p>Para los suscriptores de las tiendas (clientes finales): nombre completo, correo electrónico, número de teléfono, dirección de envío, historial de suscripciones y ciclos de cobro, y parámetros de atribución de campaña (UTM).</p>
+    <p>Para los merchants (tiendas Shopify): dominio Shopify, credenciales de pasarela de pago (almacenadas con encriptación AES), configuración de planes de suscripción y datos de facturación del servicio SaaS.</p>
+
+    <h2>3. Datos que NO almacenamos</h2>
+    <p>SuscripFy nunca almacena números de tarjeta de crédito, códigos de verificación (CVV) ni fechas de vencimiento. La tokenización de datos de pago ocurre directamente entre el navegador del usuario y Wompi mediante su SDK. Solo almacenamos identificadores opacos de fuente de pago que son inútiles sin las credenciales del merchant.</p>
+
+    <h2>4. Finalidad del tratamiento</h2>
+    <p>Los datos personales se utilizan exclusivamente para: procesamiento de cobros recurrentes de suscripciones, generación de órdenes en Shopify, envío de notificaciones transaccionales (activación, cobro exitoso, cobro fallido, pausa y cancelación), y generación de métricas y reportes para el merchant.</p>
+
+    <h2>5. Terceros con acceso a datos</h2>
+    <p>Compartimos datos estrictamente necesarios con: Wompi (procesamiento de pagos), Shopify (creación de órdenes y gestión de clientes), Resend (envío de correos electrónicos transaccionales) y Alegra (facturación electrónica, exclusivamente datos del merchant).</p>
+
+    <h2>6. Derechos del titular</h2>
+    <p>De conformidad con la Ley 1581 de 2012 de protección de datos personales de Colombia, los titulares tienen derecho a conocer, actualizar, rectificar y suprimir sus datos personales, así como a revocar la autorización otorgada para su tratamiento. Para ejercer estos derechos, puede contactarnos en <a href="mailto:comercial@suscripfy.co">comercial@suscripfy.co</a>.</p>
+    <p>Los clientes finales pueden gestionar sus datos directamente desde el portal de suscripciones de cada tienda, incluyendo la actualización de dirección de envío, método de pago y la cancelación de suscripciones.</p>
+
+    <h2>7. Eliminación de datos</h2>
+    <p>SuscripFy implementa los protocolos de eliminación de datos requeridos por Shopify: solicitud de exportación de datos del cliente, eliminación de datos del cliente a solicitud del merchant, y eliminación completa de todos los datos de la tienda 48 horas después de la desinstalación de la aplicación.</p>
+
+    <h2>8. Seguridad</h2>
+    <p>Las credenciales sensibles de los merchants se almacenan con encriptación AES (Fernet). Todas las comunicaciones se realizan exclusivamente sobre HTTPS. Se implementan headers de seguridad estándar incluyendo Content Security Policy, X-Frame-Options y protección contra clickjacking. Los webhooks de pago se verifican mediante firma SHA-256.</p>
+
+    <h2>9. Modificaciones</h2>
+    <p>SuscripFy se reserva el derecho de actualizar esta política en cualquier momento. Los cambios se publicarán en esta misma página con la fecha de última actualización.</p>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="assets/logos/logo-dark.svg" alt="SuscripFy" width="160" height="35" class="footer__logo" />
+        <p class="footer__tagline">Hecho en Colombia para tiendas Shopify colombianas</p>
+        <a href="mailto:comercial@suscripfy.co" class="footer__contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          comercial@suscripfy.co
+        </a>
+      </div>
+      <div class="footer__nav">
+        <a href="/#features" class="footer__nav-link">Funcionalidades</a>
+        <a href="/#capacidades" class="footer__nav-link">Capacidades</a>
+        <a href="/#planes" class="footer__nav-link">Planes</a>
+        <a href="/#faq" class="footer__nav-link">FAQ</a>
+        <a href="privacy.html" class="footer__nav-link">Política de privacidad</a>
+      </div>
+      <div class="footer__copy">
+        <p>&copy; 2026 SuscripFy. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
