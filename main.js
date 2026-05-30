@@ -1,5 +1,18 @@
 'use strict';
 
+/* ── WhatsApp config ── */
+const WA_NUMBER = '573XXXXXXXXXX'; // TODO: reemplazar con número colombiano real
+const WA_MSG    = encodeURIComponent('Hola, quiero saber más sobre SuscripFy');
+const WA_URL    = `https://wa.me/${WA_NUMBER}?text=${WA_MSG}`;
+
+// Inyectar URLs (los elementos se definen en HTML con href="#" como placeholder)
+document.addEventListener('DOMContentLoaded', () => {
+  const navBtn    = document.getElementById('wa-nav-btn');
+  const floatLink = document.getElementById('wa-float-link');
+  if (navBtn)    navBtn.href    = WA_URL;
+  if (floatLink) floatLink.href = WA_URL;
+});
+
 /* ============================================================
    NAVBAR — transparent → solid on scroll
    ============================================================ */
@@ -87,3 +100,29 @@ const observer = new IntersectionObserver(
 );
 
 animatedEls.forEach((el) => observer.observe(el));
+
+/* ============================================================
+   WHATSAPP FLOATING BUTTON — dismiss logic
+   ============================================================ */
+(function () {
+  const WA_KEY  = 'wa_float_dismissed';
+  const waFloat = document.getElementById('wa-float');
+  const waClose = document.getElementById('wa-float-close');
+  if (!waFloat || !waClose) return;
+
+  // Si ya fue descartado, ocultar permanentemente
+  if (localStorage.getItem(WA_KEY) === '1') {
+    waFloat.classList.add('is-dismissed');
+    return;
+  }
+
+  // Mostrar con delay para no ser invasivo en carga
+  setTimeout(() => waFloat.classList.add('is-visible'), 1200);
+
+  waClose.addEventListener('click', () => {
+    waFloat.classList.remove('is-visible');
+    // Esperar a que termine la transición antes de ocultar del DOM
+    setTimeout(() => waFloat.classList.add('is-dismissed'), 350);
+    localStorage.setItem(WA_KEY, '1');
+  });
+})();
