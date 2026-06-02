@@ -1982,9 +1982,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    ============================================================ */
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--s-5);
   margin-bottom: var(--s-8);
+}
+.pricing-grid .btn--full {
+  white-space: normal;
 }
 .pricing-card {
   background: var(--c-surface);
