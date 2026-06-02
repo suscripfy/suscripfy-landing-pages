@@ -1,7 +1,7 @@
 'use strict';
 
 /* ── WhatsApp config ── */
-const WA_NUMBER = '573115688398'; // TODO: reemplazar con número colombiano real
+const WA_NUMBER = '573104513138'; // TODO: reemplazar con número colombiano real
 const WA_MSG    = encodeURIComponent('Hola, quiero saber más sobre SuscripFy');
 const WA_URL    = `https://wa.me/${WA_NUMBER}?text=${WA_MSG}`;
 
