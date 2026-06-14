@@ -2669,6 +2669,4 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-color: #EF4444;
 }
 @media (max-width: 640px) {
-  .wa-float { bottom: 110px; right: 16px; }
-  .wa-float__btn { width: 60px; height: 60px; }
 }

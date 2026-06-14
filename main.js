@@ -126,3 +126,34 @@ animatedEls.forEach((el) => observer.observe(el));
     localStorage.setItem(WA_KEY, '1');
   });
 })();
+
+/* ============================================================
+   ALIGN WHATSAPP FLOAT ABOVE TIDIO WIDGET
+   ============================================================ */
+(function () {
+  var waFloat = document.getElementById('wa-float');
+  if (!waFloat) return;
+
+  function alignAboveTidio() {
+    var tidio = document.getElementById('tidio-chat');
+    if (!tidio) return;
+    var rect = tidio.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    var rightPx = window.innerWidth - rect.right;
+    var centerX = rect.left + rect.width / 2;
+    var waBtnW = 60;
+    waFloat.style.right = (window.innerWidth - centerX - waBtnW / 2) + 'px';
+    waFloat.style.bottom = (window.innerHeight - rect.top + 16) + 'px';
+    waFloat.querySelector('.wa-float__btn').style.width = rect.width + 'px';
+    waFloat.querySelector('.wa-float__btn').style.height = rect.height + 'px';
+  }
+
+  var observer = new MutationObserver(function () {
+    if (document.getElementById('tidio-chat')) {
+      setTimeout(alignAboveTidio, 800);
+      window.addEventListener('resize', alignAboveTidio);
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
