@@ -2607,7 +2607,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .wa-float {
   position: fixed;
   bottom: 28px;
-  left: 24px;
+  right: 28px;
   z-index: 500;
   display: flex;
   align-items: flex-end;
@@ -2627,8 +2627,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: none !important;
 }
 .wa-float__btn {
-  width: 60px;
-  height: 60px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: #25D366;
   display: flex;
@@ -2669,5 +2669,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-color: #EF4444;
 }
 @media (max-width: 640px) {
-  .wa-float { bottom: 20px; left: 16px; }
+  .wa-float { bottom: 16px; right: 16px; }
+  .wa-float__btn { width: 50px; height: 50px; }
 }
