@@ -2606,8 +2606,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ── WhatsApp Floating Button ── */
 .wa-float {
   position: fixed;
-  bottom: 120px;
-  right: 24px;
+  bottom: 28px;
+  left: 24px;
   z-index: 500;
   display: flex;
   align-items: flex-end;
@@ -2669,4 +2669,5 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-color: #EF4444;
 }
 @media (max-width: 640px) {
+  .wa-float { bottom: 20px; left: 16px; }
 }
