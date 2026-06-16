@@ -1,16 +1,5 @@
 'use strict';
 
-/* ── WhatsApp config ── */
-const WA_NUMBER = '573104513138'; // TODO: reemplazar con número colombiano real
-const WA_MSG    = encodeURIComponent('Hola, quiero saber más sobre SuscripFy');
-const WA_URL    = `https://wa.me/${WA_NUMBER}?text=${WA_MSG}`;
-
-// Inyectar URLs (los elementos se definen en HTML con href="#" como placeholder)
-document.addEventListener('DOMContentLoaded', () => {
-  const navBtn = document.getElementById('wa-nav-btn');
-  if (navBtn) navBtn.href = WA_URL;
-});
-
 /* ============================================================
    NAVBAR — transparent → solid on scroll
    ============================================================ */

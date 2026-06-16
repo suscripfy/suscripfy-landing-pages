@@ -517,6 +517,16 @@
   // ── Inicio ──────────────────────────────────────────────────────────
   trigger.addEventListener('click', open);
 
+  // El botón "Escríbenos" del navbar (desktop y mobile) abre el mismo chat.
+  // En mobile el menú hamburguesa se cierra solo (handler closeMenu sobre todos los <a> de #navLinks).
+  var navBtn = document.getElementById('wa-nav-btn');
+  if (navBtn) {
+    navBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      open();
+    });
+  }
+
   // Restaurar estado si la pestaña sigue viva
   if (sessionStorage.getItem(SS_OPEN) === '1' || getMsgs().length > 0) {
     setTimeout(open, 600);
