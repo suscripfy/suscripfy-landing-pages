@@ -59,6 +59,7 @@ export default async function handler(req, res) {
   if (!shopify_url || shopify_url.length < 3) return res.status(400).json({ error: 'invalid_shopify' });
 
   const payload = {
+    kind: 'lead',
     token: process.env.GOOGLE_SHEETS_TOKEN,
     nombre, email, whatsapp, shopify_url, session_id, origen,
     ip, user_agent: s(req.headers['user-agent'], 250),

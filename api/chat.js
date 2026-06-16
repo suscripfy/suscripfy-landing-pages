@@ -7,6 +7,7 @@ const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX = 12;
 const MAX_MSG_LEN = 500;
 const MAX_HISTORY = 12;
+const SHEETS_LOG_TIMEOUT_MS = 2500;
 
 const rateBucket = new Map(); // key: ip → { count, reset }
 
@@ -103,19 +104,78 @@ export default async function handler(req, res) {
     }
 
     const data = await apiResp.json();
-    const reply = (data.content || [])
+    const rawReply = (data.content || [])
       .filter((b) => b.type === 'text')
       .map((b) => b.text)
       .join('\n')
       .trim();
 
-    if (!reply) {
+    if (!rawReply) {
       return res.status(502).json({ error: 'empty_reply' });
     }
 
-    return res.status(200).json({ reply });
+    // Detectar trigger antes de limpiar el [TRANSFER]
+    const hasTransferMarker = rawReply.includes('[TRANSFER]');
+    const cleanReply = rawReply.replace(/\[TRANSFER\]/g, '').trim();
+    const turno = history.length + 1; // 1-indexed: este es el turno actual del usuario
+    let triggerCta = 'no';
+    if (hasTransferMarker) triggerCta = 'transfer';
+    else if (turno >= 6) triggerCta = 'turnos';
+
+    // Log a Google Sheets (no bloqueante crítico, con timeout corto)
+    await logConversationToSheets({
+      session_id: sanitize(body.session_id, 60),
+      nombre: sanitize(lead.nombre, 80),
+      email: sanitize(lead.email, 120),
+      whatsapp: sanitize(lead.whatsapp, 12),
+      shopify_url: sanitize(lead.shopify_url, 200),
+      turno,
+      mensaje_usuario: userMsg,
+      respuesta_bot: cleanReply,
+      trigger_cta: triggerCta,
+      ip,
+    });
+
+    // Devolvemos el reply RAW (con [TRANSFER]) — el frontend ya lo procesa.
+    return res.status(200).json({ reply: rawReply });
   } catch (err) {
     console.error('[sf-chat] handler error', err);
     return res.status(500).json({ error: 'internal_error' });
+  }
+}
+
+// ── Helper: log de conversación a Google Sheets ──────────────────────
+async function logConversationToSheets(payload) {
+  const url = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
+  const token = process.env.GOOGLE_SHEETS_TOKEN;
+  if (!url || !token) {
+    console.warn('[sf-chat][log] sheets misconfigured, skipping');
+    return;
+  }
+  const body = JSON.stringify({ kind: 'conversation', token, ...payload });
+  const ctrl = new AbortController();
+  const timeoutId = setTimeout(() => ctrl.abort(), SHEETS_LOG_TIMEOUT_MS);
+  try {
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body,
+      redirect: 'follow',
+      signal: ctrl.signal,
+    });
+    const txt = await resp.text().catch(() => '');
+    let parsed = null;
+    try { parsed = JSON.parse(txt); } catch {}
+    if (!resp.ok || !parsed || parsed.ok !== true) {
+      console.error('[sf-chat][log] sheets error', resp.status, txt.slice(0, 200));
+    }
+  } catch (err) {
+    if (err && err.name === 'AbortError') {
+      console.warn('[sf-chat][log] sheets timeout');
+    } else {
+      console.error('[sf-chat][log] sheets exception', err && err.message ? err.message : err);
+    }
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
