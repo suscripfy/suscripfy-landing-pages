@@ -3143,3 +3143,63 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     padding-bottom: max(12px, env(safe-area-inset-bottom));
   }
 }
+
+/* ── Tooltip "¿Dudas?" sobre el botón flotante del chat ── */
+.wa-float__tip {
+  position: absolute;
+  right: 72px;
+  bottom: 14px;
+  background: #fff;
+  color: #2563EB;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  padding: 7px 12px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(15,23,42,0.12), 0 1px 3px rgba(15,23,42,0.06);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(6px) scale(0.92);
+  transition: opacity 0.32s cubic-bezier(0.34,1.56,0.64,1),
+              transform 0.32s cubic-bezier(0.34,1.56,0.64,1);
+  animation: wa-float-tip-pulse 2.6s ease-in-out 1.6s infinite;
+}
+.wa-float__tip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -5px;
+  transform: translateY(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  box-shadow: 2px -2px 4px rgba(15,23,42,0.04);
+}
+.wa-float.is-visible .wa-float__tip {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+}
+.wa-float.is-chat-open .wa-float__tip,
+.wa-float.is-dismissed .wa-float__tip {
+  opacity: 0 !important;
+  animation: none;
+}
+@keyframes wa-float-tip-pulse {
+  0%, 100% { transform: translateX(0) scale(1); }
+  50% { transform: translateX(0) scale(1.05); }
+}
+@media (max-width: 640px) {
+  .wa-float__tip {
+    right: 68px;
+    bottom: 16px;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 12px;
+  }
+  .wa-float__tip::after { width: 8px; height: 8px; right: -4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wa-float__tip { animation: none; }
+}

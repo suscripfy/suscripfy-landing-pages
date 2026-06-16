@@ -210,6 +210,8 @@
     isOpen = true;
     sessionStorage.setItem(SS_OPEN, '1');
     requestAnimationFrame(function () { panel.classList.add('sf-chat-panel--open'); });
+    var waFloat = document.getElementById('wa-float');
+    if (waFloat) waFloat.classList.add('is-chat-open');
     setUnread(0);
     setTimeout(function () {
       if (!getLead()) {
@@ -229,6 +231,8 @@
     isOpen = false;
     sessionStorage.setItem(SS_OPEN, '0');
     panel.classList.remove('sf-chat-panel--open');
+    var waFloat = document.getElementById('wa-float');
+    if (waFloat) waFloat.classList.remove('is-chat-open');
   }
 
   function mount() {
