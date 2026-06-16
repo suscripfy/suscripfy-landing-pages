@@ -1,0 +1,8 @@
+{
+  "name": "suscripfy-landing",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  }
+}
