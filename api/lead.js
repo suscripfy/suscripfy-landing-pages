@@ -56,7 +56,7 @@ export default async function handler(req, res) {
   if (!nombre || nombre.length < 2) return res.status(400).json({ error: 'invalid_nombre' });
   if (!RX_EMAIL.test(email)) return res.status(400).json({ error: 'invalid_email' });
   if (!RX_PHONE.test(whatsapp)) return res.status(400).json({ error: 'invalid_whatsapp' });
-  if (!shopify_url) return res.status(400).json({ error: 'invalid_shopify' });
+  if (!shopify_url || shopify_url.length < 3) return res.status(400).json({ error: 'invalid_shopify' });
 
   const payload = {
     token: process.env.GOOGLE_SHEETS_TOKEN,
@@ -65,19 +65,33 @@ export default async function handler(req, res) {
   };
 
   try {
+    // Apps Script Web App requiere text/plain;charset=utf-8 para preservar el body
+    // a través del redirect 302 → script.googleusercontent.com.
+    // Ref: https://developers.google.com/apps-script/guides/web (doPost)
     const resp = await fetch(process.env.GOOGLE_SHEETS_WEBHOOK_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload),
       redirect: 'follow',
     });
+
+    const respText = await resp.text().catch(() => '');
+    let respJson = null;
+    try { respJson = JSON.parse(respText); } catch { /* no era JSON */ }
+
     if (!resp.ok) {
-      console.error('[sf-chat] sheets error', resp.status);
-      return res.status(502).json({ error: 'sheets_upstream' });
+      console.error('[sf-chat][lead] sheets http error', resp.status, respText.slice(0, 200));
+      return res.status(502).json({ error: 'sheets_upstream', status: resp.status });
     }
+
+    if (!respJson || respJson.ok !== true) {
+      console.error('[sf-chat][lead] sheets logical error', respText.slice(0, 200));
+      return res.status(502).json({ error: 'sheets_logical', detail: (respJson && respJson.error) || 'no_json' });
+    }
+
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('[sf-chat] lead handler error', err);
+    console.error('[sf-chat][lead] handler error', err && err.message ? err.message : err);
     return res.status(500).json({ error: 'internal_error' });
   }
 }

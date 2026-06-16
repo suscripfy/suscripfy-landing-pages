@@ -83,10 +83,23 @@
   // ── Validaciones del formulario ─────────────────────────────────────
   var RX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var RX_PHONE_CO = /^3\d{9}$/; // 10 dígitos, empieza por 3
-  var RX_SHOPIFY = /^https?:\/\/[a-z0-9-]+(\.myshopify\.com|\.[a-z]{2,}(\.[a-z]{2,})?)\/?$/i;
+  var RX_DOMAIN = /^[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/i;
 
   function normalizePhone(v) {
     return String(v || '').replace(/\D/g, '').replace(/^57/, '');
+  }
+  function normalizeDomain(v) {
+    return String(v || '')
+      .trim()
+      .toLowerCase()
+      .replace(/^https?:\/\//, '')
+      .replace(/^www\./, '')
+      .replace(/\/.*$/, '')
+      .trim();
+  }
+  function isNoStore(v) {
+    var s = String(v || '').trim().toLowerCase();
+    return s === 'no tengo aún' || s === 'no tengo aun' || s === 'no tengo' || s === 'aún no' || s === 'aun no';
   }
   function validateForm(d) {
     var errors = {};
@@ -94,10 +107,11 @@
     if (!RX_EMAIL.test(d.email || '')) errors.email = 'Correo no válido';
     var phone = normalizePhone(d.whatsapp);
     if (!RX_PHONE_CO.test(phone)) errors.whatsapp = 'Número colombiano de 10 dígitos (3XXXXXXXXX)';
-    var url = (d.shopify_url || '').trim();
-    if (!url) errors.shopify_url = 'URL requerida (o escribe "no tengo aún")';
-    else if (url.toLowerCase() !== 'no tengo aún' && url.toLowerCase() !== 'no tengo aun' && !RX_SHOPIFY.test(url)) {
-      errors.shopify_url = 'URL no válida (ej: https://mitienda.myshopify.com)';
+    var raw = (d.shopify_url || '').trim();
+    if (!raw) errors.shopify_url = 'Escribe tu dominio o "no tengo aún"';
+    else if (!isNoStore(raw)) {
+      var norm = normalizeDomain(raw);
+      if (!RX_DOMAIN.test(norm)) errors.shopify_url = 'Dominio no válido (ejemplo: mitienda.com.co)';
     }
     return errors;
   }
@@ -146,9 +160,9 @@
         '<div class="sf-chat-field__error" id="sf-chat-err-whatsapp" hidden></div>' +
       '</div>' +
       '<div class="sf-chat-field">' +
-        '<label class="sf-chat-field__label" for="sf-chat-shopify">URL de tu tienda Shopify</label>' +
-        '<input class="sf-chat-field__input" id="sf-chat-shopify" name="shopify_url" type="url" autocomplete="url" maxlength="200" placeholder="https://mitienda.myshopify.com" required>' +
-        '<div class="sf-chat-field__hint">Si a\u00FAn no tienes tienda, escribe: <em>no tengo a\u00FAn</em></div>' +
+        '<label class="sf-chat-field__label" for="sf-chat-shopify">Dominio de tu tienda</label>' +
+        '<input class="sf-chat-field__input" id="sf-chat-shopify" name="shopify_url" type="text" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="200" placeholder="mitienda.com.co" required>' +
+        '<div class="sf-chat-field__hint">Por ejemplo: <em>mitienda.com.co</em>. Si a\u00FAn no tienes tienda, escribe: <em>no tengo a\u00FAn</em></div>' +
         '<div class="sf-chat-field__error" id="sf-chat-err-shopify" hidden></div>' +
       '</div>' +
       '<div class="sf-chat-field sf-chat-field--hp" aria-hidden="true">' +
@@ -275,9 +289,9 @@
 
       var payload = {
         nombre: data.nombre,
-        email: data.email,
+        email: data.email.toLowerCase(),
         whatsapp: normalizePhone(data.whatsapp),
-        shopify_url: data.shopify_url,
+        shopify_url: isNoStore(data.shopify_url) ? 'sin tienda aún' : normalizeDomain(data.shopify_url),
         session_id: getSessionId(),
         origen: 'landing-chat',
       };
@@ -293,7 +307,7 @@
         setLead(payload);
         renderBody();
         // Mensaje de bienvenida del bot
-        var welcome = '\u00A1Hola ' + payload.nombre.split(' ')[0] + '! \uD83D\uDC4B Soy el asistente de SuscripFy. \u00BFEn qu\u00E9 puedo ayudarte hoy? Puedo contarte c\u00F3mo funciona, planes, instalaci\u00F3n o lo que necesites.';
+        var welcome = '\u00A1Hola ' + payload.nombre.split(' ')[0] + '! \uD83D\uDC4B Soy el asistente de SuscripFy y te respondo de inmediato. Puedo contarte c\u00F3mo funciona, planes, instalaci\u00F3n o cualquier duda que tengas.\n\nSi prefieres hablar con un asesor humano o agendar una demo, d\u00EDmelo en cualquier momento y te conecto.';
         appendBotMsg(welcome);
       });
     });
