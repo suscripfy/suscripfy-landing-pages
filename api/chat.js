@@ -1,7 +1,7 @@
 import { SYSTEM_PROMPT } from './_kb.js';
 
-const MODEL = 'claude-haiku-4-5';
-const MAX_TOKENS = 600;
+const MODEL = 'claude-sonnet-4-6';
+const MAX_TOKENS = 1500;
 const TEMPERATURE = 0.3;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX = 12;
