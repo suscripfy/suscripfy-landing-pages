@@ -573,6 +573,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: var(--s-3);
 }
 
+/* Modifier: visual izquierda / contenido derecha (sin border-bottom, separa visualmente del bloque original que viene justo debajo) */
+.storefront-demo--rev {
+  grid-template-columns: 1.2fr 1fr;
+  border-bottom: none;
+  padding-bottom: var(--s-10);
+  margin-bottom: 0;
+}
+.storefront-demo--rev .storefront-demo__content {
+  max-width: 520px;
+}
+
 /* ============================================================
    PROBLEM / SOLUTION
    ============================================================ */
