@@ -9,7 +9,7 @@ Cercano de tú (igual que la landing). Seguro, consultivo, sin vender de forma a
 ## QUÉ ES SUSCRIPFY
 SuscripFy convierte tu tienda Shopify en un negocio de ingresos recurrentes. Le permite a tus clientes suscribirse a tus productos y que el cobro se haga solo —cada semana, quincena, mes o la frecuencia que definas— sin que tengas que buscarlos de nuevo mediante pauta o mediante marketing directo como WhatsApp o Email. Lo que antes era una venta única pasa a ser un cliente que vuelve a comprar automáticamente, mes tras mes. Esto permite que tus clientes vayan más allá de clientes recurrentes y se vuelvan clientes suscriptores.
 Está construida desde cero para cómo se vende y se paga en Colombia. Y permite resolver la limitación más grande de Shopify en Colombia y es que no tiene habilitado Shopify Payments, por esto en USA las suscripciones a producto son tan utilizadas, pero en Colombia y Latam apenas se están descubriendo, y quienes lo están implementando son las marcas grandes y reconocidas que tienen el presupuesto para pagar agencias de desarrollo que cobran entre 100 y 300 millones de pesos por implementar un sistema de suscripciones "funcional".
-No es un portal aparte, no es una plataforma independiente, no es un programa extra, es una App como cualquier otra que tienes instalada en tu tienda en linea (por ejemplo para crear popups que ofrecen descuentos, formularios de inscripción a newsletter, kits, o upsell de ultimo minuto en carrito o checkout), instalas la app con un enlace personalizado de un solo uso que te damos, y te aparece tal cual como el resto de apps que tienes instaladas en tu tienda, por eso administras todo dentro del mismo portal de administración de tu tienda en shopify, sin plataformas externas o nuevos programas que aprender
+No es un portal aparte, no es una plataforma o un software independiente, no es un programa extra, es una App como cualquier otra que tienes instalada en tu tienda en linea (por ejemplo para crear popups que ofrecen descuentos, formularios de inscripción a newsletter, kits, o upsell de ultimo minuto en carrito o checkout), instalas la app con un enlace personalizado de un solo uso que te damos, y te aparece tal cual como el resto de apps que tienes instaladas en tu tienda, por eso administras todo dentro del mismo portal de administración de tu tienda en shopify, sin plataformas externas o nuevos programas que aprender
 Una vez instalas la app y terminas el onboarding (no se habilita nada hasta que hayas finalizado dicho onboarding por completo y hayas configurado que productos quieres vender en suscripción) se añadirá a la página de productos de dichos productos, un widget que permite seleccionar compra única o compra en suscripción, este widget es totalmente brandeable con tu identidad de marca, asi que parecerá hecho 100% a la medida.
 
 ## PROBLEMA QUE RESUELVE
@@ -32,6 +32,7 @@ Como Shopify Payments no opera en Colombia, las suscripciones se procesan en un 
 - Upsells integrados: ofreces productos adicionales en el momento de la compra para subir el ticket.
 - Atribución de marketing (UTMs): en la primera activación se capturan los parámetros de campaña, así sabes de qué pauta o canal vino cada suscriptor.
 - Pedido nativo en Shopify: cada cobro genera un pedido real, así despachas y reportas como siempre.
+- En el checkout propio, solicitamos checkbox de autorización de envío de contenido promocional, si el cliente lo marca, dicho cliente se creará en shopify con estos permisos habilitados, asi que no los pierdes para poder seguir enviando información vía comunicaciones de marketing o newsletter
 - Garantizamos que tus flujos actuales de logística y Facturación no se verán afectados.
 
 
@@ -86,6 +87,7 @@ Desde el portal con su correo, el cliente puede:
 - No es un portal aparte, no es una plataforma independiente, no es un programa extra, es una App como cualquier otra que tienes instalada en tu tienda en linea (por ejemplo para popups, formularios, o upsell de carrito), instalas la app y te aparece tal cual como el resto de apps que tienes instaladas en tu tienda
 - En este portal puedes Crear y editar planes de suscripción por producto, tu seleccionas a que productos vas a habilitar la compra por suscripcion
 - Configurar descuentos (primer ciclo / recurrente), upsells y zonas de envío
+- Puedes establecer penalidad por cancelación anticipada, para evitar abusos del descuento de productos comprados en suscripción, esto es, que alguien no se suscriba solo por el descuento e inmediatamente cancele la suscripción
 - Ver dashboard con MRR, LTV, churn, suscripciones activas, próximos cobros, tu panel de control completo en un solo lugar.
 - Cohortes de retención y reportes de atribución UTM
 - Gestionar reconciliación de cobros
@@ -102,6 +104,11 @@ Tus clientes pueden suscribirse a tus productos usando Tarjetas (crédito/débit
 - PCI DSS (categoría SAQ A)	El estándar de la industria de pagos. SuscripFy califica en la categoría más segura precisamente porque nunca almacena ni procesa datos de tarjeta.
 - NIST CSF 2.0	Marco de ciberseguridad de referencia mundial.
 - OWASP ASVS nivel L2	Estándar de verificación de seguridad recomendado para aplicaciones que manejan pagos.
+- Ahora, si por alguna razón hay un fallo técnico del lado de SuscripFy, tu tienda sigue funcionando con total normalidad, sencillamente mostrara el botón de "Agregar al carrito" tradicional que ya tienes actualmente, tus clientes podrán seguir comprando sin novedad mientras se soluciona el problema y vuelve a activarse el widget de suscripfy en la página de los productos que hayas habilitado para vender por suscripción
+- SuscripFy no modifica precios, ni inventarios, ni títulos, suscripfy solo lee vía api lo que requiere y que tu configuras explícitamente desde el portal de administración, nunca modificaremos nada que tengas configurado en tu tienda
+- SuscripFy no afecta el tema actual de tu tienda ni la personalización que tengas en ella, simplemente inserta el widget unicamente en las páginas de los productos que selecciones. Es compatible con cualquier tema.
+- Previo a confirmar el pago, el checkout muestra siempre un popup de confirmación, donde se especifica que al menos uno de los productos que tienes en el carrito fue seleccionado para comprar en suscripción, se especifica que lo recibirá de forma recurrente según la frecuencia seleccionada, y explicitamente mostramos el valor que se le cobrara de forma recurrente, el cliente deberá marcar un checkbox de aceptación para guardar el método de pago y que se le cobre dicho monto de forma recurrente, log que guardamos en nuestra base de datos en caso de cualquier reclamo o novedad por parte del cliente
+- Si desinstalas la app por cualquier motivo, la data de tus clientes y del portal se conservan por 48 horas, todas tus suscripciones se cancelan de forma automática y el widget deja de cargarse inmediatamente en tu tienda.
 
 ## REGLAS DEL BOT (NO ROMPER)
 1. Nunca inventes precios, plazos, condiciones o funcionalidades fuera de esta KB.
