@@ -1,6 +1,9 @@
 {
   "functions": {
     "api/chat.js": { "maxDuration": 30 },
-    "api/lead.js": { "maxDuration": 10 }
+    "api/lead.js": { "maxDuration": 10 },
+    "api/staff/login.js": { "maxDuration": 10 },
+    "api/staff/logout.js": { "maxDuration": 5 },
+    "api/staff/chat.js": { "maxDuration": 30 }
   }
 }
