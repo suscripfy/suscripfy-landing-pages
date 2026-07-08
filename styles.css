@@ -3214,3 +3214,90 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (prefers-reduced-motion: reduce) {
   .wa-float__tip { animation: none; }
 }
+
+/* ============================================================
+   CORNERSTONE PAGE — breadcrumb, prose, steps
+   ============================================================ */
+.breadcrumb {
+  padding: var(--s-4) 0;
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--c-border);
+  margin-top: var(--nav-h);
+}
+.breadcrumb__list {
+  list-style: none;
+  display: flex;
+  gap: var(--s-2);
+  font-size: var(--text-sm);
+  color: var(--c-muted);
+  margin: 0;
+  padding: 0;
+}
+.breadcrumb__item + .breadcrumb__item::before {
+  content: "/";
+  margin-right: var(--s-2);
+  color: var(--c-border);
+}
+.breadcrumb__item a {
+  color: var(--c-primary);
+  text-decoration: none;
+}
+.breadcrumb__item a:hover { text-decoration: underline; }
+
+.article-prose {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: var(--text-lg);
+  line-height: 1.75;
+  color: var(--c-text);
+}
+.article-prose p { margin-bottom: var(--s-6); }
+
+.steps-list {
+  list-style: none;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-6);
+}
+.steps-list__item {
+  display: flex;
+  gap: var(--s-5);
+  align-items: flex-start;
+}
+.steps-list__number {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-full);
+  background: var(--c-primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+.steps-list__item strong {
+  display: block;
+  font-size: var(--text-lg);
+  margin-bottom: var(--s-1);
+}
+.steps-list__item p {
+  margin: 0;
+  color: var(--c-muted);
+  line-height: 1.6;
+}
+.steps-list__reqs {
+  max-width: 760px;
+  margin: var(--s-10) auto 0;
+  font-size: var(--text-base);
+  color: var(--c-muted);
+}
+.steps-list__reqs ul {
+  margin: var(--s-3) 0 0 var(--s-6);
+  padding: 0;
+}
+.steps-list__reqs li { margin-bottom: var(--s-2); }
