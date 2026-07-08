@@ -16,6 +16,108 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="canonical" href="https://www.suscripfy.co/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "SuscripFy",
+        "url": "https://www.suscripfy.co",
+        "logo": "https://www.suscripfy.co/assets/logos/icon-512.jpg",
+        "email": "comercial@suscripfy.co",
+        "areaServed": "CO",
+        "description": "SuscripFy es la única app de suscripciones para Shopify que funciona en Colombia. Cobra automáticamente con Wompi, aumenta el LTV y genera ingresos recurrentes predecibles."
+      },
+      {
+        "@type": "WebSite",
+        "name": "SuscripFy",
+        "url": "https://www.suscripfy.co",
+        "inLanguage": "es"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "SuscripFy",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "SuscripFy es la única app de suscripciones para Shopify que funciona en Colombia. Cobra automáticamente con Wompi, aumenta el LTV y genera ingresos recurrentes predecibles.",
+        "url": "https://www.suscripfy.co",
+        "offers": [
+          {
+            "@type": "Offer",
+            "name": "Free",
+            "price": "0",
+            "priceCurrency": "COP"
+          },
+          {
+            "@type": "Offer",
+            "name": "Starter",
+            "price": "179900",
+            "priceCurrency": "COP"
+          },
+          {
+            "@type": "Offer",
+            "name": "Growth",
+            "price": "279900",
+            "priceCurrency": "COP"
+          },
+          {
+            "@type": "Offer",
+            "name": "Pro",
+            "price": "379900",
+            "priceCurrency": "COP"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Mis datos de pago y los de mis clientes están seguros?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SuscripFy nunca almacena datos de tarjeta (número, CVV, fecha). La tokenización ocurre directamente entre el navegador del cliente y Wompi mediante su SDK. Solo guardamos tokens opacos que son inútiles sin las credenciales del merchant, las cuales están encriptadas en nuestra base de datos."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿SuscripFy afecta el rendimiento de mi tienda Shopify?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. SuscripFy opera como un servicio externo que se comunica vía API. El widget se carga de forma asíncrona y pesa menos de 15KB. Si SuscripFy estuviera caído, tu tienda sigue funcionando normalmente con su botón de compra nativo."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué pasa si un cobro automático falla?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "SuscripFy tiene un sistema de reintentos inteligentes. Si Wompi rechaza un cobro, el sistema reintenta automáticamente en los días siguientes con notificaciones al cliente por correo para que actualice su tarjeta. Solo después de agotar los reintentos se marca la suscripción como fallida."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo garantizan que no haya doble cobro?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Cada cobro usa una clave de idempotencia única en Wompi. Si por alguna razón el sistema intenta cobrar dos veces el mismo ciclo, Wompi rechaza el duplicado automáticamente. Además, el estado del ciclo se actualiza en base de datos antes de intentar el cobro."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Funciona con cualquier tema de Shopify?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. El widget de SuscripFy es compatible con todos los temas de Shopify, incluidos los de la Theme Store y los personalizados. Se inyecta vía Script Tag y se adapta automáticamente al estilo de tu tienda. No requiere modificar el código del tema."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
