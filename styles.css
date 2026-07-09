@@ -3437,3 +3437,133 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     transform: translate(-50%, -50%);
   }
 }
+
+/* ============================================================
+   APPS MOCK — listado de apps de Shopify (bloque "Instalación nativa")
+   Reemplaza la captura apps_instaladas.jpg. Vectorial, genérico.
+   Vive dentro de .storefront-demo__frame--static
+   ============================================================ */
+.apps-mock {
+  background: #FFFFFF;
+  padding: var(--s-4);
+  font-family: var(--font);
+}
+.apps-mock__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: var(--s-2);
+}
+.apps-mock__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--c-text);
+}
+.apps-mock__btns {
+  display: flex;
+  gap: 6px;
+}
+.apps-mock__btn {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 5px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--c-border);
+  color: var(--c-muted);
+  background: #FFFFFF;
+  white-space: nowrap;
+}
+.apps-mock__btn--dark {
+  background: var(--c-text);
+  border-color: var(--c-text);
+  color: #FFFFFF;
+}
+.apps-mock__tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+.apps-mock__tab {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--c-muted);
+  padding: 4px 9px;
+  border-radius: 6px;
+}
+.apps-mock__tab--active {
+  background: #F1F5F9;
+  color: var(--c-text);
+}
+.apps-mock__search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #94A3B8;
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+}
+.apps-mock__list {
+  border: 1px solid var(--c-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.apps-mock__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #F1F5F9;
+}
+.apps-mock__row:last-child {
+  border-bottom: 0;
+}
+.apps-mock__row--sf {
+  background: #EFF6FF;
+}
+.apps-mock__ico {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #F1F5F9;
+  color: #94A3B8;
+}
+.apps-mock__ico--sf {
+  background: var(--c-primary);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 800;
+}
+.apps-mock__name {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--c-text);
+  line-height: 1.35;
+}
+.apps-mock__name--sf {
+  color: #1D4ED8;
+}
+.apps-mock__desc {
+  font-size: 9.5px;
+  color: #94A3B8;
+  line-height: 1.35;
+}
+.apps-mock__dots {
+  margin-left: auto;
+  color: #CBD5E1;
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+@media (max-width: 640px) {
+  .apps-mock { padding: var(--s-3); }
+  .apps-mock__btns { display: none; }
+  .apps-mock__search { display: none; }
+}
