@@ -112,3 +112,30 @@ animatedEls.forEach((el) => observer.observe(el));
     localStorage.setItem(WA_KEY, '1');
   });
 })();
+
+/* ============================================================
+   VIDEO DEMO — facade: el iframe se inyecta solo al hacer click.
+   Guard obligatorio: main.js tambien lo carga la pagina cornerstone,
+   donde este bloque NO existe.
+   ============================================================ */
+(function () {
+  const player = document.getElementById('video-demo-player');
+  const facade = document.getElementById('video-demo-facade');
+  if (!player || !facade) return;
+
+  const EMBED_URL = 'https://streamable.com/e/lf0tos?autoplay=1';
+  let loaded = false;
+
+  facade.addEventListener('click', function () {
+    if (loaded) return;
+    loaded = true;
+    const iframe = document.createElement('iframe');
+    iframe.src = EMBED_URL;
+    iframe.title = 'Video explicativo de SuscripFy';
+    iframe.className = 'video-demo__iframe';
+    iframe.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('loading', 'lazy');
+    player.replaceChildren(iframe);
+  });
+})();
