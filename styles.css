@@ -3440,23 +3440,31 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ============================================================
    APPS MOCK — listado de apps de Shopify (bloque "Instalación nativa")
-   Reemplaza la captura apps_instaladas.jpg. Vectorial, genérico.
+   Reemplaza la captura apps_instaladas.jpg. Vectorial, generico.
    Vive dentro de .storefront-demo__frame--static
    ============================================================ */
+
+/* El frame ya no contiene un <img> con ancho intrinseco: hay que darselo.
+   .storefront-demo__visual es flex column con align-items:flex-start. */
+.storefront-demo__frame--static {
+  width: 100%;
+}
+
 .apps-mock {
   background: #FFFFFF;
-  padding: var(--s-4);
+  padding: 18px;
   font-family: var(--font);
+  line-height: 1.4;
 }
 .apps-mock__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
-  gap: var(--s-2);
+  gap: 8px;
+  margin-bottom: 14px;
 }
 .apps-mock__title {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--c-text);
 }
@@ -3465,14 +3473,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: 6px;
 }
 .apps-mock__btn {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
-  padding: 5px 9px;
-  border-radius: 6px;
+  padding: 6px 11px;
+  border-radius: 7px;
   border: 1px solid var(--c-border);
   color: var(--c-muted);
   background: #FFFFFF;
   white-space: nowrap;
+  line-height: 1.2;
 }
 .apps-mock__btn--dark {
   background: var(--c-text);
@@ -3485,11 +3494,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-bottom: 10px;
 }
 .apps-mock__tab {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--c-muted);
-  padding: 4px 9px;
-  border-radius: 6px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  line-height: 1.2;
 }
 .apps-mock__tab--active {
   background: #F1F5F9;
@@ -3498,13 +3508,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .apps-mock__search {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 10px;
+  gap: 7px;
+  font-size: 11px;
+  line-height: 1.2;
   color: #94A3B8;
   border: 1px solid var(--c-border);
   border-radius: 8px;
-  padding: 7px 10px;
-  margin-bottom: 10px;
+  padding: 9px 12px;
+  margin-bottom: 12px;
+}
+.apps-mock__search svg {
+  flex-shrink: 0;
 }
 .apps-mock__list {
   border: 1px solid var(--c-border);
@@ -3514,8 +3528,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .apps-mock__row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
+  gap: 11px;
+  padding: 9px 14px;
   border-bottom: 1px solid #F1F5F9;
 }
 .apps-mock__row:last-child {
@@ -3525,9 +3539,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: #EFF6FF;
 }
 .apps-mock__ico {
-  width: 28px;
-  height: 28px;
-  border-radius: 7px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3535,14 +3549,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: #F1F5F9;
   color: #94A3B8;
 }
+.apps-mock__ico svg {
+  width: 16px;
+  height: 16px;
+}
 .apps-mock__ico--sf {
   background: var(--c-primary);
   color: #FFFFFF;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
+  line-height: 1;
 }
 .apps-mock__name {
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--c-text);
   line-height: 1.35;
@@ -3551,19 +3570,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: #1D4ED8;
 }
 .apps-mock__desc {
-  font-size: 9.5px;
+  font-size: 10.5px;
   color: #94A3B8;
   line-height: 1.35;
 }
 .apps-mock__dots {
   margin-left: auto;
   color: #CBD5E1;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 1px;
   line-height: 1;
+  flex-shrink: 0;
 }
 @media (max-width: 640px) {
-  .apps-mock { padding: var(--s-3); }
+  .apps-mock { padding: 12px; }
   .apps-mock__btns { display: none; }
   .apps-mock__search { display: none; }
+  .apps-mock__title { font-size: 14px; }
 }
