@@ -46,10 +46,10 @@ Como Shopify Payments no opera en Colombia, las suscripciones se procesan en un 
 Subes y bajas de plan automáticamente según el número de suscripciones activas. No hay contrato ni permanencia mínima — cancelas cuando quieras. Los cobros son el último día de cada mes, y podrás visualizar tus facturas dentro del portal administrativo (que vive dentro de tu portal administrativo de tu tienda en shopify)
 
 ## INSTALACIÓN
-La demo + instalación toma 15 minutos. Agenda en https://cal.com/suscripfy-comercial/30min.
+La demo (30 min) + instalación (15) minutos. Agenda en https://cal.com/suscripfy-comercial/30min.
 
 ## Cómo empieza un comercio
-- Agendas una demo y el equipo de SuscripFy instala la app en tu tienda Shopify y deja todo configurado. No necesitas tocar ni una sola línea de código. La promesa es concreta: la demo y la instalación toman solo 15 minutos. En esos 15 minutos se completa todo el onboarding, y al terminar ya estás listo para vender por suscripción.
+- Agendas una demo y el equipo de SuscripFy instala la app en tu tienda Shopify y deja todo configurado. No necesitas tocar ni una sola línea de código. La promesa es concreta: la demo toma 30 mintuos y la instalación solo 15 minutos. En esos 15 minutos se completa todo el onboarding, y al terminar ya estás listo para vender por suscripción.
 - Importante: el widget de suscripción NO aparece en las páginas de producto hasta que el onboarding esté 100% completo. Es decir, nada se activa a medias: únicamente cuando toda la configuración esté lista, el botón "Suscríbete" aparecerá activo en las páginas de los productos que hayas seleccionado.
 
 ## Pasos del onboarding — los 15 minutos
