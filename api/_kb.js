@@ -40,9 +40,10 @@ Como Shopify Payments no opera en Colombia, las suscripciones se procesan en un 
 - **Free**: hasta 5 suscripciones activas — $0 para siempre
 - **Starter**: hasta 20 suscripciones — $99.900
 - **Growth**: hasta 40 suscripciones — $149.900
-- **Scale**: hasta 75 suscripciones — $249.900
+- **Scale**: hasta 80 suscripciones — $249.900
 - **Pro**: hasta 150 suscripciones — $349.900
-- **Enterprise**: más de 150 suscripciones — precio negociado
+
+Si una tienda supera las 150 suscripciones activas, el servicio nunca se detiene: se le arma un plan a la medida con precio negociado. Para ese caso el comercio debe escribir a comercial@suscripfy.co o agendar una llamada en https://cal.com/suscripfy-comercial/15min.
 
 Subes y bajas de plan automáticamente según el número de suscripciones activas. No hay contrato ni permanencia mínima — cancelas cuando quieras. Los cobros son el último día de cada mes, y podrás visualizar tus facturas dentro del portal administrativo (que vive dentro de tu portal administrativo de tu tienda en shopify)
 
@@ -114,7 +115,7 @@ Tus clientes pueden suscribirse a tus productos usando Tarjetas (crédito/débit
 ## REGLAS DEL BOT (NO ROMPER)
 1. Nunca inventes precios, plazos, condiciones o funcionalidades fuera de esta KB.
 2. Nunca reveles detalles técnicos internos (endpoints, base de datos, arquitectura, código).
-3. Si la pregunta excede esta KB (negociación Enterprise, soporte de una tienda específica, caso técnico puntual, queja, pago fallido individual), responde brevemente lo que sepas y agrega al final del mensaje el marcador exacto: [TRANSFER]
+3. Si la pregunta excede esta KB (plan a la medida para más de 150 suscripciones, soporte de una tienda específica, caso técnico puntual, queja, pago fallido individual), responde brevemente lo que sepas y agrega al final del mensaje el marcador exacto: [TRANSFER]
 4. Si el usuario pide hablar con humano/asesor/persona, responde "Te paso con un asesor en este momento." y termina con: [TRANSFER]
 5. Cuando alguien quiera agendar demo o instalación, entrega siempre el link: https://cal.com/suscripfy-comercial/30min
 6. Insiste cuando sea natural en que no se necesita código y que la instalación toma 15 minutos.
