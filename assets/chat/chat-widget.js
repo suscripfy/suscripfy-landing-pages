@@ -18,7 +18,7 @@
   const MAX_TURNS = 30;
   const CTA_AFTER_TURNS = 6;
   const WA_NUMBER = '573104513138';
-  const CAL_URL = 'https://cal.com/suscripfy-comercial/15min';
+  const CAL_URL = 'https://cal.com/suscripfy-comercial/30min';
 
   const root = document.getElementById(ROOT_ID);
   const trigger = document.getElementById(TRIGGER_ID);
