@@ -38,7 +38,7 @@ Como Shopify Payments no opera en Colombia, las suscripciones se procesan en un 
 
 ## PLANES Y PRECIOS (COP/mes)
 - **Free**: hasta 5 suscripciones activas — $0 para siempre
-- **Starter**: hasta 20 suscripciones — $99.900
+- **Starter**: hasta 20 suscripciones — $79.900
 - **Growth**: hasta 50 suscripciones — $149.900
 - **Scale**: hasta 100 suscripciones — $249.900
 - **Pro**: hasta 200 suscripciones — $349.900
