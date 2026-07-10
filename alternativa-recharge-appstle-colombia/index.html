@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18307171972"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18307171972');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alternativa a Recharge y Appstle en Colombia &mdash; SuscripFy</title>
+  <meta name="description" content="Recharge y Appstle no pueden ejecutar cobros recurrentes en Colombia porque dependen de Shopify Payments. SuscripFy cobra con Wompi. Comparativa honesta y explicacion tecnica." />
+  <meta property="og:title" content="Alternativa a Recharge y Appstle en Colombia — SuscripFy" />
+  <meta property="og:description" content="Por que las apps de suscripciones del App Store no cobran en Colombia, y cual es la alternativa real con Wompi." />
+  <meta property="og:image" content="https://www.suscripfy.co/assets/logos/icon-512.jpg" />
+  <meta property="og:url" content="https://www.suscripfy.co/alternativa-recharge-appstle-colombia/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,-apple-system,sans-serif' font-size='19' font-weight='800' fill='white'%3ES%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="canonical" href="https://www.suscripfy.co/alternativa-recharge-appstle-colombia/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Alternativa a Recharge y Appstle para tiendas Shopify en Colombia",
+        "description": "Recharge y Appstle dependen de Shopify Payments para ejecutar cobros recurrentes. Shopify Payments no opera en Colombia. SuscripFy resuelve el cobro recurrente con Wompi.",
+        "author": { "@type": "Organization", "name": "SuscripFy", "url": "https://www.suscripfy.co" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "SuscripFy",
+          "logo": { "@type": "ImageObject", "url": "https://www.suscripfy.co/assets/logos/icon-512.jpg" }
+        },
+        "mainEntityOfPage": "https://www.suscripfy.co/alternativa-recharge-appstle-colombia/",
+        "image": [
+          "https://www.suscripfy.co/assets/screenshots/vista_previa_widget_valenti.png",
+          "https://www.suscripfy.co/assets/logos/icon-512.jpg"
+        ],
+        "datePublished": "2026-07-09",
+        "dateModified": "2026-07-09",
+        "inLanguage": "es"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.suscripfy.co/" },
+          { "@type": "ListItem", "position": 2, "name": "Alternativa a Recharge y Appstle", "item": "https://www.suscripfy.co/alternativa-recharge-appstle-colombia/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Recharge funciona en Colombia?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Recharge se puede instalar en una tienda Shopify colombiana, pero no puede ejecutar el cobro recurrente. Su motor de cobros opera sobre Shopify Payments y sobre pasarelas aprobadas por Shopify, y ninguna de las dos cosas existe en Colombia. La app queda instalada sin poder cobrarle a nadie." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Appstle funciona en Colombia?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ocurre lo mismo que con Recharge. Appstle usa la API de Selling Plans de Shopify, cuyo cobro recurrente se ejecuta a traves de Shopify Payments. Sin Shopify Payments no hay cobro automatico posible, sin importar cuantas suscripciones se configuren." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Es culpa de Recharge o de Appstle?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Son productos solidos y bien construidos. La limitacion es de Shopify: no habilita Shopify Payments en Colombia, y su API de suscripciones esta amarrada a esa pasarela. Cualquier app del App Store que dependa de esa API tiene el mismo techo." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Como cobra SuscripFy si no usa Shopify Payments?",
+            "acceptedAnswer": { "@type": "Answer", "text": "SuscripFy no usa la API de suscripciones de Shopify. Guarda el metodo de pago del cliente como un token seguro mediante la API de Wompi y ejecuta los cobros programados contra ese token. Cada cobro exitoso genera un pedido nativo en Shopify, asi que el comercio despacha y reporta como siempre." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Por que SuscripFy no esta en el Shopify App Store?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Porque las apps de suscripcion publicadas en el App Store deben ejecutar el cobro recurrente dentro del checkout de Shopify, que en Colombia no soporta cobros automaticos. SuscripFy se distribuye como Custom App e instala mediante el flujo OAuth estandar de Shopify. Es una consecuencia directa de la restriccion, no un atajo." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿SuscripFy cobra comision sobre mis ventas?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. El comercio usa sus propias credenciales de Wompi, procesa sus propios pagos y las dispersiones llegan directo a su cuenta. SuscripFy cobra unicamente su plan mensual." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Que pasa con mis suscriptores si ya tengo Recharge instalado?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Si Recharge nunca pudo cobrar, no hay suscriptores activos que migrar. Si el comercio venia cobrando de forma manual o con enlaces de pago, cada cliente debe registrar su metodo de pago una vez en el checkout de SuscripFy. A partir de ahi el cobro es automatico." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar" aria-label="Navegacion principal">
+    <div class="container navbar__inner">
+      <a href="/" class="navbar__logo" aria-label="SuscripFy — inicio">
+        <img src="../assets/logos/logo-light.svg" alt="SuscripFy" width="160" height="35" />
+      </a>
+      <div class="navbar__links" id="navLinks">
+        <a href="/#features" class="navbar__link">Funcionalidades</a>
+        <a href="/#capacidades" class="navbar__link">Capacidades</a>
+        <a href="/#planes" class="navbar__link">Planes</a>
+        <a href="/#faq" class="navbar__link">FAQ</a>
+        <a href="#demo" class="btn btn--primary btn--sm">Agenda una demo</a>
+      </div>
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="page-article">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="/">Inicio</a></li>
+          <li class="breadcrumb__item" aria-current="page">Alternativa a Recharge y Appstle</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="section" aria-labelledby="page-headline">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h1 class="section__title" id="page-headline">Alternativa a <em class="title-brand">Recharge</em> y Appstle en Colombia</h1>
+          <p class="section__subtitle">Instalaste la app, configuraste el plan, y el cobro nunca se ejecuto. No hiciste nada mal. Aqui esta la razon tecnica, y la salida.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EL DIAGNOSTICO -->
+    <section class="section section--alt" aria-labelledby="diagnostico-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="diagnostico-title">Las apps funcionan. El <em class="title-brand">checkout</em> no.</h2>
+        </div>
+        <div class="article-prose animate-on-scroll">
+          <p>Recharge y Appstle son productos serios. Miles de tiendas los usan todos los dias en Estados Unidos, Canada, Reino Unido y Australia, y funcionan muy bien.</p>
+          <p>El problema no esta en ellos. Esta debajo. Ambas apps ejecutan el cobro recurrente a traves del motor de pagos de Shopify, que en la practica significa Shopify Payments o una pasarela que Shopify haya aprobado para cobros automaticos. En Colombia no existe ninguna de las dos cosas.</p>
+          <p>El resultado es exactamente lo que ya viste: la app se instala, el widget aparece, el cliente se suscribe, y cuando llega el dia del segundo cobro no pasa absolutamente nada. Ningun error visible. Simplemente no hay quien ejecute el cargo.</p>
+          <p>Esto no se arregla cambiando de plan, ni escribiendole al soporte, ni instalando otra app del App Store. Cualquier app de suscripciones publicada ahi vive sobre la misma tuberia. Si quieres entender la restriccion desde la raiz, esta explicada en detalle en la <a href="/suscripciones-shopify-colombia/" class="inline-link">guia de suscripciones para Shopify en Colombia</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUE SI FUNCIONA -->
+    <section class="section" aria-labelledby="solucion-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="solucion-title">Lo unico que si funciona: cobrar por fuera del checkout de Shopify</h2>
+          <p class="section__subtitle">No es un truco. Es la unica arquitectura posible cuando la pasarela nativa no existe.</p>
+        </div>
+        <div class="article-prose animate-on-scroll">
+          <p>La API de Wompi si permite cobros automaticos. Guarda el metodo de pago del cliente como un token seguro, lo valida con 3D Secure, y despues ejecuta cargos programados contra ese token sin que el cliente vuelva a escribir su tarjeta.</p>
+          <p>Eso es exactamente lo que hace SuscripFy. La suscripcion se paga en un checkout propio, con la marca de tu tienda, y cada cobro exitoso genera un pedido nativo en Shopify. Despachas, facturas y reportas igual que siempre. Tu catalogo, tu inventario y tus pedidos siguen viviendo dentro de Shopify.</p>
+          <p>Usa tus propias credenciales de Wompi. Tu procesas tus pagos, tus dispersiones llegan directo a tu cuenta, y SuscripFy no cobra comision sobre tus ventas. Si aun no tienes la pasarela lista, empieza por la <a href="/wompi-shopify/" class="inline-link">guia para conectar Wompi con Shopify</a>.</p>
+          <p>Las marcas grandes de Colombia ya construyeron esto. Le pagaron a una agencia entre cien y trescientos millones de pesos y esperaron meses. SuscripFy entrega lo mismo en un onboarding de quince minutos, sin una sola linea de codigo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPARATIVA -->
+    <section class="section section--tint" aria-labelledby="comparativa-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="comparativa-title">Comparativa, sin adornos</h2>
+          <p class="section__subtitle">Todo lo que sigue aplica unicamente a tiendas Shopify registradas en Colombia.</p>
+        </div>
+        <div class="faq-list animate-on-scroll">
+
+          <details class="faq-item" open>
+            <summary class="faq-question">
+              <span>Cobro recurrente automatico</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p><strong>Recharge:</strong> no. <strong>Appstle:</strong> no. <strong>SuscripFy:</strong> si, via Wompi. La diferencia no es de features, es de si el cargo se ejecuta o no.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Metodos de pago para la suscripcion</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p><strong>Recharge y Appstle:</strong> ninguno operativo en Colombia. <strong>SuscripFy:</strong> tarjeta de credito, tarjeta debito y Nequi.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Moneda</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p><strong>Recharge y Appstle:</strong> pensados para USD y monedas soportadas por Shopify Payments. <strong>SuscripFy:</strong> pesos colombianos, exclusivamente.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Comision sobre tus ventas</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p><strong>Recharge y Appstle:</strong> varias de sus modalidades cobran un porcentaje sobre el volumen procesado, ademas de la mensualidad. <strong>SuscripFy:</strong> solo el plan mensual. Cero comision sobre tus ventas.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Facturacion electronica DIAN</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p><strong>Recharge y Appstle:</strong> no contemplan la normativa colombiana. <strong>SuscripFy:</strong> integracion con Alegra para emision compatible con DIAN.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Soporte e idioma</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p><strong>Recharge y Appstle:</strong> soporte en ingles, en husos horarios distintos. <strong>SuscripFy:</strong> soporte en espanol, en Colombia, con acompanamiento directo en la implementacion.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Donde esta publicada la app</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p><strong>Recharge y Appstle:</strong> Shopify App Store. <strong>SuscripFy:</strong> Custom App, instalada con el flujo OAuth estandar de Shopify. Es la consecuencia directa de no depender de Shopify Payments, no un atajo.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TIENDA REAL + VIDEO                                          -->
+    <!-- ============================================================ -->
+    <section class="section" aria-labelledby="storefront-demo-title">
+      <div class="container">
+
+        <!-- Tienda real: preview Valenti -->
+        <div class="storefront-demo animate-on-scroll">
+
+          <div class="storefront-demo__content">
+            <h2 class="storefront-demo__title" id="storefront-demo-title">Conoce como se ve <em class="title-brand">SuscripFy</em> en una tienda real</h2>
+            <ul class="storefront-demo__bullets">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/></svg>
+                Compatible con todos los temas de Shopify
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/></svg>
+                Compatible con todas las apps del shopify marketplace
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/></svg>
+                Checkout completo integrado, flujos de datos garantizados
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/></svg>
+                Incorporalo sin una sola linea de codigo
+              </li>
+            </ul>
+          </div>
+
+          <div class="storefront-demo__visual animate-on-scroll animate-delay-1">
+            <a href="https://valenti.com.co/products/exfoliante-capilar" target="_blank" rel="noopener noreferrer" class="storefront-demo__frame" aria-label="Ver widget SuscripFy en tienda Valenti">
+              <div class="storefront-demo__frame-header">
+                <div class="storefront-demo__dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="storefront-demo__url">valenti.com.co</div>
+              </div>
+              <div class="storefront-demo__frame-body">
+                <img src="../assets/screenshots/vista_previa_widget_valenti.png" alt="Widget de suscripcion de SuscripFy funcionando en la pagina de producto de la tienda Valenti, con opcion de suscribirse y ahorrar o compra unica" class="storefront-demo__img" loading="lazy" />
+              </div>
+            </a>
+            <a href="https://valenti.com.co/products/exfoliante-capilar" target="_blank" rel="noopener noreferrer" class="storefront-demo__live-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Ver tienda en vivo
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Video explicativo -->
+        <div class="video-demo animate-on-scroll">
+          <div class="video-demo__card">
+            <h3 class="video-demo__title">Mira como funciona SuscripFy</h3>
+            <p class="video-demo__subtitle">5 minutos. Del widget en tu producto hasta el cobro automatico.</p>
+            <div class="video-demo__player" id="video-demo-player">
+              <button type="button" class="video-demo__facade" id="video-demo-facade" aria-label="Reproducir el video explicativo de SuscripFy (5 minutos)">
+                <img src="../assets/video/video_thumb.jpg" alt="Vista previa del video explicativo de SuscripFy" width="640" height="351" loading="lazy" decoding="async" class="video-demo__thumb" />
+                <span class="video-demo__play" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="#2563EB" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- PLANES Y PRECIOS                                             -->
+    <!-- ============================================================ -->
+    <section class="section section--tint" aria-labelledby="planes-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="planes-title">Planes y precios</h2>
+          <p class="section__subtitle">Todas las funcionalidades disponibles desde el plan gratuito. Subes y bajas de plan automaticamente segun el numero de suscripciones activas.</p>
+        </div>
+
+        <div class="pricing-grid animate-on-scroll">
+
+          <div class="pricing-card pricing-card--featured">
+            <div class="pricing-card__badge">Empieza aqui</div>
+            <div class="pricing-card__name">Free</div>
+            <div class="pricing-card__price-wrap">
+              <span class="pricing-card__price">Gratis</span>
+              <span class="pricing-card__period">siempre</span>
+            </div>
+            <div class="pricing-card__limit">Hasta 5 suscripciones activas</div>
+            <a href="#demo" class="btn btn--primary btn--full" aria-label="Agenda una demo para el plan Free">Agenda una demo</a>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-card__name">Starter</div>
+            <div class="pricing-card__price-wrap">
+              <span class="pricing-card__coming">$79.900 COP Mensuales</span>
+            </div>
+            <div class="pricing-card__limit">Hasta 20 suscripciones activas</div>
+            <a href="#demo" class="btn btn--outline btn--full" aria-label="Agenda una demo para el plan Starter">Agenda una demo</a>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-card__name">Growth</div>
+            <div class="pricing-card__price-wrap">
+              <span class="pricing-card__coming">$149.900 COP Mensuales</span>
+            </div>
+            <div class="pricing-card__limit">Hasta 50 suscripciones activas</div>
+            <a href="#demo" class="btn btn--outline btn--full" aria-label="Agenda una demo para el plan Growth">Agenda una demo</a>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-card__name">Scale</div>
+            <div class="pricing-card__price-wrap">
+              <span class="pricing-card__coming">$249.900 COP Mensuales</span>
+            </div>
+            <div class="pricing-card__limit">Hasta 100 suscripciones activas</div>
+            <a href="#demo" class="btn btn--outline btn--full" aria-label="Agenda una demo para el plan Scale">Agenda una demo</a>
+          </div>
+
+          <div class="pricing-card">
+            <div class="pricing-card__name">Pro</div>
+            <div class="pricing-card__price-wrap">
+              <span class="pricing-card__coming">$349.900 COP Mensuales</span>
+            </div>
+            <div class="pricing-card__limit">Hasta 200 suscripciones activas</div>
+            <a href="#demo" class="btn btn--outline btn--full" aria-label="Agenda una demo para el plan Pro">Agenda una demo</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <section class="section section--alt" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="faq-title">Preguntas frecuentes</h2>
+        </div>
+        <div class="faq-list animate-on-scroll">
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Es culpa de Recharge o de Appstle?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>No. Son productos solidos y bien construidos. La limitacion es de Shopify: no habilita Shopify Payments en Colombia, y su API de suscripciones esta amarrada a esa pasarela. Cualquier app del App Store que dependa de esa API tiene el mismo techo.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Como cobra SuscripFy si no usa Shopify Payments?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>SuscripFy no usa la API de suscripciones de Shopify. Guarda el metodo de pago del cliente como un token seguro mediante la API de Wompi y ejecuta los cobros programados contra ese token. Cada cobro exitoso genera un pedido nativo en Shopify.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Mis datos de pago y los de mis clientes estan seguros?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>SuscripFy nunca almacena numeros de tarjeta, CVV ni fechas de vencimiento. La tokenizacion ocurre directamente entre el navegador de tu cliente y Wompi. Solo guardamos identificadores opacos, inutiles sin tus credenciales, que estan encriptadas en nuestra base de datos. SuscripFy califica en la categoria PCI DSS SAQ A.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Que pasa con mis suscriptores si ya tengo Recharge instalado?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Si Recharge nunca pudo cobrar, no hay suscriptores activos que migrar. Si venias cobrando de forma manual o con enlaces de pago, cada cliente registra su metodo de pago una vez en el checkout de SuscripFy. A partir de ahi el cobro es automatico.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿SuscripFy reemplaza mi plugin de pagos actual?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>No. Tu pasarela sigue atendiendo las compras normales de tu tienda. SuscripFy se encarga unicamente de los productos que vendes por suscripcion, usando las mismas credenciales de tu cuenta de Wompi.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Hay contrato o permanencia minima?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>No. Cancelas cuando quieras. Los planes son fijos segun el numero de suscripciones activas, y subes o bajas de plan de forma automatica. Hay un plan gratuito para empezar.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO / CAL.COM -->
+    <section id="demo" class="section section--dark" aria-labelledby="demo-title">
+      <div class="container">
+        <div class="demo__header animate-on-scroll">
+          <h2 class="demo__title" id="demo-title">Deja de pelear con una app que no puede cobrar</h2>
+        </div>
+        <div class="demo__cal animate-on-scroll animate-delay-1">
+          <div id="cal-embed" style="width:100%;min-height:500px;overflow:auto;"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="../assets/logos/logo-dark.svg" alt="SuscripFy" width="160" height="35" class="footer__logo" />
+        <p class="footer__tagline">Hecho en Colombia para tiendas Shopify colombianas</p>
+        <a href="mailto:comercial@suscripfy.co" class="footer__contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          comercial@suscripfy.co
+        </a>
+      </div>
+      <div class="footer__nav">
+        <a href="/#features" class="footer__nav-link">Funcionalidades</a>
+        <a href="/#capacidades" class="footer__nav-link">Capacidades</a>
+        <a href="/#planes" class="footer__nav-link">Planes</a>
+        <a href="/#faq" class="footer__nav-link">FAQ</a>
+        <a href="/suscripciones-shopify-colombia/" class="footer__nav-link">Suscripciones Shopify en Colombia</a>
+        <a href="/wompi-shopify/" class="footer__nav-link">Wompi + Shopify</a>
+        <a href="/alternativa-recharge-appstle-colombia/" class="footer__nav-link">Alternativa a Recharge y Appstle</a>
+        <a href="/terms.html" class="footer__nav-link">Terminos de suscripcion</a>
+        <a href="/privacy.html" class="footer__nav-link">Politica de privacidad</a>
+      </div>
+      <div class="footer__copy">
+        <p>&copy; 2026 SuscripFy. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cal.com embed -->
+  <script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", {origin:"https://cal.com"});
+  Cal("inline", {elementOrSelector:"#cal-embed", calLink: "suscripfy-comercial"});
+  Cal("ui", {"hideEventTypeDetails":false,"layout":"month_view","theme":"light"});
+  </script>
+
+  <!-- Google Ads - conversion: demo agendada (Cal.com bookingSuccessful) -->
+  <script type="text/javascript">
+  (function () {
+    var _sfConversionSent = false;
+
+    function _sfReportDemoConversion() {
+      if (_sfConversionSent) return;
+      _sfConversionSent = true;
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-18307171972/MWQiCM2g1M0cEISNxZlE'
+        });
+      }
+    }
+
+    if (typeof window.Cal === 'function') {
+      window.Cal("on", {
+        action: "bookingSuccessful",
+        callback: _sfReportDemoConversion
+      });
+    }
+  })();
+  </script>
+
+  <script src="../main.js"></script>
+</body>
+</html>
