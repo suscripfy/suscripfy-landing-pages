@@ -3671,8 +3671,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    ============================================================ */
 .footer__nav--cols {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--s-8);
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.6fr) minmax(0, 0.85fr);
+  gap: var(--s-10);
   flex: 1;
   align-items: start;
 }
