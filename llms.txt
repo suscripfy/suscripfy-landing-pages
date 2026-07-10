@@ -33,6 +33,9 @@ SuscripFy se instala como una app dentro de Shopify y se administra desde el mis
 - [Inicio](https://www.suscripfy.co/): Qué es SuscripFy, funcionalidades, capacidades, planes y preguntas frecuentes.
 - [Cómo cobrar suscripciones en Shopify en Colombia](https://www.suscripfy.co/suscripciones-shopify-colombia/): Guía completa sobre por qué Shopify no tiene suscripciones nativas en Colombia y cómo activarlas con Wompi.
 - [Cómo conectar Wompi con Shopify](https://www.suscripfy.co/wompi-shopify/): Llaves de API, plugin oficial, métodos de pago y limitaciones para cobros recurrentes.
+- [Alternativa a Recharge y Appstle en Colombia](https://www.suscripfy.co/alternativa-recharge-appstle-colombia/): Por qué las apps de suscripción del Shopify App Store no ejecutan cobros recurrentes en Colombia, y comparativa punto por punto.
+- [Cómo aumentar las ventas de tu tienda Shopify en Colombia](https://www.suscripfy.co/aumentar-ventas-shopify-colombia/): Las tres únicas palancas de crecimiento (tráfico, ticket promedio, frecuencia de compra) y cuál compone.
+- [Apps de Shopify para tiendas en Colombia](https://www.suscripfy.co/apps-shopify-colombia/): Qué categorías de apps funcionan en una tienda colombiana, cuáles se instalan pero no operan, y cómo evaluarlas.
 - [Términos de suscripción](https://www.suscripfy.co/terms.html)
 
 ## Contacto
