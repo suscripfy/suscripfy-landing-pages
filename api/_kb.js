@@ -43,7 +43,7 @@ Como Shopify Payments no opera en Colombia, las suscripciones se procesan en un 
 - **Scale**: hasta 100 suscripciones — $249.900
 - **Pro**: hasta 200 suscripciones — $349.900
 
-Si una tienda supera las 150 suscripciones activas, el servicio nunca se detiene: se le arma un plan a la medida con precio negociado. Para ese caso el comercio debe escribir a comercial@suscripfy.co o agendar una llamada en https://cal.com/suscripfy-comercial/15min.
+Si una tienda supera las 200 suscripciones activas, el servicio nunca se detiene: se le arma un plan a la medida con precio negociado. Para ese caso el comercio debe escribir a comercial@suscripfy.co o agendar una llamada en https://cal.com/suscripfy-comercial/30min.
 
 Subes y bajas de plan automáticamente según el número de suscripciones activas. No hay contrato ni permanencia mínima — cancelas cuando quieras. Los cobros son el último día de cada mes, y podrás visualizar tus facturas dentro del portal administrativo (que vive dentro de tu portal administrativo de tu tienda en shopify)
 
