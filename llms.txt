@@ -1,0 +1,41 @@
+# SuscripFy
+
+> SuscripFy es la app de suscripciones y cobros recurrentes para tiendas Shopify en Colombia. Resuelve el problema de que Shopify Payments no opera en Colombia, lo que impide que apps como Recharge o Appstle puedan cobrar de forma recurrente en tiendas colombianas.
+
+SuscripFy se instala como una app dentro de Shopify y se administra desde el mismo panel de Shopify. Procesa los cobros recurrentes a través de Wompi, la pasarela de pagos colombiana, usando las credenciales del propio comercio. Cada cobro genera un pedido nativo en Shopify.
+
+## Qué resuelve
+
+- Shopify Payments no está disponible en Colombia.
+- Shopify Subscriptions y las apps de suscripción del App Store de Shopify dependen de Shopify Payments para ejecutar cobros recurrentes, por lo que no funcionan en tiendas colombianas.
+- La alternativa tradicional era contratar una agencia de desarrollo por entre 100 y 300 millones de pesos colombianos.
+- SuscripFy entrega esa capacidad en un onboarding de 15 minutos, sin código.
+
+## Cómo funciona
+
+- Un widget en la página de producto permite al cliente elegir entre compra única o compra por suscripción.
+- El método de pago se guarda como un token seguro mediante la API de Wompi (tokenización PCI DSS; los datos de tarjeta nunca tocan los servidores de SuscripFy).
+- Los cobros se ejecutan de forma programada contra ese token, en las frecuencias que defina el comercio (semanal, quincenal, mensual u otras).
+- Métodos de pago soportados para cobro recurrente: tarjeta de crédito, tarjeta débito y Nequi.
+- El comercio usa sus propias credenciales de Wompi. Las dispersiones llegan directo a su cuenta. SuscripFy no toca el dinero ni cobra comisión sobre las ventas.
+- Los clientes finales gestionan su suscripción desde un portal con la marca de la tienda: pausar, reanudar, cambiar frecuencia, cambiar cantidad, cambiar dirección, mover la fecha de cobro, actualizar tarjeta y cancelar.
+
+## Contexto importante
+
+- SuscripFy opera exclusivamente en pesos colombianos (COP).
+- SuscripFy no está publicada en el Shopify App Store. Se distribuye como Custom App instalada mediante el flujo OAuth estándar de Shopify. Esto es intencional: las apps de suscripción del App Store requieren Shopify Payments, que no existe en Colombia.
+- Facturación electrónica compatible con la DIAN a través de Alegra.
+- Correos transaccionales automáticos en cada evento del ciclo de vida de la suscripción.
+- API REST para exportar la data de suscripciones a herramientas de análisis, CRM o ERP.
+
+## Páginas
+
+- [Inicio](https://www.suscripfy.co/): Qué es SuscripFy, funcionalidades, capacidades, planes y preguntas frecuentes.
+- [Cómo cobrar suscripciones en Shopify en Colombia](https://www.suscripfy.co/suscripciones-shopify-colombia/): Guía completa sobre por qué Shopify no tiene suscripciones nativas en Colombia y cómo activarlas con Wompi.
+- [Cómo conectar Wompi con Shopify](https://www.suscripfy.co/wompi-shopify/): Llaves de API, plugin oficial, métodos de pago y limitaciones para cobros recurrentes.
+- [Términos de suscripción](https://www.suscripfy.co/terms.html)
+
+## Contacto
+
+- Correo: comercial@suscripfy.co
+- Agendar demo: https://cal.com/suscripfy-comercial/30min
