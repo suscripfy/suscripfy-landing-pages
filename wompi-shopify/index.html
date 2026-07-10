@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18307171972"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18307171972');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Como conectar Wompi con Shopify en Colombia (guia 2026) &mdash; SuscripFy</title>
+  <meta name="description" content="Guia paso a paso para integrar Wompi con tu tienda Shopify en Colombia: llaves de API, plugin oficial, metodos de pago y como habilitar cobros recurrentes que Wompi no cubre por si solo." />
+  <meta property="og:title" content="Como conectar Wompi con Shopify en Colombia (guia 2026)" />
+  <meta property="og:description" content="Integra Wompi con Shopify paso a paso. Y descubre por que el plugin oficial no cobra automaticamente cada mes, y como resolverlo." />
+  <meta property="og:image" content="https://www.suscripfy.co/assets/logos/icon-512.jpg" />
+  <meta property="og:url" content="https://www.suscripfy.co/wompi-shopify/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,-apple-system,sans-serif' font-size='19' font-weight='800' fill='white'%3ES%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="canonical" href="https://www.suscripfy.co/wompi-shopify/" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "Como conectar Wompi con Shopify en Colombia",
+        "description": "Guia paso a paso para integrar Wompi con Shopify en Colombia, y como habilitar cobros recurrentes que el plugin oficial no cubre.",
+        "author": { "@type": "Organization", "name": "SuscripFy" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "SuscripFy",
+          "logo": { "@type": "ImageObject", "url": "https://www.suscripfy.co/assets/logos/icon-512.jpg" }
+        },
+        "mainEntityOfPage": "https://www.suscripfy.co/wompi-shopify/",
+        "inLanguage": "es"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.suscripfy.co/" },
+          { "@type": "ListItem", "position": 2, "name": "Wompi + Shopify", "item": "https://www.suscripfy.co/wompi-shopify/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Wompi funciona con Shopify?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Si. Wompi tiene un plugin oficial para Shopify que se instala desde la tienda de aplicaciones. Permite cobrar con tarjetas de credito y debito, PSE, Nequi, Daviplata, Boton Bancolombia y efectivo en corresponsales bancarios." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Wompi permite cobros recurrentes en Shopify?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No de forma directa. El plugin oficial de Wompi procesa pagos unicos. Los cobros recurrentes requieren tokenizar el metodo de pago mediante la API de Wompi y ejecutar los cobros de forma programada. Eso es lo que hace SuscripFy." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Por que no puedo usar Shopify Subscriptions en Colombia?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Las apps de suscripciones de Shopify dependen de Shopify Payments, que no esta disponible en Colombia. Por eso las apps internacionales como Recharge o Appstle no pueden cobrar recurrente en tiendas colombianas." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Que necesito para abrir una cuenta en Wompi?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Wompi solicita documentos de vinculacion como RUT y certificacion bancaria. Puedes registrarte como persona natural o como empresa. Una vez aprobada la cuenta obtienes las llaves publica y privada desde el panel de comercio." }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Puedo usar Wompi para pagos unicos y SuscripFy para suscripciones al mismo tiempo?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Si. Son complementarios. El plugin de Wompi atiende las compras normales de tu tienda y SuscripFy gestiona los productos que vendes por suscripcion, usando las mismas credenciales de Wompi." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="navbar" aria-label="Navegacion principal">
+    <div class="container navbar__inner">
+      <a href="/" class="navbar__logo" aria-label="SuscripFy — inicio">
+        <img src="../assets/logos/logo-light.svg" alt="SuscripFy" width="160" height="35" />
+      </a>
+      <div class="navbar__links" id="navLinks">
+        <a href="/#features" class="navbar__link">Funcionalidades</a>
+        <a href="/#capacidades" class="navbar__link">Capacidades</a>
+        <a href="/#planes" class="navbar__link">Planes</a>
+        <a href="/#faq" class="navbar__link">FAQ</a>
+        <a href="#demo" class="btn btn--primary btn--sm">Agenda una demo</a>
+      </div>
+      <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="page-article">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <div class="container">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="/">Inicio</a></li>
+          <li class="breadcrumb__item" aria-current="page">Wompi + Shopify</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="section" aria-labelledby="page-headline">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h1 class="section__title" id="page-headline">Como conectar <em class="title-brand">Wompi</em> con Shopify en Colombia</h1>
+          <p class="section__subtitle">Guia completa y actualizada: llaves de API, instalacion del plugin oficial, metodos de pago disponibles, y que hacer cuando necesitas cobrar todos los meses de forma automatica.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- POR QUE WOMPI -->
+    <section class="section section--alt" aria-labelledby="porque-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="porque-title">Por que las tiendas colombianas usan Wompi</h2>
+          <p class="section__subtitle">Shopify Payments, la pasarela nativa de Shopify, no esta disponible en Colombia. Sin ella, tu tienda no puede cobrar con tarjeta usando el checkout nativo. Wompi, la pasarela de Bancolombia, resuelve ese problema con un plugin oficial.</p>
+        </div>
+        <div class="pricing-all animate-on-scroll">
+          <p class="pricing-all__label">Metodos de pago que habilita Wompi en tu Shopify:</p>
+          <div class="pricing-all__grid">
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Tarjetas de credito y debito</strong><span>Visa, Mastercard y American Express</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>PSE</strong><span>Debito directo desde cualquier cuenta bancaria en Colombia</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Nequi y Daviplata</strong><span>Las dos billeteras digitales mas usadas del pais</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Boton y QR Bancolombia</strong><span>Pago directo desde la cuenta Bancolombia del cliente</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Efectivo en corresponsales</strong><span>Para clientes sin acceso a medios de pago digitales</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Sin cuota mensual fija</strong><span>Wompi cobra por transaccion exitosa, no una mensualidad</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PASO A PASO -->
+    <section class="section" aria-labelledby="pasos-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="pasos-title">La integracion, paso a paso</h2>
+          <p class="section__subtitle">El proceso completo toma menos de una hora, siempre que tu cuenta de Wompi ya este aprobada.</p>
+        </div>
+        <div class="faq-list animate-on-scroll">
+
+          <details class="faq-item" open>
+            <summary class="faq-question">
+              <span>Paso 1. Abre y activa tu cuenta de comercio en Wompi</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Registrate en el sitio de Wompi como persona natural o como empresa. Durante la vinculacion te van a pedir documentos como el RUT y una certificacion bancaria de la cuenta donde quieres recibir los desembolsos. La aprobacion suele tardar unos dias habiles. Sin la cuenta aprobada no puedes cobrar en produccion.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Paso 2. Obten tus llaves de API</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Entra al panel de comercio de Wompi y ve a la seccion de desarrolladores. Ahi encuentras cuatro llaves: publica y privada de pruebas, publica y privada de produccion. Las de prueba empiezan por <em>pub_test_</em> y las reales por <em>pub_prod_</em>. Guardalas en un lugar seguro y nunca compartas la llave privada.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Paso 3. Instala el plugin oficial de Wompi en Shopify</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Wompi publica una aplicacion oficial para Shopify. Al instalarla, Shopify te pide aceptar los permisos de la app. Luego eres redirigido a la pantalla de conexion, donde ingresas primero las credenciales de produccion y despues las de prueba. Si las llaves son validas, la conexion queda establecida de inmediato.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Paso 4. Elige el tipo de checkout</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Wompi ofrece dos formas de cobrar. La primera es por redireccion: al confirmar la compra, el cliente sale de tu tienda hacia la pasarela de Wompi, paga alli y regresa con la confirmacion. La segunda, mas reciente, permite pagar con tarjeta sin salir de tu tienda. Esta ultima reduce el abandono del carrito, pero solo aplica a tarjetas; los demas metodos siguen usando redireccion.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Paso 5. Activa los metodos de pago y prueba</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Dentro de la configuracion de Wompi en Shopify decides que metodos mostrar en el checkout. Deja activado el modo de prueba y haz una compra completa de punta a punta antes de desactivarlo. Verifica que la orden se cree en Shopify, que el estado del pago sea aprobado y que el correo de confirmacion llegue al cliente.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EL LIMITE -->
+    <section class="section section--tint" aria-labelledby="limite-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="limite-title">Lo que el plugin de Wompi <em class="title-brand">no</em> hace</h2>
+          <p class="section__subtitle">Wompi cobra una vez. No cobra todos los meses.</p>
+        </div>
+        <div class="section__header animate-on-scroll animate-delay-1">
+          <p class="section__subtitle">Si vendes cafe, suplementos, skincare, comida para mascotas o cualquier producto de recompra, lo natural es venderlo por suscripcion. El cliente autoriza el cobro una vez y tu le cobras cada mes sin que el tenga que hacer nada.</p>
+          <p class="section__subtitle">El plugin oficial de Wompi no hace eso. Procesa pagos unicos. Cada compra necesita que el cliente vuelva y pague de nuevo.</p>
+          <p class="section__subtitle">Y las apps de suscripciones que existen en el App Store de Shopify tampoco sirven: dependen de Shopify Payments, que no opera en Colombia. Por eso Recharge, Appstle y las demas no pueden cobrar recurrente en una tienda colombiana.</p>
+          <p class="section__subtitle">Tecnicamente la solucion existe. La API de Wompi permite guardar el metodo de pago del cliente como un token seguro, validarlo con 3D Secure, y despues ejecutar cobros programados contra ese token, sin que el cliente vuelva a escribir su tarjeta. Pero eso hay que construirlo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUSCRIPFY -->
+    <section class="section" aria-labelledby="suscripfy-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title">Eso es exactamente lo que hace <em class="title-brand">SuscripFy</em></h2>
+          <p class="section__subtitle" id="suscripfy-title">SuscripFy se instala en tu tienda Shopify, usa tus mismas credenciales de Wompi, y convierte cualquier producto en una suscripcion con cobro automatico.</p>
+        </div>
+        <div class="pricing-all animate-on-scroll animate-delay-1">
+          <p class="pricing-all__label">Como funciona:</p>
+          <div class="pricing-all__grid">
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Widget en tu pagina de producto</strong><span>El cliente elige comprar una vez o suscribirse, con la frecuencia que tu definas</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Tokenizacion segura con Wompi</strong><span>Los datos de tarjeta viajan del navegador a Wompi. SuscripFy nunca los ve ni los guarda</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Cobro automatico cada ciclo</strong><span>SuscripFy cobra, crea la orden en Shopify y notifica al cliente por correo</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Portal para tus clientes</strong><span>Pausan, cambian frecuencia, actualizan tarjeta o cancelan sin escribirte</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Convive con tu plugin de Wompi</strong><span>Las compras normales siguen igual. SuscripFy solo maneja las suscripciones</span></div>
+            </div>
+            <div class="pricing-all__item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <div><strong>Plan gratuito, sin permanencia</strong><span>Instalacion asistida en 15 minutos, sin tocar el codigo de tu tema</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--alt" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <h2 class="section__title" id="faq-title">Preguntas frecuentes</h2>
+        </div>
+        <div class="faq-list animate-on-scroll">
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Wompi permite cobros recurrentes en Shopify?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>No de forma directa. El plugin oficial procesa pagos unicos. Los cobros recurrentes requieren tokenizar el metodo de pago mediante la API de Wompi y ejecutar los cobros de forma programada. Eso es lo que hace SuscripFy con tus propias credenciales.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Por que no puedo usar Recharge o Appstle en Colombia?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>Esas apps dependen de Shopify Payments para ejecutar el cobro recurrente, y Shopify Payments no esta disponible en Colombia. Puedes instalarlas, pero no van a poder cobrarle a tus clientes.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿SuscripFy reemplaza al plugin de Wompi?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>No. Son complementarios. El plugin de Wompi sigue atendiendo las compras normales de tu tienda. SuscripFy se encarga unicamente de los productos que vendes por suscripcion, usando las mismas credenciales de tu cuenta de Wompi.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Mis datos de pago y los de mis clientes estan seguros?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>SuscripFy nunca almacena numeros de tarjeta, CVV ni fechas de vencimiento. La tokenizacion ocurre directamente entre el navegador de tu cliente y Wompi. Solo guardamos identificadores opacos, inutiles sin tus credenciales, que estan encriptadas en nuestra base de datos.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>¿Necesito programar algo?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="faq-answer">
+              <p>No. La instalacion es asistida y toma alrededor de 15 minutos. No se modifica el codigo de tu tema. El widget se inyecta automaticamente y se adapta al estilo de tu tienda.</p>
+            </div>
+          </details>
+
+        </div>
+        <div class="section__header animate-on-scroll" style="margin-top:2rem">
+          <p class="section__subtitle">¿Buscas mas detalle sobre suscripciones en Shopify Colombia? Lee la <a href="/suscripciones-shopify-colombia/">guia completa de suscripciones para Shopify en Colombia</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO / CAL.COM -->
+    <section id="demo" class="section section--dark" aria-labelledby="demo-title">
+      <div class="container">
+        <div class="demo__header animate-on-scroll">
+          <h2 class="demo__title" id="demo-title">Conecta Wompi y empieza a cobrar automatico</h2>
+        </div>
+        <div class="demo__cal animate-on-scroll animate-delay-1">
+          <div id="cal-embed" style="width:100%;min-height:500px;overflow:auto;"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="../assets/logos/logo-dark.svg" alt="SuscripFy" width="160" height="35" class="footer__logo" />
+        <p class="footer__tagline">Hecho en Colombia para tiendas Shopify colombianas</p>
+        <a href="mailto:comercial@suscripfy.co" class="footer__contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          comercial@suscripfy.co
+        </a>
+      </div>
+      <div class="footer__nav">
+        <a href="/#features" class="footer__nav-link">Funcionalidades</a>
+        <a href="/#capacidades" class="footer__nav-link">Capacidades</a>
+        <a href="/#planes" class="footer__nav-link">Planes</a>
+        <a href="/#faq" class="footer__nav-link">FAQ</a>
+        <a href="/suscripciones-shopify-colombia/" class="footer__nav-link">Suscripciones Shopify en Colombia</a>
+        <a href="/wompi-shopify/" class="footer__nav-link">Wompi + Shopify</a>
+        <a href="/terms.html" class="footer__nav-link">Terminos de suscripcion</a>
+        <a href="/privacy.html" class="footer__nav-link">Politica de privacidad</a>
+      </div>
+      <div class="footer__copy">
+        <p>&copy; 2026 SuscripFy. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cal.com embed -->
+  <script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", {origin:"https://cal.com"});
+  Cal("inline", {elementOrSelector:"#cal-embed", calLink: "suscripfy-comercial"});
+  Cal("ui", {"hideEventTypeDetails":false,"layout":"month_view","theme":"light"});
+  </script>
+
+  <!-- Google Ads - conversion: demo agendada (Cal.com bookingSuccessful) -->
+  <script type="text/javascript">
+  (function () {
+    var _sfConversionSent = false;
+
+    function _sfReportDemoConversion() {
+      if (_sfConversionSent) return;
+      _sfConversionSent = true;
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-18307171972/MWQiCM2g1M0cEISNxZlE'
+        });
+      }
+    }
+
+    if (typeof window.Cal === 'function') {
+      window.Cal("on", {
+        action: "bookingSuccessful",
+        callback: _sfReportDemoConversion
+      });
+    }
+  })();
+  </script>
+
+  <script src="../main.js"></script>
+</body>
+</html>
