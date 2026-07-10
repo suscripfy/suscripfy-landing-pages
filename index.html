@@ -1460,6 +1460,30 @@
   Cal("inline", {elementOrSelector:"#cal-embed", calLink: "suscripfy-comercial"});
   Cal("ui", {"hideEventTypeDetails":false,"layout":"month_view","theme":"light"});
   </script>
+
+  <!-- Google Ads - conversion: demo agendada (Cal.com bookingSuccessful) -->
+  <script type="text/javascript">
+  (function () {
+    var _sfConversionSent = false;
+
+    function _sfReportDemoConversion() {
+      if (_sfConversionSent) return;
+      _sfConversionSent = true;
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-18307171972/MWQiCM2g1M0cEISNxZlE'
+        });
+      }
+    }
+
+    if (typeof window.Cal === 'function') {
+      window.Cal("on", {
+        action: "bookingSuccessful",
+        callback: _sfReportDemoConversion
+      });
+    }
+  })();
+  </script>
   <!-- Chat Floating Button -->
   <div id="wa-float" class="wa-float" role="complementary" aria-label="Chat SuscripFy">
     <button id="sf-chat-trigger"
