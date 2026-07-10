@@ -3664,3 +3664,44 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .guide-card { padding: var(--s-5); }
   .guide-card:hover { transform: none; }
 }
+
+/* ============================================================
+   FOOTER — navegacion agrupada en columnas (6 paginas principales)
+   terms.html y privacy.html conservan el footer simple.
+   ============================================================ */
+.footer__nav--cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-8);
+  flex: 1;
+  align-items: start;
+}
+.footer__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  min-width: 0;
+}
+.footer__group-title {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-dark-muted);
+  margin-bottom: var(--s-1);
+}
+.footer__nav--cols .footer__nav-link {
+  line-height: 1.45;
+}
+@media (max-width: 860px) {
+  .footer__nav--cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-6);
+  }
+}
+@media (max-width: 640px) {
+  .footer__nav--cols {
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+}
