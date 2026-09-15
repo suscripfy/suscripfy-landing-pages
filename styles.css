@@ -3548,7 +3548,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* ============================================================
    STORES SECTION (tiendas reales)
    ============================================================ */
-/* Alternancia de fondos: journey-section (--c-surface) → stores (--c-bg) → #features (--c-primary-50) */
+/* Alternancia de fondos: hero (--c-surface) → stores (--c-bg) → #problema (section--alt, --c-bg); journey-section (--c-surface) → #features (--c-primary-50) */
 .stores-section {
   background: var(--c-bg);
   padding: var(--section-py) 0;
