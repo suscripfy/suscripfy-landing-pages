@@ -84,6 +84,7 @@ Desde el portal con su correo, el cliente puede:
 - Mover la fecha del próximo cobro
 - Cambiar su tarjeta sin cancelar la suscripción (Wompi tokenize, sin cobro intermedio)
 - Cancelar cuando quiera (si la tienda configuró permanencia mínima, se muestra antes)
+- Si un cobro recurrente falla, SuscripFy reintenta hasta 3 intentos en total (uno por día) avisando al cliente por email en cada uno; si los 3 fallan, la suscripción se cancela automáticamente. El cliente puede reactivarla desde su portal durante los 30 días siguientes con un cobro inmediato, conservando el mismo precio, descuento y costo de envío que tenía
 
 ## QUÉ PUEDE HACER EL MERCHANT (PANEL EMBEBIDO EN SHOPIFY)
 - No es un portal aparte, no es una plataforma independiente, no es un programa extra, es una App como cualquier otra que tienes instalada en tu tienda en linea (por ejemplo para popups, formularios, o upsell de carrito), instalas la app y te aparece tal cual como el resto de apps que tienes instaladas en tu tienda
