@@ -2065,6 +2065,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.5;
 }
 
+/* Nota Enterprise (+200 suscripciones) bajo la grilla de planes */
+.pricing-enterprise {
+  margin: calc(var(--s-5) - var(--s-8)) auto var(--s-8);
+  max-width: 720px;
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--c-muted);
+  line-height: 1.6;
+  text-wrap: balance;
+}
+.pricing-enterprise strong {
+  color: var(--c-text);
+  font-weight: 700;
+}
+
 /* "Todos los planes incluyen" bar */
 .pricing-all {
   background: var(--c-primary-50);
