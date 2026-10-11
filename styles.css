@@ -475,6 +475,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--c-text);
   margin-bottom: var(--s-6);
 }
+.storefront-demo__title + .section__subtitle {
+  margin-top: calc(-1 * var(--s-3));
+  margin-bottom: var(--s-6);
+}
 .storefront-demo__bullets {
   display: flex;
   flex-direction: column;
