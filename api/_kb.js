@@ -97,6 +97,7 @@ Desde el portal con su correo, el cliente puede:
 - Gestionar reconciliación de cobros
 - Personalizar el widget de suscripción (colores, tipografía), todo queda con los colores y el branding exacto de tu marca
 - Acción manual sobre suscripciones individuales (pausar, cambiar tarjeta, etc.)
+- Agente SuscripFy: un asistente de inteligencia artificial dentro del portal de la app. Responde cómo funciona la app, consulta la configuración y las suscripciones de tu tienda, y puede preparar cambios (por ejemplo en un plan o en una suscripción), pero ningún cambio se ejecuta hasta que tú lo revisas y lo confirmas con el botón de confirmación. Sus respuestas pueden tener errores, por eso siempre revisas antes de confirmar, y su uso puede tener límites de mensajes y disponibilidad
 
 ## MEDIOS DE PAGO
 Tus clientes pueden suscribirse a tus productos usando Tarjetas (crédito/débito) y Nequi, procesados por Wompi. Los datos de tarjeta nunca se almacenan en los servidores de SuscripFy ni de la tienda.
