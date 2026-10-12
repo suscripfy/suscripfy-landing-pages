@@ -139,3 +139,72 @@ animatedEls.forEach((el) => observer.observe(el));
     player.replaceChildren(iframe);
   });
 })();
+
+/* ============================================================
+   WIDGET SHOWCASE — rotación de vistas (paso 01)
+   Guard obligatorio: main.js tambien lo cargan otras paginas,
+   donde este bloque NO existe.
+   ============================================================ */
+(function () {
+  const ROTATE_MS = 3000;
+  const track = document.querySelector('[data-rotate]');
+  if (!track) return;
+
+  const showcase = track.closest('.widget-showcase');
+  const slides = Array.from(track.querySelectorAll('.widget-showcase__slide'));
+  const tabs = showcase ? Array.from(showcase.querySelectorAll('.widget-showcase__tab')) : [];
+  if (!showcase || slides.length < 2) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = 0;
+  let timer = null;
+  let inView = false;
+  let hovered = false;
+
+  function show(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => {
+      const active = i === current;
+      slide.classList.toggle('is-active', active);
+      slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
+    tabs.forEach((tab, i) => tab.setAttribute('aria-pressed', i === current ? 'true' : 'false'));
+  }
+
+  function stop() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  function sync() {
+    stop();
+    if (reduceMotion || !inView || hovered || document.hidden) return;
+    timer = setInterval(() => show(current + 1), ROTATE_MS);
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      show(Number(tab.getAttribute('data-index')) || 0);
+      sync(); // reinicia el contador
+    });
+  });
+
+  showcase.addEventListener('mouseenter', () => { hovered = true; sync(); });
+  showcase.addEventListener('mouseleave', () => { hovered = false; sync(); });
+  showcase.addEventListener('focusin', () => { hovered = true; sync(); });
+  showcase.addEventListener('focusout', (e) => {
+    if (showcase.contains(e.relatedTarget)) return;
+    hovered = false;
+    sync();
+  });
+  document.addEventListener('visibilitychange', sync);
+
+  new IntersectionObserver((entries) => {
+    entries.forEach((entry) => { inView = entry.isIntersecting; });
+    sync();
+  }, { threshold: 0.3 }).observe(showcase);
+
+  show(0);
+})();

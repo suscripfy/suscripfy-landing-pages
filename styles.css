@@ -1372,6 +1372,114 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: rgba(37,99,235,0.25);
 }
 
+/* Rotating views (paso 01): slides stacked in one grid cell */
+.widget-showcase__slides {
+  display: grid;
+}
+.widget-showcase__slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .45s var(--ease), visibility .45s;
+}
+.widget-showcase__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+.widget-showcase__fpill-pct {
+  color: var(--c-success);
+  font-weight: 700;
+}
+.widget-showcase__tiers {
+  padding: var(--s-2) var(--s-3);
+  border-bottom: 1px solid var(--c-border);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.widget-showcase__tiers-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--c-text);
+  margin-bottom: 2px;
+}
+.widget-showcase__tier {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-2);
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  color: #475569;
+}
+.widget-showcase__tier--on {
+  background: var(--c-primary-light);
+  color: var(--c-primary-hover);
+  font-weight: 700;
+}
+.widget-showcase__gift {
+  background: #FFF7ED;
+  padding: var(--s-2) var(--s-3);
+  border-bottom: 1px solid var(--c-border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.widget-showcase__gift-title {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #9A3412;
+}
+.widget-showcase__gift-title svg { flex-shrink: 0; }
+.widget-showcase__gift-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.widget-showcase__gift-thumb {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  background: #FFE4E6;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.widget-showcase__gift-name {
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--c-text);
+}
+.widget-showcase__gift-note {
+  font-size: 8px;
+  color: var(--c-muted);
+}
+
+/* View tabs (on dark card) */
+.widget-showcase__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+.widget-showcase__tab {
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: var(--r-full);
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: background var(--t-base), border-color var(--t-base), color var(--t-base);
+}
+.widget-showcase__tab[aria-pressed="true"] {
+  background: var(--c-primary);
+  border-color: var(--c-primary);
+  color: #fff;
+}
+
 /* ============================================================
    DASH SHOWCASE (Feature 2 — CSS dashboard with sidebar + KPIs + charts)
    ============================================================ */
@@ -1727,6 +1835,114 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border-bottom: 1px solid var(--c-border);
 }
 .admin-showcase__mt-row:last-child { border-bottom: none; }
+
+/* ============================================================
+   AGENT SHOWCASE (Feature 6 — chat del Agente SuscripFy)
+   ============================================================ */
+.agent-showcase__chat {
+  background: #fff;
+  padding: var(--s-4);
+  display: flex; flex-direction: column; gap: 8px;
+  min-width: 0;
+}
+.agent-showcase__head {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--c-border);
+}
+.agent-showcase__title {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; color: var(--c-text);
+}
+.agent-showcase__title svg { color: var(--c-primary); flex-shrink: 0; }
+.agent-showcase__hint {
+  font-size: 9px; color: var(--c-muted); text-align: right;
+}
+.agent-showcase__msg {
+  font-size: 9px; line-height: 1.5;
+  padding: 6px 10px;
+}
+.agent-showcase__msg--user {
+  align-self: flex-end;
+  max-width: 82%;
+  background: var(--c-primary); color: #fff;
+  border-radius: 11px 11px 3px 11px;
+}
+.agent-showcase__msg--bot {
+  align-self: flex-start;
+  max-width: 86%;
+  background: var(--c-bg); color: var(--c-text);
+  border: 1px solid var(--c-border);
+  border-radius: 11px 11px 11px 3px;
+}
+.agent-showcase__card {
+  border: 1px solid #F59E0B;
+  border-left: 4px solid #F59E0B;
+  border-radius: 0;
+  background: #fff;
+  padding: 8px 10px;
+  display: flex; flex-direction: column; gap: 3px;
+}
+.agent-showcase__badge {
+  align-self: flex-start;
+  font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
+  color: #92400E; background: #FEF3C7;
+  border-radius: var(--r-full);
+  padding: 1px 6px;
+}
+.agent-showcase__card-title {
+  font-size: 11px; font-weight: 700; color: var(--c-text);
+}
+.agent-showcase__section {
+  font-size: 8px; font-weight: 700; color: var(--c-muted);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  margin-top: 3px;
+}
+.agent-showcase__row {
+  font-size: 9px; color: var(--c-text);
+  padding: 2px 0;
+}
+.agent-showcase__row + .agent-showcase__row { border-top: 1px dashed var(--c-border); }
+.agent-showcase__row-label { font-weight: 600; }
+.agent-showcase__note {
+  font-size: 9px; color: var(--c-text);
+}
+.agent-showcase__foot {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 6px;
+  margin-top: 4px;
+}
+.agent-showcase__expires {
+  font-size: 8px; color: var(--c-muted);
+}
+.agent-showcase__actions {
+  display: flex; gap: 4px;
+}
+.agent-showcase__btn {
+  font-size: 8px; font-weight: 600; color: var(--c-text);
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+.agent-showcase__btn--primary {
+  background: var(--c-primary); border-color: var(--c-primary); color: #fff;
+}
+.agent-showcase__compose {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--c-border);
+}
+.agent-showcase__input {
+  flex: 1; min-width: 0;
+  font-size: 9px; color: #94A3B8;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  padding: 4px 8px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 
 /* ============================================================
    CHECKOUT SHOWCASE (Feature 4 — checkout with form + summary)
@@ -2422,6 +2638,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   /* On tablet, always show visual before content */
   .feature--rev .feature__visual { order: -1; }
+
+  /* Agent showcase: narrower Shopify sidebar, wider bubbles */
+  .agent-showcase .admin-showcase__body { grid-template-columns: 90px 1fr; }
+  .agent-showcase .admin-showcase__shopify-sidebar { display: flex; }
+  .agent-showcase__msg--user,
+  .agent-showcase__msg--bot { max-width: 92%; }
   .pricing-grid     { grid-template-columns: repeat(2, 1fr); }
   .cap-grid         { grid-template-columns: repeat(2, 1fr); }
   .pricing-all__grid { grid-template-columns: repeat(2, 1fr); }

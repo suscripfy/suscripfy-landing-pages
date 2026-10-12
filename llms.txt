@@ -14,6 +14,8 @@ SuscripFy se instala como una app dentro de Shopify y se administra desde el mis
 ## Cómo funciona
 
 - Un widget en la página de producto permite al cliente elegir entre compra única o compra por suscripción.
+- El comercio puede configurar descuento individual por producto, descuento según la frecuencia elegida, descuento escalonado por cantidad y productos de regalo solo para compras en suscripción. Los descuentos no se acumulan: se aplica el mayor.
+- Incluye un agente de inteligencia artificial dentro del panel que responde dudas y prepara cambios de configuración en lenguaje natural; ningún cambio se aplica sin confirmación del comercio.
 - El método de pago se guarda como un token seguro mediante la API de Wompi (tokenización PCI DSS; los datos de tarjeta nunca tocan los servidores de SuscripFy).
 - Los cobros se ejecutan de forma programada contra ese token, en las frecuencias que defina el comercio (semanal, quincenal, mensual u otras).
 - Métodos de pago soportados para cobro recurrente: tarjeta de crédito, tarjeta débito y Nequi.
