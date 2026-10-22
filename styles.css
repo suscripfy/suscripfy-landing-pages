@@ -1456,30 +1456,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--c-muted);
 }
 
-/* View tabs (on dark card) */
-.widget-showcase__tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2);
-}
-.widget-showcase__tab {
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.6);
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: var(--r-full);
-  padding: 3px 10px;
-  cursor: pointer;
-  transition: background var(--t-base), border-color var(--t-base), color var(--t-base);
-}
-.widget-showcase__tab[aria-pressed="true"] {
-  background: var(--c-primary);
-  border-color: var(--c-primary);
-  color: #fff;
-}
-
 /* ============================================================
    DASH SHOWCASE (Feature 2 — CSS dashboard with sidebar + KPIs + charts)
    ============================================================ */
@@ -3845,3 +3821,182 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     margin: 0;
   }
 }
+
+/* ============================================================
+   ROTADOR DE ESTRATEGIAS (hero + feature 01)
+   Barra de progreso tipo "historias": el fin de la animación de la
+   barra dispara el cambio (main.js), así pausa y progreso nunca se
+   desincronizan. Duración en --rc-dur (inline en cada raíz).
+   ============================================================ */
+.rc-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.rc-chip {
+  position: relative;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  min-width: 0;
+  padding: 9px 0 11px;   /* sin padding lateral: el contenido va centrado y así no se recorta */
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 12.5px; font-weight: 700; line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background var(--t-base), color var(--t-base), border-color var(--t-base), transform var(--t-fast), box-shadow var(--t-base);
+}
+.rc-chip svg { flex-shrink: 0; }
+.rc-chip:focus-visible { outline: 2px solid var(--c-sky); outline-offset: 2px; }
+.rc-chip:active { transform: scale(.97); }
+.rc-bar {
+  position: absolute; left: 10px; right: 10px; bottom: 4px;
+  height: 3px; border-radius: 3px; overflow: hidden;
+}
+.rc-bar i {
+  display: block; height: 100%; width: 100%;
+  transform: scaleX(0); transform-origin: left;
+  border-radius: inherit;
+}
+.rc-chip.is-run .rc-bar i { animation: rcFill var(--rc-dur, 2500ms) linear forwards; }
+.is-paused .rc-chip.is-run .rc-bar i { animation-play-state: paused; }
+.is-static .rc-bar { display: none; }
+@keyframes rcFill { to { transform: scaleX(1); } }
+
+/* Variante clara (hero): el chip activo toma el color de esa tienda */
+.rc-chip--light { background: #fff; color: var(--c-muted); border: 1px solid var(--c-border); }
+.rc-chip--light:hover { color: var(--c-text); border-color: #CBD5E1; }
+.rc-chip--light .rc-bar { background: var(--c-border); }
+.rc-chip--light .rc-bar i { background: var(--c-muted); }
+.rc-chip--light[aria-pressed="true"] {
+  background: var(--chip-accent, var(--c-primary));
+  border-color: var(--chip-accent, var(--c-primary));
+  color: #fff;
+  box-shadow: 0 6px 16px -6px var(--chip-accent, var(--c-primary));
+}
+.rc-chip--light[aria-pressed="true"] .rc-bar { background: rgba(255,255,255,.3); }
+.rc-chip--light[aria-pressed="true"] .rc-bar i { background: #fff; }
+
+/* Variante oscura (feature 01) */
+.rc-chip--dark {
+  background: rgba(255,255,255,.04); color: rgba(255,255,255,.62);
+  border: 1px solid rgba(255,255,255,.12);
+  font-size: 11.5px; gap: 5px;
+}
+.rc-chip--dark:hover { color: #fff; border-color: rgba(255,255,255,.28); }
+.rc-chip--dark .rc-bar { background: rgba(255,255,255,.1); }
+.rc-chip--dark .rc-bar i { background: rgba(255,255,255,.5); }
+.rc-chip--dark[aria-pressed="true"] {
+  background: var(--c-primary); border-color: var(--c-primary); color: #fff;
+  box-shadow: 0 6px 18px -6px rgba(37,99,235,.9);
+}
+.rc-chip--dark[aria-pressed="true"] .rc-bar { background: rgba(255,255,255,.28); }
+.rc-chip--dark[aria-pressed="true"] .rc-bar i { background: #fff; }
+.widget-showcase .rc-row { gap: 6px; }
+
+@media (max-width: 520px) {
+  .rc-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+/* Anchos donde 4 columnas no alcanzan para ícono + texto: solo texto */
+@media (min-width: 521px) and (max-width: 660px) {
+  .rc-chip svg { display: none; }
+}
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .rc-chip--dark svg { display: none; }
+}
+
+/* ============================================================
+   HERO — 4 tiendas, 4 estrategias
+   ============================================================ */
+#hero-rot .hero-pdp-mock__url { contain: inline-size; }   /* la URL más larga no ensancha la columna en móvil (evita CLS) */
+.hm-modes { display: flex; flex-direction: column; gap: 8px; }
+.hm-modes__lead {
+  font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--c-muted);
+}
+.hm-scenes { display: grid; }
+.hm-scene {
+  grid-area: 1 / 1;
+  opacity: 0; visibility: hidden;
+  transition: opacity .35s var(--ease), visibility .35s;
+}
+.hm-scene.is-active { opacity: 1; visibility: visible; }
+.hm-scene .hero-pdp-mock__image { background: var(--img-bg, linear-gradient(155deg,#F0F4FF 0%,#E8F0FE 40%,#DBEAFE 100%)); }
+.hm-scene .hero-pdp-mock__image svg { display: block; max-width: 100%; height: auto; filter: drop-shadow(3px 6px 10px rgba(15,23,42,.12)); }
+
+.hm-scene.is-enter .hm-prod { animation: hmProdIn .6s cubic-bezier(.22,1,.36,1) both; }
+.hm-scene.is-enter .hero-widget-sim__discount { animation: hmPop .5s cubic-bezier(.34,1.56,.64,1) .2s both; }
+.hm-scene.is-enter .hm-focus { animation: hmBlockIn .5s cubic-bezier(.22,1,.36,1) .15s both, hmRing 1.1s ease-out .45s; }
+@keyframes hmProdIn { from { opacity: 0; transform: translateY(18px) scale(.9); } }
+@keyframes hmPop { 0% { transform: scale(.4); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes hmBlockIn { from { opacity: 0; transform: translateY(10px); } }
+@keyframes hmRing {
+  0%   { box-shadow: inset 0 0 0 2px var(--c-primary); }
+  100% { box-shadow: inset 0 0 0 2px transparent; }
+}
+.hm-focus { position: relative; }
+.hero-widget-sim__pill b { color: var(--c-success); font-weight: 800; margin-left: 2px; }
+.hm-tiers { padding: var(--s-2) var(--s-3); border-bottom: 1px solid var(--c-border); display: flex; flex-direction: column; gap: 2px; }
+.hm-tiers__title { font-size: 10px; font-weight: 700; color: var(--c-text); }
+.hm-tier { display: flex; justify-content: space-between; font-size: 9.5px; padding: 2px 6px; border-radius: 5px; color: #475569; }
+.hm-tier--on { background: var(--c-primary-light); color: var(--c-primary); font-weight: 700; }
+.hm-gift { background: #FFF7ED; padding: var(--s-2) var(--s-3); border-bottom: 1px solid var(--c-border); display: flex; flex-direction: column; gap: 4px; }
+.hm-gift__title { display: flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: #9A3412; }
+.hm-gift__item { display: flex; align-items: center; gap: 8px; }
+.hm-gift__thumb { width: 26px; height: 26px; border-radius: 6px; background: #EDE9FE; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.hm-gift__name { font-size: 10px; font-weight: 600; color: var(--c-text); line-height: 1.3; }
+.hm-gift__note { font-size: 9px; color: var(--c-muted); line-height: 1.3; }
+
+.hm-notif { animation: none; }
+.hm-notif.is-pop { animation: notifSlideIn .5s cubic-bezier(.22,1,.36,1) .3s both; }
+.hm-notif__text span { min-height: 2.8em; }   /* evita salto de altura entre textos */
+
+/* ============================================================
+   FEATURE 01 — foco en el bloque que cambia + lista enlazada
+   ============================================================ */
+.widget-showcase__slide.is-enter .ws-focus { animation: hmBlockIn .5s cubic-bezier(.22,1,.36,1) .1s both, wsRing 1.1s ease-out .4s; }
+.widget-showcase__slide.is-enter .widget-showcase__badge-disc { animation: hmPop .5s cubic-bezier(.34,1.56,.64,1) .15s both; }
+@keyframes wsRing {
+  0%   { box-shadow: inset 0 0 0 2px var(--c-primary); background-color: var(--c-primary-50); }
+  100% { box-shadow: inset 0 0 0 2px transparent; }
+}
+.ws-focus { position: relative; }
+.widget-showcase__price-new { font-variant-numeric: tabular-nums; }
+
+/* Texto del mock más legible (antes 8–10px) */
+.ws-legible .widget-showcase__radio-row { font-size: 11px; }
+.ws-legible .widget-showcase__badge-disc { font-size: 10px; padding: 1px 6px; }
+.ws-legible .widget-showcase__price-new,
+.ws-legible .widget-showcase__price-old { font-size: 11.5px; white-space: nowrap; }
+.ws-legible .widget-showcase__benefits span { font-size: 10px; }
+.ws-legible .widget-showcase__fpill { font-size: 10.5px; padding: 2px 8px; }
+.ws-legible .widget-showcase__tiers-title { font-size: 11px; }
+.ws-legible .widget-showcase__tier { font-size: 10.5px; padding: 3px 8px; }
+.ws-legible .widget-showcase__gift-title { font-size: 10.5px; }
+.ws-legible .widget-showcase__gift-name { font-size: 10.5px; }
+.ws-legible .widget-showcase__gift-note { font-size: 9.5px; }
+@media (min-width: 768px) {
+  .ws-legible .widget-showcase__product { grid-template-columns: 84px 1fr; gap: var(--s-3); }
+}
+
+/* Lista de la derecha enlazada con la pestaña activa */
+.feature__list li.fl-item { display: block; }
+.fl-link {
+  display: flex; align-items: flex-start; gap: var(--s-3);
+  width: calc(100% + 20px); text-align: left;
+  font: inherit; color: inherit; background: none; border: 0;
+  padding: 6px 10px; margin: -6px -10px;
+  border-radius: 10px; cursor: pointer;
+  transition: background var(--t-slow), box-shadow var(--t-slow);
+}
+.fl-link:hover { background: rgba(37,99,235,.06); }
+.fl-link:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 1px; }
+.fl-link svg { flex-shrink: 0; margin-top: 1px; transition: transform var(--t-slow); }
+.fl-link .fl-circle { fill: transparent; transition: fill var(--t-slow); }
+.fl-link.is-linked {
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15,23,42,.06), 0 0 0 1px var(--c-primary-light);
+  font-weight: 700;
+}
+.fl-link.is-linked svg { transform: scale(1.12); }
+.fl-link.is-linked .fl-circle { fill: var(--c-primary-light); }

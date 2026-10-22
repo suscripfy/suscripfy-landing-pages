@@ -208,71 +208,235 @@
           </ul>
         </div>
 
-        <div class="hero__visual animate-on-scroll animate-delay-1" aria-hidden="true">
+        <div class="hero__visual animate-on-scroll animate-delay-1" id="hero-rot" style="--rc-dur:2500ms">
           <div class="hero-composition">
-            <div class="hero-pdp-mock">
-              <div class="hero-pdp-mock__header">
-                <div class="hero-pdp-mock__dots" aria-hidden="true">
-                  <span></span><span></span><span></span>
-                </div>
-                <div class="hero-pdp-mock__url">tutienda.com.co/productos/serum-facial</div>
-              </div>
-              <div class="hero-pdp-mock__body">
-                <div class="hero-pdp-mock__image">
-                  <div class="hero-product-bottle">
-                    <div class="hero-product-bottle__cap"></div>
-                    <div class="hero-product-bottle__body">
-                      <div class="hero-product-bottle__label">
-                        <span class="hero-product-bottle__brand">BEAUTÉ</span>
-                        <span class="hero-product-bottle__line">Vitamina C</span>
-                        <span class="hero-product-bottle__ml">30ml</span>
-                      </div>
-                    </div>
-                    <div class="hero-product-bottle__shadow"></div>
-                  </div>
-                </div>
-                <div class="hero-pdp-mock__info">
-                  <div class="hero-pdp-mock__brand">BEAUTÉ CO.</div>
-                  <div class="hero-pdp-mock__name">Sérum Facial Vitamina C</div>
-                  <div class="hero-pdp-mock__price">$45.000 COP</div>
-                  <div class="hero-widget-sim">
-                    <div class="hero-widget-sim__option hero-widget-sim__option--active">
-                      <div class="hero-widget-sim__radio hero-widget-sim__radio--on"></div>
-                      <div class="hero-widget-sim__text">
-                        <span class="hero-widget-sim__label">Suscríbete y ahorra</span>
-                        <span class="hero-widget-sim__discount">-15%</span>
-                      </div>
-                      <span class="hero-widget-sim__sub-price">$38.250</span>
-                    </div>
-                    <div class="hero-widget-sim__benefits">
-                      <span>Ahorra 15% en cada entrega</span>
-                      <span>Envío gratis en cada entrega</span>
-                      <span>Modifica, pausa o cancela cuando quieras</span>
-                    </div>
-                    <div class="hero-widget-sim__freq">
-                      <span class="hero-widget-sim__freq-label">Entregar cada:</span>
-                      <div class="hero-widget-sim__freq-pills">
-                        <span class="hero-widget-sim__pill">2 sem</span>
-                        <span class="hero-widget-sim__pill hero-widget-sim__pill--active">1 mes</span>
-                        <span class="hero-widget-sim__pill">2 meses</span>
-                      </div>
-                    </div>
-                    <div class="hero-widget-sim__option">
-                      <div class="hero-widget-sim__radio"></div>
-                      <span class="hero-widget-sim__label">Compra única</span>
-                      <span class="hero-widget-sim__sub-price" style="color:var(--c-muted)">$45.000</span>
-                    </div>
-                  </div>
-                </div>
+            <div class="hm-modes">
+              <span class="hm-modes__lead">Un solo widget, 4 formas de vender</span>
+              <div class="rc-row" role="group" aria-label="Estrategias del widget">
+                <button type="button" class="rc-chip rc-chip--light" data-chip aria-pressed="true" style="--chip-accent:#2563EB">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+                  Suscripción<span class="rc-bar"><i></i></span>
+                </button>
+                <button type="button" class="rc-chip rc-chip--light" data-chip aria-pressed="false" style="--chip-accent:#B45309">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                  Por frecuencia<span class="rc-bar"><i></i></span>
+                </button>
+                <button type="button" class="rc-chip rc-chip--light" data-chip aria-pressed="false" style="--chip-accent:#0D9488">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+                  Por cantidad<span class="rc-bar"><i></i></span>
+                </button>
+                <button type="button" class="rc-chip rc-chip--light" data-chip aria-pressed="false" style="--chip-accent:#7C3AED">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
+                  Obsequio<span class="rc-bar"><i></i></span>
+                </button>
               </div>
             </div>
-            <div class="hero-notif">
+
+            <div class="hero-pdp-mock" aria-hidden="true">
+              <div class="hero-pdp-mock__header">
+                <div class="hero-pdp-mock__dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="hero-pdp-mock__url" data-url>tutienda.com.co/productos/serum-facial</div>
+              </div>
+              <div class="hm-scenes">
+
+                <!-- Escena 0 · Suscripción (azul) -->
+                <div class="hm-scene is-active" data-scene data-url="tutienda.com.co/productos/serum-facial" data-notif="Recibirás tu Sérum Facial cada mes de forma automática">
+                  <div class="hero-pdp-mock__body">
+                    <div class="hero-pdp-mock__image">
+                      <div class="hero-product-bottle hm-prod">
+                        <div class="hero-product-bottle__cap"></div>
+                        <div class="hero-product-bottle__body">
+                          <div class="hero-product-bottle__label">
+                            <span class="hero-product-bottle__brand">BEAUTÉ</span>
+                            <span class="hero-product-bottle__line">Vitamina C</span>
+                            <span class="hero-product-bottle__ml">30ml</span>
+                          </div>
+                        </div>
+                        <div class="hero-product-bottle__shadow"></div>
+                      </div>
+                    </div>
+                    <div class="hero-pdp-mock__info">
+                      <div class="hero-pdp-mock__brand">BEAUTÉ CO.</div>
+                      <div class="hero-pdp-mock__name">Sérum Facial Vitamina C</div>
+                      <div class="hero-pdp-mock__price">$45.000 COP</div>
+                      <div class="hero-widget-sim">
+                        <div class="hero-widget-sim__option hero-widget-sim__option--active">
+                          <div class="hero-widget-sim__radio hero-widget-sim__radio--on"></div>
+                          <div class="hero-widget-sim__text"><span class="hero-widget-sim__label">Suscríbete y ahorra</span><span class="hero-widget-sim__discount">-15%</span></div>
+                          <span class="hero-widget-sim__sub-price">$38.250</span>
+                        </div>
+                        <div class="hero-widget-sim__benefits">
+                          <span>Ahorra 15% en cada entrega</span>
+                          <span>Envío gratis en cada entrega</span>
+                          <span>Modifica, pausa o cancela cuando quieras</span>
+                        </div>
+                        <div class="hero-widget-sim__freq hm-focus">
+                          <span class="hero-widget-sim__freq-label">Entregar cada:</span>
+                          <div class="hero-widget-sim__freq-pills">
+                            <span class="hero-widget-sim__pill">2 sem</span>
+                            <span class="hero-widget-sim__pill hero-widget-sim__pill--active">1 mes</span>
+                            <span class="hero-widget-sim__pill">2 meses</span>
+                          </div>
+                        </div>
+                        <div class="hero-widget-sim__option">
+                          <div class="hero-widget-sim__radio"></div>
+                          <span class="hero-widget-sim__label">Compra única</span>
+                          <span class="hero-widget-sim__sub-price" style="color:var(--c-muted);margin-left:auto">$45.000</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Escena 1 · Por frecuencia (café) -->
+                <div class="hm-scene" data-scene data-url="tutienda.com.co/productos/cafe-de-origen" data-notif="Recibirás tu café cada 2 semanas con 20% de descuento"
+                     style="--c-primary:#B45309;--c-primary-light:#FDE68A;--c-primary-50:#FFFBEB;--img-bg:linear-gradient(155deg,#FFFBEB 0%,#FEF3C7 55%,#FDE68A 100%)">
+                  <div class="hero-pdp-mock__body">
+                    <div class="hero-pdp-mock__image">
+                      <svg class="hm-prod" width="88" height="118" viewBox="0 0 84 112" aria-hidden="true">
+                        <rect x="16" y="8" width="52" height="11" rx="2" fill="#92633D"/>
+                        <path d="M14 18h56l4 82q0 4-4 4H14q-4 0-4-4z" fill="#C8A27A"/>
+                        <path d="M14 18h56" stroke="#8B6340" stroke-width="2"/>
+                        <path d="M24 18v86M60 18v86" stroke="#B88F66" stroke-width="1"/>
+                        <rect x="19" y="40" width="46" height="42" rx="5" fill="#FFFBEB"/>
+                        <text x="42" y="54" text-anchor="middle" font-size="6.5" font-weight="800" letter-spacing="1.2" fill="#B45309" font-family="Plus Jakarta Sans, sans-serif">HUILA</text>
+                        <text x="42" y="66" text-anchor="middle" font-size="9" font-weight="800" fill="#0F172A" font-family="Plus Jakarta Sans, sans-serif">Café</text>
+                        <text x="42" y="76" text-anchor="middle" font-size="5.5" fill="#64748B" font-family="Plus Jakarta Sans, sans-serif">500 g · grano</text>
+                      </svg>
+                    </div>
+                    <div class="hero-pdp-mock__info">
+                      <div class="hero-pdp-mock__brand">TOSTADORES DEL HUILA</div>
+                      <div class="hero-pdp-mock__name">Café de Origen 500 g</div>
+                      <div class="hero-pdp-mock__price">$42.000 COP</div>
+                      <div class="hero-widget-sim">
+                        <div class="hero-widget-sim__option hero-widget-sim__option--active">
+                          <div class="hero-widget-sim__radio hero-widget-sim__radio--on"></div>
+                          <div class="hero-widget-sim__text"><span class="hero-widget-sim__label">Suscríbete y ahorra</span><span class="hero-widget-sim__discount">-20%</span></div>
+                          <span class="hero-widget-sim__sub-price">$33.600</span>
+                        </div>
+                        <div class="hero-widget-sim__benefits">
+                          <span>Entre más seguido lo recibes, más ahorras</span>
+                          <span>Envío gratis en cada entrega</span>
+                        </div>
+                        <div class="hero-widget-sim__freq hm-focus">
+                          <span class="hero-widget-sim__freq-label">Entregar cada:</span>
+                          <div class="hero-widget-sim__freq-pills">
+                            <span class="hero-widget-sim__pill hero-widget-sim__pill--active">2 sem <b>−20%</b></span>
+                            <span class="hero-widget-sim__pill">1 mes <b>−15%</b></span>
+                            <span class="hero-widget-sim__pill">2 meses <b>−10%</b></span>
+                          </div>
+                        </div>
+                        <div class="hero-widget-sim__option">
+                          <div class="hero-widget-sim__radio"></div>
+                          <span class="hero-widget-sim__label">Compra única</span>
+                          <span class="hero-widget-sim__sub-price" style="color:var(--c-muted);margin-left:auto">$42.000</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Escena 2 · Por cantidad (mascotas) -->
+                <div class="hm-scene" data-scene data-url="tutienda.com.co/productos/alimento-perro-3kg" data-notif="Recibirás 2 bolsas cada mes y ahorras $20.400 en cada envío"
+                     style="--c-primary:#0D9488;--c-primary-light:#99F6E4;--c-primary-50:#F0FDFA;--img-bg:linear-gradient(155deg,#F0FDFA 0%,#CCFBF1 55%,#99F6E4 100%)">
+                  <div class="hero-pdp-mock__body">
+                    <div class="hero-pdp-mock__image">
+                      <svg class="hm-prod" width="88" height="118" viewBox="0 0 84 112" aria-hidden="true">
+                        <path d="M12 16q30-8 60 0l4 84q0 4-4 4H12q-4 0-4-4z" fill="#0F766E"/>
+                        <path d="M12 16q30-8 60 0" stroke="#115E59" stroke-width="2.5" fill="none"/>
+                        <rect x="17" y="34" width="50" height="50" rx="6" fill="#fff"/>
+                        <circle cx="42" cy="56" r="7" fill="#F59E0B"/>
+                        <circle cx="32" cy="46" r="3.6" fill="#F59E0B"/><circle cx="39" cy="42" r="3.6" fill="#F59E0B"/>
+                        <circle cx="46" cy="42" r="3.6" fill="#F59E0B"/><circle cx="53" cy="46" r="3.6" fill="#F59E0B"/>
+                        <text x="42" y="74" text-anchor="middle" font-size="7.5" font-weight="800" fill="#0F172A" font-family="Plus Jakarta Sans, sans-serif">PELUDOS</text>
+                        <text x="42" y="81" text-anchor="middle" font-size="5" fill="#64748B" font-family="Plus Jakarta Sans, sans-serif">Adulto · 3 kg</text>
+                      </svg>
+                    </div>
+                    <div class="hero-pdp-mock__info">
+                      <div class="hero-pdp-mock__brand">PELUDOS PET</div>
+                      <div class="hero-pdp-mock__name">Alimento para Perro Adulto 3 kg</div>
+                      <div class="hero-pdp-mock__price">$68.000 COP</div>
+                      <div class="hero-widget-sim">
+                        <div class="hero-widget-sim__option hero-widget-sim__option--active">
+                          <div class="hero-widget-sim__radio hero-widget-sim__radio--on"></div>
+                          <div class="hero-widget-sim__text"><span class="hero-widget-sim__label">Suscríbete · 2 bolsas</span><span class="hero-widget-sim__discount">-15%</span></div>
+                          <span class="hero-widget-sim__sub-price">$57.800 c/u</span>
+                        </div>
+                        <div class="hm-tiers hm-focus">
+                          <div class="hm-tiers__title">¡Lleva más y ahorra!</div>
+                          <div class="hm-tier"><span>1 bolsa</span><span>−10%</span></div>
+                          <div class="hm-tier hm-tier--on"><span>De 2 a 3 bolsas</span><span>−15%</span></div>
+                          <div class="hm-tier"><span>4+ bolsas</span><span>−20%</span></div>
+                        </div>
+                        <div class="hero-widget-sim__option">
+                          <div class="hero-widget-sim__radio"></div>
+                          <span class="hero-widget-sim__label">Compra única</span>
+                          <span class="hero-widget-sim__sub-price" style="color:var(--c-muted);margin-left:auto">$68.000</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Escena 3 · Obsequio (suplementos) -->
+                <div class="hm-scene" data-scene data-url="tutienda.com.co/productos/proteina-whey" data-notif="Tu shaker de regalo llega gratis con el primer pedido"
+                     style="--c-primary:#7C3AED;--c-primary-light:#DDD6FE;--c-primary-50:#F5F3FF;--img-bg:linear-gradient(155deg,#F5F3FF 0%,#EDE9FE 55%,#DDD6FE 100%)">
+                  <div class="hero-pdp-mock__body">
+                    <div class="hero-pdp-mock__image">
+                      <svg class="hm-prod" width="88" height="118" viewBox="0 0 84 112" aria-hidden="true">
+                        <rect x="17" y="16" width="50" height="13" rx="3" fill="#4C1D95"/>
+                        <path d="M15 29h54l-3 71q0 4-4 4H22q-4 0-4-4z" fill="#7C3AED"/>
+                        <rect x="18" y="48" width="48" height="32" fill="#fff"/>
+                        <text x="42" y="61" text-anchor="middle" font-size="6" font-weight="800" letter-spacing="1.2" fill="#7C3AED" font-family="Plus Jakarta Sans, sans-serif">FIT LAB</text>
+                        <text x="42" y="71" text-anchor="middle" font-size="9" font-weight="800" fill="#0F172A" font-family="Plus Jakarta Sans, sans-serif">WHEY</text>
+                        <text x="42" y="77.5" text-anchor="middle" font-size="5" fill="#64748B" font-family="Plus Jakarta Sans, sans-serif">Vainilla · 900 g</text>
+                      </svg>
+                    </div>
+                    <div class="hero-pdp-mock__info">
+                      <div class="hero-pdp-mock__brand">FIT LAB</div>
+                      <div class="hero-pdp-mock__name">Proteína Whey Vainilla 900 g</div>
+                      <div class="hero-pdp-mock__price">$129.000 COP</div>
+                      <div class="hero-widget-sim">
+                        <div class="hero-widget-sim__option hero-widget-sim__option--active">
+                          <div class="hero-widget-sim__radio hero-widget-sim__radio--on"></div>
+                          <div class="hero-widget-sim__text"><span class="hero-widget-sim__label">Suscríbete y ahorra</span><span class="hero-widget-sim__discount">-10%</span></div>
+                          <span class="hero-widget-sim__sub-price">$116.100</span>
+                        </div>
+                        <div class="hm-gift hm-focus">
+                          <div class="hm-gift__title">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
+                            Obsequio en tu primer pedido
+                          </div>
+                          <div class="hm-gift__item">
+                            <div class="hm-gift__thumb">
+                              <svg width="12" height="16" viewBox="0 0 24 32" aria-hidden="true"><rect x="5" y="1" width="14" height="5" rx="1.5" fill="#4C1D95"/><path d="M4 6h16l-2 24H6z" fill="#A78BFA"/></svg>
+                            </div>
+                            <div>
+                              <div class="hm-gift__name">1 × Shaker Fit Lab 600 ml</div>
+                              <div class="hm-gift__note">Gratis · solo comprando en suscripción</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="hero-widget-sim__option">
+                          <div class="hero-widget-sim__radio"></div>
+                          <span class="hero-widget-sim__label">Compra única</span>
+                          <span class="hero-widget-sim__sub-price" style="color:var(--c-muted);margin-left:auto">$129.000</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="hero-notif hm-notif is-pop" data-notif-box aria-hidden="true">
               <div class="hero-notif__icon">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
               </div>
-              <div class="hero-notif__text">
+              <div class="hero-notif__text hm-notif__text">
                 <strong>Suscripción activada</strong>
-                <span>Recibirás tu Sérum Facial cada mes de forma automática</span>
+                <span data-notif-text>Recibirás tu Sérum Facial cada mes de forma automática</span>
               </div>
             </div>
           </div>
@@ -551,7 +715,25 @@
         <!-- Feature 1: Widget — imagen izquierda, texto derecha -->
         <div class="feature animate-on-scroll">
           <div class="feature__visual">
-            <div class="widget-showcase">
+            <div class="widget-showcase" id="ws-rot" style="--rc-dur:2500ms">
+              <div class="rc-row" role="group" aria-label="Vistas del widget">
+                <button type="button" class="rc-chip rc-chip--dark" data-chip aria-pressed="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+                  Suscripción<span class="rc-bar"><i></i></span>
+                </button>
+                <button type="button" class="rc-chip rc-chip--dark" data-chip aria-pressed="false">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                  Por frecuencia<span class="rc-bar"><i></i></span>
+                </button>
+                <button type="button" class="rc-chip rc-chip--dark" data-chip aria-pressed="false">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg>
+                  Por cantidad<span class="rc-bar"><i></i></span>
+                </button>
+                <button type="button" class="rc-chip rc-chip--dark" data-chip aria-pressed="false">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
+                  Obsequio<span class="rc-bar"><i></i></span>
+                </button>
+              </div>
               <div class="widget-showcase__browser">
                 <div class="widget-showcase__bar">
                   <span class="widget-showcase__dot" style="background:#FF5F57"></span>
@@ -559,9 +741,9 @@
                   <span class="widget-showcase__dot" style="background:#28C840"></span>
                   <span class="widget-showcase__url">tutienda.com.co/productos/crema-hidratante</span>
                 </div>
-                <div class="widget-showcase__page">
-                  <div class="widget-showcase__slides" data-rotate>
-                  <div class="widget-showcase__slide is-active" data-label="Suscripción">
+                <div class="widget-showcase__page ws-legible">
+                  <div class="widget-showcase__slides">
+                  <div class="widget-showcase__slide is-active" data-scene data-label="Suscripción">
                   <div class="widget-showcase__product">
                     <div class="widget-showcase__product-img">
                       <div class="showcase-product-jar">
@@ -579,14 +761,14 @@
                           <div class="widget-showcase__radio-active"></div>
                           <span>Suscríbete y ahorra</span>
                           <span class="widget-showcase__badge-disc">-15%</span>
-                          <span class="widget-showcase__price-new">$32.300</span>
+                          <span class="widget-showcase__price-new" data-price="32300" data-suffix="">$32.300</span>
                         </div>
                         <div class="widget-showcase__benefits">
                           <span>Ahorra 15% en cada entrega</span>
                           <span>Envío gratis siempre</span>
                           <span>Modifica, pausa o cancela cuando quieras</span>
                         </div>
-                        <div class="widget-showcase__pills-row">
+                        <div class="widget-showcase__pills-row ws-focus">
                           <span class="widget-showcase__fpill">Semanal</span>
                           <span class="widget-showcase__fpill widget-showcase__fpill--on">Mensual</span>
                           <span class="widget-showcase__fpill">Bimestral</span>
@@ -600,7 +782,7 @@
                     </div>
                   </div>
                   </div>
-                  <div class="widget-showcase__slide" data-label="Por frecuencia">
+                  <div class="widget-showcase__slide" data-scene aria-hidden="true" data-label="Por frecuencia">
                   <div class="widget-showcase__product">
                     <div class="widget-showcase__product-img">
                       <div class="showcase-product-jar">
@@ -618,13 +800,13 @@
                           <div class="widget-showcase__radio-active"></div>
                           <span>Suscríbete y ahorra</span>
                           <span class="widget-showcase__badge-disc">-25%</span>
-                          <span class="widget-showcase__price-new">$28.500</span>
+                          <span class="widget-showcase__price-new" data-price="28500" data-suffix="">$28.500</span>
                         </div>
                         <div class="widget-showcase__benefits">
                           <span>Entre más seguido, más ahorras</span>
                           <span>Envío gratis siempre</span>
                         </div>
-                        <div class="widget-showcase__pills-row">
+                        <div class="widget-showcase__pills-row ws-focus">
                           <span class="widget-showcase__fpill widget-showcase__fpill--on">Mensual <b class="widget-showcase__fpill-pct">−25%</b></span>
                           <span class="widget-showcase__fpill">Bimestral <b class="widget-showcase__fpill-pct">−20%</b></span>
                           <span class="widget-showcase__fpill">Trimestral <b class="widget-showcase__fpill-pct">−15%</b></span>
@@ -638,7 +820,7 @@
                     </div>
                   </div>
                   </div>
-                  <div class="widget-showcase__slide" data-label="Por cantidad">
+                  <div class="widget-showcase__slide" data-scene aria-hidden="true" data-label="Por cantidad">
                   <div class="widget-showcase__product">
                     <div class="widget-showcase__product-img">
                       <div class="showcase-product-jar">
@@ -656,9 +838,9 @@
                           <div class="widget-showcase__radio-active"></div>
                           <span>Suscríbete · 2 unidades</span>
                           <span class="widget-showcase__badge-disc">-20%</span>
-                          <span class="widget-showcase__price-new">$30.400 c/u</span>
+                          <span class="widget-showcase__price-new" data-price="30400" data-suffix=" c/u">$30.400 c/u</span>
                         </div>
-                        <div class="widget-showcase__tiers">
+                        <div class="widget-showcase__tiers ws-focus">
                           <div class="widget-showcase__tiers-title">¡Lleva más y ahorra!</div>
                           <div class="widget-showcase__tier"><span>1 unidad</span><span>−15%</span></div>
                           <div class="widget-showcase__tier widget-showcase__tier--on"><span>De 2 a 3 unidades</span><span>−20%</span></div>
@@ -673,7 +855,7 @@
                     </div>
                   </div>
                   </div>
-                  <div class="widget-showcase__slide" data-label="Regalo">
+                  <div class="widget-showcase__slide" data-scene aria-hidden="true" data-label="Obsequio">
                   <div class="widget-showcase__product">
                     <div class="widget-showcase__product-img">
                       <div class="showcase-product-jar">
@@ -691,9 +873,9 @@
                           <div class="widget-showcase__radio-active"></div>
                           <span>Suscríbete y ahorra</span>
                           <span class="widget-showcase__badge-disc">-15%</span>
-                          <span class="widget-showcase__price-new">$32.300</span>
+                          <span class="widget-showcase__price-new" data-price="32300" data-suffix="">$32.300</span>
                         </div>
-                        <div class="widget-showcase__gift">
+                        <div class="widget-showcase__gift ws-focus">
                           <div class="widget-showcase__gift-title">
                             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>
                             <span>Obsequio en tu primer pedido</span>
@@ -719,12 +901,6 @@
                   </div>
                   </div>
                 </div>
-              </div>
-              <div class="widget-showcase__tabs" role="group" aria-label="Vistas del widget">
-                <button type="button" class="widget-showcase__tab" aria-pressed="true" data-index="0">Suscripción</button>
-                <button type="button" class="widget-showcase__tab" aria-pressed="false" data-index="1">Por frecuencia</button>
-                <button type="button" class="widget-showcase__tab" aria-pressed="false" data-index="2">Por cantidad</button>
-                <button type="button" class="widget-showcase__tab" aria-pressed="false" data-index="3">Regalo</button>
               </div>
               <div class="widget-showcase__customize">
                 <div class="widget-showcase__customize-title">Personalizar widget</div>
@@ -771,12 +947,12 @@
             <h3 class="feature__title">Widget de suscripción personalizable</h3>
             <p class="feature__desc">Se integra directamente en tu página de producto sin tocar código. El cliente elige su frecuencia y ve el descuento por suscripción frente a la compra única — todo en la misma página.</p>
             <ul class="feature__list">
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>El cliente elige frecuencia: semanal, quincenal, mensual</li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Muestra precio con descuento vs compra única para incentivar</li>
+              <li class="fl-item"><button type="button" class="fl-link" data-go="0" data-modes="0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle class="fl-circle" cx="12" cy="12" r="10"/></svg><span>El cliente elige frecuencia: semanal, quincenal, mensual</span></button></li>
+              <li class="fl-item"><button type="button" class="fl-link" data-go="0" data-modes="0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle class="fl-circle" cx="12" cy="12" r="10"/></svg><span>Muestra precio con descuento vs compra única para incentivar</span></button></li>
               <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Personalizable: frecuencias, descuentos, textos y colores</li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Descuento según la frecuencia: premia a quien recompra más seguido (ej. mensual 25%, bimestral 20%, trimestral 15%)</li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Descuentos escalonados por cantidad: a más unidades, mayor ahorro</li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Regalos por compra en suscripción para premiar a tus suscriptores</li>
+              <li class="fl-item"><button type="button" class="fl-link" data-go="1" data-modes="1"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle class="fl-circle" cx="12" cy="12" r="10"/></svg><span>Descuento según la frecuencia: premia a quien recompra más seguido (ej. mensual 25%, bimestral 20%, trimestral 15%)</span></button></li>
+              <li class="fl-item"><button type="button" class="fl-link" data-go="2" data-modes="2"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle class="fl-circle" cx="12" cy="12" r="10"/></svg><span>Descuentos escalonados por cantidad: a más unidades, mayor ahorro</span></button></li>
+              <li class="fl-item"><button type="button" class="fl-link" data-go="3" data-modes="3"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle class="fl-circle" cx="12" cy="12" r="10"/></svg><span>Obsequios por compra en suscripción para premiar a tus suscriptores</span></button></li>
               <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" aria-hidden="true"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Compatible con todos los temas de Shopify</li>
             </ul>
           </div>

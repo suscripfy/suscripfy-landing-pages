@@ -141,70 +141,143 @@ animatedEls.forEach((el) => observer.observe(el));
 })();
 
 /* ============================================================
-   WIDGET SHOWCASE — rotación de vistas (paso 01)
-   Guard obligatorio: main.js tambien lo cargan otras paginas,
-   donde este bloque NO existe.
+   ROTADOR DE ESTRATEGIAS DEL WIDGET (hero + paso 01)
+   - El cambio lo dispara el fin de la animación de la barra del chip
+     activo (CSS --rc-dur), así pausa y progreso siempre coinciden.
+   - Pausa: mouse encima (solo puntero tipo mouse), foco de teclado
+     dentro, fuera de pantalla o pestaña oculta.
+   - prefers-reduced-motion: sin autoplay; los chips siguen funcionando.
+   Guard obligatorio: main.js también lo cargan otras páginas, donde
+   estos bloques NO existen.
    ============================================================ */
 (function () {
-  const ROTATE_MS = 3000;
-  const track = document.querySelector('[data-rotate]');
-  if (!track) return;
-
-  const showcase = track.closest('.widget-showcase');
-  const slides = Array.from(track.querySelectorAll('.widget-showcase__slide'));
-  const tabs = showcase ? Array.from(showcase.querySelectorAll('.widget-showcase__tab')) : [];
-  if (!showcase || slides.length < 2) return;
+  const heroRoot = document.getElementById('hero-rot');
+  const wsRoot = document.getElementById('ws-rot');
+  if (!heroRoot && !wsRoot) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let current = 0;
-  let timer = null;
-  let inView = false;
-  let hovered = false;
 
-  function show(index) {
-    current = (index + slides.length) % slides.length;
-    slides.forEach((slide, i) => {
-      const active = i === current;
-      slide.classList.toggle('is-active', active);
-      slide.setAttribute('aria-hidden', active ? 'false' : 'true');
-    });
-    tabs.forEach((tab, i) => tab.setAttribute('aria-pressed', i === current ? 'true' : 'false'));
+  function restartClass(el, cls) {
+    el.classList.remove(cls);
+    void el.offsetWidth; // fuerza reflow para reiniciar la animación
+    el.classList.add(cls);
   }
 
-  function stop() {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
+  function createRotator(root, onShow) {
+    const chips = Array.from(root.querySelectorAll('[data-chip]'));
+    const scenes = Array.from(root.querySelectorAll('[data-scene]'));
+    if (scenes.length < 2 || chips.length !== scenes.length) return null;
+
+    let current = -1;
+    let hovered = false;
+    let focused = false;
+    let inView = true;
+
+    if (reduceMotion) root.classList.add('is-static');
+
+    function show(index) {
+      const prev = current;
+      current = (index + scenes.length) % scenes.length;
+      scenes.forEach((scene, i) => {
+        const active = i === current;
+        scene.classList.toggle('is-active', active);
+        scene.setAttribute('aria-hidden', active ? 'false' : 'true');
+        if (!active) scene.classList.remove('is-enter');
+      });
+      chips.forEach((chip, i) => {
+        chip.setAttribute('aria-pressed', i === current ? 'true' : 'false');
+        chip.classList.remove('is-run');
+      });
+      if (!reduceMotion) {
+        restartClass(chips[current], 'is-run');
+        restartClass(scenes[current], 'is-enter');
+      }
+      if (onShow) onShow(current, prev, scenes[current]);
+    }
+
+    function sync() {
+      root.classList.toggle('is-paused', hovered || focused || !inView || document.hidden);
+    }
+
+    chips.forEach((chip, i) => {
+      chip.addEventListener('click', () => show(i));
+      const bar = chip.querySelector('.rc-bar i');
+      if (bar && !reduceMotion) {
+        bar.addEventListener('animationend', () => { if (i === current) show(current + 1); });
+      }
+    });
+
+    // Solo mouse: en táctil el "hover" queda pegado tras un toque.
+    root.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { hovered = true; sync(); } });
+    root.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') { hovered = false; sync(); } });
+    root.addEventListener('focusin', (e) => { if (e.target.matches(':focus-visible')) { focused = true; sync(); } });
+    root.addEventListener('focusout', (e) => {
+      if (root.contains(e.relatedTarget)) return;
+      focused = false;
+      sync();
+    });
+    document.addEventListener('visibilitychange', sync);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((entry) => { inView = entry.isIntersecting; });
+        sync();
+      }, { threshold: 0.3 }).observe(root);
+    }
+
+    show(0);
+    return { show };
+  }
+
+  /* ---------- Hero: 4 tiendas, 4 estrategias ---------- */
+  if (heroRoot) {
+    const urlEl = heroRoot.querySelector('[data-url]');
+    const notif = heroRoot.querySelector('[data-notif-box]');
+    const notifText = heroRoot.querySelector('[data-notif-text]');
+    createRotator(heroRoot, (i, prev, scene) => {
+      if (urlEl) urlEl.textContent = scene.getAttribute('data-url') || '';
+      if (notifText) notifText.textContent = scene.getAttribute('data-notif') || '';
+      if (notif && prev !== -1 && !reduceMotion) restartClass(notif, 'is-pop');
+    });
+  }
+
+  /* ---------- Paso 01: mismo producto, 4 estrategias ---------- */
+  if (wsRoot) {
+    const links = Array.from(document.querySelectorAll('[data-go]'));
+    const fmt = new Intl.NumberFormat('es-CO');
+    let rafId = 0;
+
+    function tweenPrice(el, from, to) {
+      const suffix = el.getAttribute('data-suffix') || '';
+      cancelAnimationFrame(rafId);
+      if (reduceMotion || !isFinite(from) || from === to) {
+        el.textContent = '$' + fmt.format(to) + suffix;
+        return;
+      }
+      const t0 = performance.now();
+      const dur = 650;
+      const step = (t) => {
+        const p = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = '$' + fmt.format(Math.round((from + (to - from) * eased) / 100) * 100) + suffix;
+        if (p < 1) rafId = requestAnimationFrame(step);
+      };
+      rafId = requestAnimationFrame(step);
+    }
+
+    const scenes = wsRoot.querySelectorAll('[data-scene]');
+    const rot = createRotator(wsRoot, (i, prev, scene) => {
+      links.forEach((link) => {
+        const modes = (link.getAttribute('data-modes') || '').split(',');
+        link.classList.toggle('is-linked', modes.indexOf(String(i)) !== -1);
+      });
+      const priceEl = scene.querySelector('[data-price]');
+      if (priceEl && prev !== -1) {
+        const prevEl = scenes[prev].querySelector('[data-price]');
+        tweenPrice(priceEl, Number(prevEl && prevEl.getAttribute('data-price')), Number(priceEl.getAttribute('data-price')));
+      }
+    });
+    if (rot) {
+      links.forEach((link) => link.addEventListener('click', () => rot.show(Number(link.getAttribute('data-go')) || 0)));
     }
   }
-
-  function sync() {
-    stop();
-    if (reduceMotion || !inView || hovered || document.hidden) return;
-    timer = setInterval(() => show(current + 1), ROTATE_MS);
-  }
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      show(Number(tab.getAttribute('data-index')) || 0);
-      sync(); // reinicia el contador
-    });
-  });
-
-  showcase.addEventListener('mouseenter', () => { hovered = true; sync(); });
-  showcase.addEventListener('mouseleave', () => { hovered = false; sync(); });
-  showcase.addEventListener('focusin', () => { hovered = true; sync(); });
-  showcase.addEventListener('focusout', (e) => {
-    if (showcase.contains(e.relatedTarget)) return;
-    hovered = false;
-    sync();
-  });
-  document.addEventListener('visibilitychange', sync);
-
-  new IntersectionObserver((entries) => {
-    entries.forEach((entry) => { inView = entry.isIntersecting; });
-    sync();
-  }, { threshold: 0.3 }).observe(showcase);
-
-  show(0);
 })();
