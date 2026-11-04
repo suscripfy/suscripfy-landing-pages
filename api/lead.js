@@ -1,3 +1,5 @@
+import { buildSheetLead, postSheet } from './install/_lib.js';
+
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 const rateBucket = new Map();
@@ -58,31 +60,21 @@ export default async function handler(req, res) {
   if (!RX_PHONE.test(whatsapp)) return res.status(400).json({ error: 'invalid_whatsapp' });
   if (!shopify_url || shopify_url.length < 3) return res.status(400).json({ error: 'invalid_shopify' });
 
-  const payload = {
-    kind: 'lead',
-    token: process.env.GOOGLE_SHEETS_TOKEN,
+  const payload = buildSheetLead(process.env.GOOGLE_SHEETS_TOKEN, {
     nombre, email, whatsapp, shopify_url, session_id, origen,
     ip, user_agent: s(req.headers['user-agent'], 250),
-  };
+  });
 
   try {
     // Apps Script Web App requiere text/plain;charset=utf-8 para preservar el body
     // a través del redirect 302 → script.googleusercontent.com.
     // Ref: https://developers.google.com/apps-script/guides/web (doPost)
-    const resp = await fetch(process.env.GOOGLE_SHEETS_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload),
-      redirect: 'follow',
-    });
+    // Helper compartido con /api/install/check (mismo payload, mismo envío).
+    const { ok, status, text: respText, json: respJson } = await postSheet(process.env.GOOGLE_SHEETS_WEBHOOK_URL, payload);
 
-    const respText = await resp.text().catch(() => '');
-    let respJson = null;
-    try { respJson = JSON.parse(respText); } catch { /* no era JSON */ }
-
-    if (!resp.ok) {
-      console.error('[sf-chat][lead] sheets http error', resp.status, respText.slice(0, 200));
-      return res.status(502).json({ error: 'sheets_upstream', status: resp.status });
+    if (!ok) {
+      console.error('[sf-chat][lead] sheets http error', status, respText.slice(0, 200));
+      return res.status(502).json({ error: 'sheets_upstream', status });
     }
 
     if (!respJson || respJson.ok !== true) {

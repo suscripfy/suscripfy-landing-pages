@@ -50,11 +50,11 @@
       <ol class="install-steps" aria-label="Pasos de la instalación">
         <li class="install-steps__item is-active" data-indicator="1">
           <span class="install-steps__num" aria-hidden="true">1</span>
-          <span class="install-steps__label">Tu tienda</span>
+          <span class="install-steps__label">Tus datos</span>
         </li>
         <li class="install-steps__item" data-indicator="2">
           <span class="install-steps__num" aria-hidden="true">2</span>
-          <span class="install-steps__label">Tu correo</span>
+          <span class="install-steps__label">Código</span>
         </li>
         <li class="install-steps__item" data-indicator="3">
           <span class="install-steps__num" aria-hidden="true">3</span>
@@ -67,33 +67,65 @@
         <span>Ya tienes una solicitud en curso en este dispositivo. <a href="#" id="pending-link">Ver el estado</a></span>
       </p>
 
-      <!-- PASO 1: TIENDA -->
+      <!-- PASO 1: TUS DATOS Y TU TIENDA -->
       <section class="install-card" id="step-shop" aria-labelledby="step-shop-title">
-        <h2 class="install-card__title" id="step-shop-title">¿Cuál es tu tienda?</h2>
-        <form id="shop-form" class="install-form" novalidate>
-          <label for="shop-input" class="install-label">Dirección de tu tienda</label>
-          <div class="install-row">
+        <h2 class="install-card__title" id="step-shop-title" tabindex="-1">Tus datos y tu tienda</h2>
+        <form id="shop-form" class="install-form install-form--fields" novalidate>
+          <div class="install-field">
+            <label for="name-input" class="install-label">Tu nombre</label>
+            <input id="name-input" name="nombre" type="text" class="install-input" autocomplete="name"
+                   maxlength="120" placeholder="Nombre y apellido" required aria-describedby="shop-error" />
+          </div>
+          <div class="install-field">
+            <label for="email-input" class="install-label">Correo electrónico</label>
+            <input id="email-input" name="email" type="email" class="install-input"
+                   inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false"
+                   maxlength="254" placeholder="tu@correo.com" required aria-describedby="email-hint shop-error" />
+            <p class="install-hint" id="email-hint">Aquí te llegan el código y el link de instalación.</p>
+          </div>
+          <div class="install-field">
+            <label for="phone-input" class="install-label">Celular (WhatsApp)</label>
+            <input id="phone-input" name="whatsapp" type="tel" class="install-input"
+                   inputmode="numeric" autocomplete="tel-national" maxlength="16"
+                   placeholder="3001234567" required aria-describedby="phone-hint shop-error" />
+            <p class="install-hint" id="phone-hint">10 dígitos, empieza por 3.</p>
+          </div>
+          <div class="install-field">
+            <label for="referral-input" class="install-label">¿Dónde nos conociste?</label>
+            <select id="referral-input" name="referral" class="install-input install-select" required aria-describedby="shop-error">
+              <option value="">Elige una opción</option>
+            </select>
+          </div>
+          <div class="install-field">
+            <label for="shop-input" class="install-label">Dirección de tu tienda</label>
             <input id="shop-input" name="shop" type="text" class="install-input"
                    inputmode="url" autocomplete="url" autocapitalize="none" autocorrect="off" spellcheck="false"
                    maxlength="300" placeholder="mitienda.com" required
                    aria-describedby="shop-hint shop-error" />
-            <button type="submit" class="btn btn--primary install-row__btn" id="shop-submit">Verificar tienda</button>
+            <p class="install-hint" id="shop-hint">Puede ser tu dominio (mitienda.com), tu dirección mitienda.myshopify.com o el link de tu admin de Shopify.</p>
+            <details class="install-help">
+              <summary>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+                ¿Dónde la encuentro?
+                <svg class="install-help__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="install-help__body">
+                <p>Es la dirección que tus clientes escriben para entrar a tu tienda, por ejemplo <strong>mitienda.com</strong> o <strong>www.mitienda.com.co</strong>.</p>
+                <p>Si no la tienes a la mano, entra al admin de Shopify y copia la dirección que aparece en la barra del navegador: tiene la forma <strong>admin.shopify.com/store/NOMBRE</strong>. Puedes pegarla tal cual.</p>
+              </div>
+            </details>
           </div>
-          <p class="install-hint" id="shop-hint">Puede ser tu dominio (mitienda.com), tu dirección mitienda.myshopify.com o el link de tu admin de Shopify.</p>
+          <label class="install-terms">
+            <input type="checkbox" id="terms-input" name="terms" required />
+            <span>Acepto los <a href="/terminos-tiendas.html" target="_blank" rel="noopener">Términos y Condiciones para Tiendas</a></span>
+          </label>
           <p class="install-error" id="shop-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn--primary btn--lg btn--full" id="shop-submit">
+            Verificar y enviar código
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+          <p class="install-hint install-hint--center" id="shop-wait" hidden>Revisamos tu tienda y su catálogo. Puede tardar hasta 20 segundos.</p>
         </form>
-
-        <details class="install-help">
-          <summary>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-            ¿Dónde la encuentro?
-            <svg class="install-help__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </summary>
-          <div class="install-help__body">
-            <p>Es la dirección que tus clientes escriben para entrar a tu tienda, por ejemplo <strong>mitienda.com</strong> o <strong>www.mitienda.com.co</strong>.</p>
-            <p>Si no la tienes a la mano, entra al admin de Shopify y copia la dirección que aparece en la barra del navegador: tiene la forma <strong>admin.shopify.com/store/NOMBRE</strong>. Puedes pegarla tal cual.</p>
-          </div>
-        </details>
 
         <div class="install-result" id="shop-result" hidden>
           <p class="install-result__store" id="shop-result-name"></p>
@@ -104,36 +136,15 @@
             <li class="install-checks__item" data-check="category"><span class="install-checks__icon" aria-hidden="true"></span><span class="install-checks__text">Categoría de productos permitida</span><span class="install-sr" data-sr></span></li>
           </ul>
           <div class="install-note" id="shop-message" role="status" hidden></div>
-          <button type="button" class="btn btn--primary btn--lg btn--full" id="shop-continue" hidden>
-            Continuar
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </button>
         </div>
       </section>
 
-      <!-- PASO 2: CORREO + CÓDIGO -->
+      <!-- PASO 2: CÓDIGO -->
       <section class="install-card" id="step-email" aria-labelledby="step-email-title" hidden>
         <h2 class="install-card__title" id="step-email-title" tabindex="-1">Confirma tu correo</h2>
-        <p class="install-card__lead">
-          Tienda: <strong id="email-store"></strong>
-          <button type="button" class="install-link" id="change-store">Cambiar</button>
-        </p>
+        <p class="install-card__lead">Tienda: <strong id="email-store"></strong></p>
 
-        <form id="email-form" class="install-form" novalidate>
-          <label for="email-input" class="install-label">Correo electrónico</label>
-          <input id="email-input" name="email" type="email" class="install-input"
-                 inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false"
-                 maxlength="254" placeholder="tu@correo.com" required aria-describedby="email-hint email-error" />
-          <p class="install-hint" id="email-hint">Te enviaremos un código de 6 dígitos y, después, el link de instalación.</p>
-          <label class="install-terms">
-            <input type="checkbox" id="terms-input" name="terms" required />
-            <span>Acepto los <a href="/terminos-tiendas.html" target="_blank" rel="noopener">Términos y Condiciones para Tiendas</a></span>
-          </label>
-          <p class="install-error" id="email-error" role="alert" hidden></p>
-          <button type="submit" class="btn btn--primary btn--lg btn--full" id="email-submit">Enviar código</button>
-        </form>
-
-        <form id="code-form" class="install-form" novalidate hidden>
+        <form id="code-form" class="install-form" novalidate>
           <p class="install-card__lead">Enviamos un código de 6 dígitos a <strong id="code-email"></strong>. Si no lo ves en unos minutos, revisa tu carpeta de spam.</p>
           <label for="code-input" class="install-label">Código de verificación</label>
           <input id="code-input" name="code" type="text" class="install-input install-input--code"
@@ -160,6 +171,7 @@
           <h2 class="install-card__title" id="status-title"></h2>
           <p class="install-status__store" id="status-store" hidden></p>
           <p class="install-status__text" id="status-text"></p>
+          <p class="install-status__close" id="status-close" hidden>Puedes cerrar esta página: te avisaremos por correo.</p>
 
           <div class="install-status__install" id="status-install" hidden>
             <a id="status-install-btn" class="btn btn--primary btn--lg btn--full" href="#" target="_blank" rel="noopener noreferrer">
@@ -220,6 +232,7 @@
     </div>
   </footer>
 
+  <script type="module" src="/instalar/referral.mjs"></script>
   <script src="/instalar/messages.js" defer></script>
   <script src="/instalar/instalar.js" defer></script>
 </body>

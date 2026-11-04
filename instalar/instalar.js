@@ -2,12 +2,13 @@
 
 /* ============================================================
    /instalar — autoinstalación de SuscripFy
-   Paso 1: verificar tienda   → POST /api/install/check
-   Paso 2: correo + código    → POST /api/install/request, POST /api/install/verify
+   Paso 1: tus datos y tu tienda → POST /api/install/check (+ /api/install/request, o /api/install/resend si hay una solicitud en curso)
+   Paso 2: código               → POST /api/install/verify
    Paso 3: estado             → GET  /api/install/status?t=... (cada 30 s con la pestaña visible)
    ============================================================ */
 (function () {
   var CONTACT_EMAIL = 'comercial@suscripfy.co';
+  var SUPPORT_EMAIL = 'soporte@suscripfy.co';
   var TOKEN_RX = /^[A-Za-z0-9_-]{20,128}$/;
   var EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   var STORAGE_KEY = 'sf_install_token';
@@ -98,27 +99,38 @@
      PASOS 1 y 2
      ============================================================ */
   function initWizard() {
-    var state = { shopInput: '', domain: '', storeName: '', email: '', token: '' };
+    var state = { shopInput: '', domain: '', storeName: '', verdict: '', contact: null, token: '' };
 
     var shopForm = $('shop-form');
+    var nameInput = $('name-input');
+    var emailInput = $('email-input');
+    var phoneInput = $('phone-input');
+    var referralInput = $('referral-input');
     var shopInput = $('shop-input');
+    var termsInput = $('terms-input');
     var shopSubmit = $('shop-submit');
     var shopError = $('shop-error');
+    var shopWait = $('shop-wait');
     var shopResult = $('shop-result');
     var shopMessage = $('shop-message');
-    var shopContinue = $('shop-continue');
-
-    var emailForm = $('email-form');
-    var emailInput = $('email-input');
-    var termsInput = $('terms-input');
-    var emailError = $('email-error');
-    var emailSubmit = $('email-submit');
 
     var codeForm = $('code-form');
     var codeInput = $('code-input');
     var codeError = $('code-error');
     var codeSubmit = $('code-submit');
     var codeResend = $('code-resend');
+
+    // "¿Dónde nos conociste?": única fuente en /instalar/referral.mjs
+    (window.SfyReferralOptions || []).forEach(function (o) {
+      var opt = document.createElement('option');
+      opt.value = o.value;
+      opt.textContent = o.label;
+      referralInput.appendChild(opt);
+    });
+
+    // Prefill de la tienda (?shop=, p. ej. desde el recordatorio "Retomar la instalación")
+    var preShop = (params.get('shop') || '').trim();
+    if (preShop && preShop.length <= 300) shopInput.value = preShop;
 
     // Solicitud previa guardada en este dispositivo
     var saved = storageGet();
@@ -131,12 +143,12 @@
       setStepIndicator(step);
       show($('step-shop'), step === 1);
       show($('step-email'), step === 2);
+      var title = $(step === 2 ? 'step-email-title' : 'step-shop-title');
       if (step === 2) {
         $('email-store').textContent = state.storeName ? state.storeName + ' (' + state.domain + ')' : state.domain;
-        var title = $('step-email-title');
-        if (title) title.focus({ preventScroll: true });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
+      if (title) title.focus({ preventScroll: true });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderCheck(name, value) {
@@ -164,7 +176,11 @@
       return 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     }
 
-    function renderResult(d) {
+    function supportLink() {
+      return '<a href="mailto:' + SUPPORT_EMAIL + '">' + SUPPORT_EMAIL + '</a>';
+    }
+
+    function renderResult(d, extraHtml, extraTone) {
       show(shopResult, true);
       var name = $('shop-result-name');
       if (d.myshopify_domain) {
@@ -203,126 +219,202 @@
         default:
           break;
       }
-      if (d.ok && d.open_request) {
-        msgs.push('<p>Ya hay una solicitud de instalación en curso para esta tienda. Si la hiciste tú, revisa tu correo. También puedes continuar y hacerla de nuevo.</p>');
-        tone = '';
-      }
+      if (extraHtml) { msgs.push(extraHtml); tone = extraTone || ''; }
       setMessage(msgs.join(''), tone);
-      show(shopContinue, !!d.ok);
-      if (d.ok) shopContinue.focus({ preventScroll: true });
+      shopResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    shopInput.addEventListener('input', function () { setError(shopError, '', shopInput); });
+    function normalizePhone(v) {
+      var digits = String(v || '').replace(/\D/g, '');
+      if (digits.length === 12 && digits.indexOf('57') === 0) digits = digits.slice(2);
+      return /^3\d{9}$/.test(digits) ? digits : '';
+    }
+
+    function fail(msg, input) {
+      setError(shopError, msg, input || null);
+      if (input) input.focus();
+      return null;
+    }
+
+    function readForm() {
+      [nameInput, emailInput, phoneInput, referralInput, shopInput].forEach(function (i) { i.setAttribute('aria-invalid', 'false'); });
+      setError(shopError, '');
+      var name = nameInput.value.replace(/\s+/g, ' ').trim();
+      if (name.length < 2) return fail('Escribe tu nombre.', nameInput);
+      var email = emailInput.value.trim().toLowerCase();
+      if (!EMAIL_RX.test(email) || email.length > 254) return fail('Revisa tu correo electrónico.', emailInput);
+      var phone = normalizePhone(phoneInput.value);
+      if (!phone) return fail('Revisa tu celular: son 10 dígitos y empieza por 3.', phoneInput);
+      if (!referralInput.value) return fail('Cuéntanos dónde nos conociste.', referralInput);
+      var shop = shopInput.value.trim();
+      if (!shop) return fail('Escribe la dirección de tu tienda.', shopInput);
+      if (!termsInput.checked) {
+        setError(shopError, 'Para continuar debes aceptar los Términos y Condiciones para Tiendas.');
+        termsInput.focus();
+        return null;
+      }
+      return { name: name, email: email, phone: phone, referral: referralInput.value, shop: shop };
+    }
+
+    var FIELD_ERRORS = {
+      invalid_name: ['Escribe tu nombre.', 'name-input'],
+      invalid_email: ['Revisa tu correo electrónico.', 'email-input'],
+      invalid_phone: ['Revisa tu celular: son 10 dígitos y empieza por 3.', 'phone-input'],
+      invalid_referral: ['Cuéntanos dónde nos conociste.', 'referral-input'],
+      invalid_shop: ['Esa dirección no parece válida. Escribe algo como mitienda.com o mitienda.myshopify.com.', 'shop-input'],
+      terms_required: ['Para continuar debes aceptar los Términos y Condiciones para Tiendas.', 'terms-input'],
+    };
+
+    function busy(on) {
+      setLoading(shopSubmit, on, 'Verificando tu tienda...');
+      show(shopWait, on);
+    }
+
+    function runCheck(f) {
+      return api('POST', '/api/install/check', {
+        nombre: f.name, email: f.email, whatsapp: f.phone, referral: f.referral, terms_accepted: true, shop: f.shop,
+      });
+    }
+
+    shopForm.addEventListener('input', function (e) {
+      if (e.target && e.target.setAttribute) e.target.setAttribute('aria-invalid', 'false');
+      setError(shopError, '');
+    });
 
     shopForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      var value = shopInput.value.trim();
-      setError(shopError, '', shopInput);
+      var f = readForm();
+      if (!f) return;
       show(shopResult, false);
-      if (!value) {
-        setError(shopError, 'Escribe la dirección de tu tienda.', shopInput);
-        shopInput.focus();
-        return;
-      }
-      setLoading(shopSubmit, true, 'Verificando...');
-      api('POST', '/api/install/check', { shop: value }).then(function (r) {
-        setLoading(shopSubmit, false);
-        if (r.status === 400 && r.data.error === 'invalid_shop') {
-          setError(shopError, 'Esa dirección no parece válida. Escribe algo como mitienda.com o mitienda.myshopify.com.', shopInput);
-          shopInput.focus();
-          return;
+      busy(true);
+      runCheck(f).then(function (r) {
+        var d = r.data;
+        if (r.status === 400 && FIELD_ERRORS[d.error]) {
+          busy(false);
+          var fe = FIELD_ERRORS[d.error];
+          return fail(fe[0], $(fe[1]));
         }
         if (r.status !== 200) {
-          setError(shopError, r.data.error === 'verification_unavailable'
+          busy(false);
+          setError(shopError, d.error === 'verification_unavailable'
             ? 'No pudimos completar la verificación. Intenta de nuevo en unos minutos.'
-            : genericError(r.status, r.data));
+            : genericError(r.status, d));
           return;
         }
-        state.shopInput = value;
-        state.domain = r.data.myshopify_domain || '';
-        state.storeName = r.data.store_name || '';
-        renderResult(r.data);
+        state.contact = f;
+        state.shopInput = f.shop;
+        state.domain = d.myshopify_domain || '';
+        state.storeName = d.store_name || '';
+        state.verdict = d.verdict || '';
+        if (!d.ok) {
+          busy(false);
+          renderResult(d);
+          return;
+        }
+        if (d.open_request && d.open_stage && d.open_stage !== 'email_pending') {
+          resendStatus(d);
+          return;
+        }
+        requestCode(shopSubmit, false, false, d);
       });
     });
 
-    shopContinue.addEventListener('click', function () {
-      if (!state.domain) return;
-      goStep(2);
-      setTimeout(function () { emailInput.focus(); }, 50);
-    });
+    // Solicitud en curso (ya pasó del código): el core reenvía el estado al correo de la solicitud.
+    function resendStatus(d) {
+      api('POST', '/api/install/resend', { myshopify_domain: state.domain }).then(function (r) {
+        busy(false);
+        var msg;
+        if (r.status === 200 && r.data.sent) {
+          msg = '<p>Ya hay una solicitud en curso para esta tienda. Te enviamos el estado al correo con el que se hizo la solicitud.</p>';
+        } else if (r.status === 200) {
+          msg = '<p>Ya hay una solicitud en curso para esta tienda. Revisa el correo con el que se hizo la solicitud o escríbenos a ' + supportLink() + '.</p>';
+        } else {
+          msg = '<p>Ya hay una solicitud en curso para esta tienda. Escríbenos a ' + supportLink() + '.</p>';
+        }
+        goStep(1);
+        renderResult(d || { checks: {} }, msg, '');
+      });
+    }
 
-    $('change-store').addEventListener('click', function () {
-      show(codeForm, false);
-      show(emailForm, true);
-      goStep(1);
-      shopInput.focus();
-    });
-
-    function requestCode(btn) {
-      var email = emailInput.value.trim().toLowerCase();
-      setError(emailError, '', emailInput);
-      setError(codeError, '', codeInput);
-      if (!EMAIL_RX.test(email) || email.length > 254) {
-        setError(emailError, 'Revisa tu correo electrónico.', emailInput);
-        emailInput.focus();
-        return;
-      }
-      if (!termsInput.checked) {
-        setError(emailError, 'Para continuar debes aceptar los Términos y Condiciones para Tiendas.');
-        termsInput.focus();
-        return;
-      }
-      setLoading(btn, true, btn === codeResend ? 'Enviando...' : 'Enviando código...');
+    function requestCode(btn, isResend, retried, checkData) {
+      var c = state.contact;
+      if (isResend) setLoading(btn, true, 'Enviando...');
       api('POST', '/api/install/request', {
         myshopify_domain: state.domain,
-        email: email,
+        email: c.email,
         terms_accepted: true,
         shop_input: state.shopInput,
+        verdict: state.verdict,
+        contact_name: c.name,
+        phone: c.phone,
+        referral_source: c.referral,
       }).then(function (r) {
-        setLoading(btn, false);
         var d = r.data;
+        // Veredicto vencido (30 min): se repite la verificación sola y se reintenta una vez.
+        if (r.status === 400 && d.error === 'verification_expired' && !retried) {
+          runCheck(c).then(function (rc) {
+            if (rc.status === 200 && rc.data.ok && rc.data.verdict) {
+              state.verdict = rc.data.verdict;
+              requestCode(btn, isResend, true, rc.data);
+            } else {
+              if (isResend) setLoading(btn, false); else busy(false);
+              goStep(1);
+              if (rc.status === 200) renderResult(rc.data);
+              else setError(shopError, genericError(rc.status, rc.data));
+            }
+          });
+          return;
+        }
+        if (isResend) setLoading(btn, false); else busy(false);
         if (r.status === 200 && d.status_token && TOKEN_RX.test(d.status_token)) {
-          state.email = email;
           state.token = d.status_token;
           storageSet(d.status_token);
-          $('code-email').textContent = email;
-          show(emailForm, false);
-          show(codeForm, true);
+          $('code-email').textContent = c.email;
+          show(shopResult, false);
           codeInput.value = '';
-          if (btn === codeResend) setError(codeError, '');
+          setError(codeError, '');
+          goStep(2);
           setTimeout(function () { codeInput.focus(); }, 50);
-          if (btn === codeResend) {
+          if (isResend) {
             codeResend.textContent = 'Código reenviado';
             codeResend.disabled = true;
             setTimeout(function () { codeResend.textContent = 'Reenviar código'; codeResend.disabled = false; }, 30000);
           }
           return;
         }
-        var target = btn === codeResend ? codeError : emailError;
+        // 409 sin código: solicitud en curso con un core que no informa open_stage → recuperar por correo.
+        if (r.status === 409 && d.error === 'conflict') {
+          resendStatus(checkData);
+          return;
+        }
         var msg;
         switch (d.error) {
           case 'invalid_email': msg = 'Revisa tu correo electrónico.'; break;
+          case 'invalid_name': msg = 'Escribe tu nombre.'; break;
+          case 'invalid_phone': msg = 'Revisa tu celular: son 10 dígitos y empieza por 3.'; break;
+          case 'invalid_referral': msg = 'Cuéntanos dónde nos conociste.'; break;
           case 'terms_required': msg = 'Para continuar debes aceptar los Términos y Condiciones para Tiendas.'; break;
           case 'already_installed': msg = 'SuscripFy ya está instalada en esta tienda.'; break;
           case 'not_cop': msg = 'Tu tienda no está en pesos colombianos (COP). Por ahora SuscripFy funciona solo con tiendas en COP.'; break;
           case 'not_shopify':
-          case 'invalid_shop': msg = 'No pudimos confirmar tu tienda. Vuelve al paso anterior y verifícala de nuevo.'; break;
+          case 'invalid_shop': msg = 'No pudimos confirmar tu tienda. Revisa la dirección e inténtalo de nuevo.'; break;
           case 'category_blocked': msg = CATEGORY_BLOCKED_TEXT; break;
+          case 'verification_expired': msg = 'La verificación venció. Vuelve a intentarlo.'; break;
           case 'verification_unavailable': msg = 'No pudimos completar la verificación. Intenta de nuevo en unos minutos.'; break;
           default: msg = genericError(r.status, d);
         }
-        setError(target, msg, btn === codeResend ? null : emailInput);
+        if (isResend) setError(codeError, msg);
+        else { goStep(1); setError(shopError, msg); }
       });
     }
 
-    emailForm.addEventListener('submit', function (e) { e.preventDefault(); requestCode(emailSubmit); });
-    codeResend.addEventListener('click', function () { requestCode(codeResend); });
+    codeResend.addEventListener('click', function () { requestCode(codeResend, true, false, null); });
 
     $('code-change-email').addEventListener('click', function () {
-      show(codeForm, false);
-      show(emailForm, true);
       setError(codeError, '');
-      emailInput.focus();
+      show(shopResult, false);
+      goStep(1);
+      setTimeout(function () { emailInput.focus(); emailInput.select(); }, 50);
     });
 
     codeInput.addEventListener('input', function () {
@@ -419,6 +511,7 @@
       var restart = $('status-restart');
       show(install, false);
       show(restart, false);
+      show($('status-close'), false);
       store.textContent = s.store_name || '';
       show(store, !!s.store_name);
 
@@ -474,11 +567,13 @@
           storageSet('');
           break;
         case 'error':
+          show($('status-close'), true);
           setIcon('search');
           title.textContent = 'Estamos revisando tu solicitud, te escribiremos';
           text.innerHTML = 'Si tienes dudas, escríbenos a <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>.';
           break;
         default: // email_pending, verified, provisioning, awaiting_link
+          show($('status-close'), true);
           setIcon('clock');
           title.textContent = 'Tu app está casi lista';
           text.textContent = ALMOST_READY_TEXT.replace(/^Tu app está casi lista\. /, '');
