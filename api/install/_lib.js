@@ -9,46 +9,43 @@ import { lookup as dnsLookup } from 'node:dns/promises';
 
 /* ============================================================
    FILTRO DE CATEGORÍA — ajustar aquí
-   Cada regla bloquea un producto si su texto (título + product_type + tags,
-   nunca la descripción) coincide con `any`. Si la regla trae `requires`,
-   además debe coincidir al menos uno de esos patrones (p. ej. colágeno solo
-   en presentación de suplemento). El texto se normaliza antes: minúsculas,
-   NFD y sin tildes, así que los patrones se escriben SIN tildes.
+   Solo se bloquea a quien vende suplementos que compiten con Savvy. Un producto
+   cuenta si su texto (título + product_type + tags, nunca la descripción):
+   - trae un término de `always` (siempre es suplemento), o
+   - trae un término de `needsSignal` Y además una señal de suplemento (`signals`).
+     Gramos, kg, lb o sabor NO son señal (los alimentos también los tienen).
+   Nunca cuenta si es de cuidado personal (`personalCare`). El texto se
+   normaliza antes: minúsculas, NFD y sin tildes → patrones SIN tildes.
    ============================================================ */
-export const CATEGORY_BLOCK_RULES = [
-  {
-    id: 'proteina',
-    any: [
-      /\bproteinas?\b/, /\bproteins?\b/, /\bwhey\b/, /\bisolates?\b/,
-      /\bcaseinas?\b/, /\bcaseins?\b/,
-      // "aislado" a secas también es "termo aislado"; solo cuenta en contexto proteico.
-      /\baislados?\s+(?:de\s+)?(?:suero|proteina|whey|soya|soja|arveja|guisante)\b/,
-    ],
-  },
-  {
-    id: 'colageno_suplemento',
-    any: [/\bcolagenos?\b/, /\bcollagen\b/],
-    requires: [
-      /\bpolvo\b/, /\bpowder\b/, /\bhidrolizados?\b/, /\bhydroly[sz]ed\b/,
-      /\bcapsulas?\b/, /\bcapsules?\b/, /\bsachets?\b/, /\bsobres?\b/, /\bscoops?\b/,
-    ],
-  },
-  { id: 'magnesio', any: [/\bmagnesio\b/, /\bmagnesium\b/] },
-  { id: 'creatina', any: [/\bcreatinas?\b/, /\bcreatine\b/] },
-  { id: 'pre_entreno', any: [/\bpre[\s-]?entrenos?\b/, /\bpre[\s-]?workouts?\b/] },
-  {
-    id: 'aminoacidos',
-    any: [/\baminoacidos?\b/, /\bamino\b/, /\bbcaas?\b/, /\bglutaminas?\b/, /\bglutamine\b/],
-  },
-  {
-    id: 'ganador_masa',
-    any: [/\bganador(?:es)?\s+de\s+(?:masa|peso)\b/, /\bgainers?\b/, /\bmass\s+gainers?\b/],
-  },
-];
+export const CATEGORY_BLOCK_RULES = {
+  always: [
+    /\bwhey\b/, /\bcaseinas?\b/, /\bcaseins?\b/, /\bcreatinas?\b/, /\bcreatine\b/,
+    /\bbcaas?\b/, /\bglutaminas?\b/, /\bglutamine\b/,
+    /\bpre[\s-]?entrenos?\b/, /\bpre[\s-]?workouts?\b/,
+    /\bganador(?:es)?\s+de\s+(?:masa|peso)\b/, /\bgainers?\b/, /\bmass\s+gainers?\b/,
+    /\bproteinas?\s+en\s+polvo\b/, /\bprotein\s+powders?\b/,
+  ],
+  needsSignal: [
+    /\bproteinas?\b/, /\bproteins?\b/, /\bcolagenos?\b/, /\bcollagen\b/,
+    /\bmagnesio\b/, /\bmagnesium\b/, /\baminoacidos?\b/, /\bamino\s+acids?\b/,
+  ],
+  signals: [
+    /\bsuplementos?\b/, /\bsupplements?\b/, /\bpolvo\b/, /\bpowders?\b/, /\bscoops?\b/,
+    /\bcapsulas?\b/, /\bcapsules?\b/, /\btabletas?\b/, /\btablets?\b/, /\bsoftgels?\b/,
+    /\bsachets?\b/, /\bsobres?\b/, /\bgomitas?\b/, /\bgumm(?:y|ies)\b/,
+    /\bhidrolizad[oa]s?\b/, /\bhydroly[sz]ed\b/,
+  ],
+  personalCare: [
+    /\bshampoos?\b/, /\bchampus?\b/, /\bacondicionador(?:es)?\b/, /\bconditioners?\b/,
+    /\bcremas?\b/, /\bcreams?\b/, /\bserums?\b/, /\bmascarillas?\b/, /\bmasks?\b/,
+    /\blocion(?:es)?\b/, /\blotions?\b/, /\bjabon(?:es)?\b/, /\bsoaps?\b/, /\bgel(?:es)?\b/,
+    /\btratamientos?\s+capilar(?:es)?\b/, /\bkeratinas?\b/, /\btintes?\b/, /\bexfoliantes?\b/,
+    /\bprotector(?:es)?\s+solar(?:es)?\b/, /\bdesodorantes?\b/, /\baceites?\b/,
+  ],
+};
 
-// Umbrales: bloqueado si hay >= BLOCK_MIN_MATCHES productos o >= BLOCK_MIN_SHARE del catálogo.
+// Umbral: bloqueado con >= BLOCK_MIN_MATCHES productos que cuentan; 1 → review (permitida, para Oscar).
 export const CATEGORY_BLOCK_MIN_MATCHES = 2;
-export const CATEGORY_BLOCK_MIN_SHARE = 0.2;
 export const CATEGORY_MAX_EVIDENCE = 5;
 
 export function normalizeText(s) {
@@ -67,9 +64,10 @@ function productText(p) {
 export function productMatchesBlock(p) {
   const text = productText(p);
   if (!text) return false;
-  return CATEGORY_BLOCK_RULES.some((rule) =>
-    rule.any.some((rx) => rx.test(text)) &&
-    (!rule.requires || rule.requires.some((rx) => rx.test(text))));
+  const R = CATEGORY_BLOCK_RULES;
+  const has = (list) => list.some((rx) => rx.test(text));
+  if (has(R.personalCare)) return false;
+  return has(R.always) || (has(R.needsSignal) && has(R.signals));
 }
 
 /**
@@ -86,7 +84,7 @@ export function classify(products) {
     .map((p) => cleanStr(p.title, 140))
     .filter(Boolean);
   let category = 'ok';
-  if (matches >= CATEGORY_BLOCK_MIN_MATCHES || (total > 0 && matches / total >= CATEGORY_BLOCK_MIN_SHARE && matches > 0)) {
+  if (matches >= CATEGORY_BLOCK_MIN_MATCHES) {
     category = 'blocked';
   } else if (matches === 1) {
     category = 'review';
@@ -446,7 +444,8 @@ export async function inspectStore(host, { budgetMs = 9000 } = {}) {
         out.catalog_checked = true;
         break outer;
       }
-      if (prod.error !== 'too_large') break;
+      // too_large → página más chica; Shopify suele responder 429 al reintento inmediato y la siguiente página sí entra.
+      if (prod.error !== 'too_large' && prod.error !== 'http_429') break;
     }
   }
   if (!out.catalog_checked) {

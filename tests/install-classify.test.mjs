@@ -22,53 +22,55 @@ test('tienda de proteínas → blocked', () => {
   assert.ok(r.evidence.includes('Proteína Whey Vainilla 900 g'));
 });
 
-test('crema con colágeno (no suplemento) → ok', () => {
-  const r = classify([
-    p('Crema facial con colágeno y ácido hialurónico', 'Cuidado facial', ['skincare', 'colageno']),
-    p('Sérum de colágeno marino', 'Cuidado facial'),
-    p('Contorno de ojos', 'Cuidado facial'),
-  ]);
+test('belleza / pelo → ok', () => {
+  const r = classify([p('Shampoo con proteína de seda'), p('Sérum con aminoácidos'), p('Aceite de magnesio corporal')]);
   assert.equal(r.category, 'ok');
   assert.equal(r.matches, 0);
 });
 
-test('colágeno hidrolizado en polvo sí cuenta', () => {
-  const r = classify([p('Colágeno Hidrolizado 500 g'), p('Collagen powder sabor fresa'), ...filler(20)]);
-  assert.equal(r.category, 'blocked');
-  assert.equal(r.matches, 2);
-});
-
-test('una sola creatina en catálogo grande → review (permitida)', () => {
-  const r = classify([p('Creatine Monohydrate 300 g'), ...filler(9, 'Café de origen')]);
-  assert.equal(r.category, 'review');
-  assert.equal(r.matches, 1);
-  assert.deepEqual(r.evidence, ['Creatine Monohydrate 300 g']);
+test('comida con proteína (sin señal de suplemento) → ok', () => {
+  const r = classify([p('Mantequilla de maní alta en proteína 500 g'), p('Barra de proteína chocolate')]);
+  assert.equal(r.category, 'ok');
+  assert.equal(r.matches, 0);
 });
 
 test('vitaminas y adelgazantes → ok', () => {
-  const r = classify([
-    p('Vitamina C 1000 mg x 60 tabletas', 'Vitaminas'),
-    p('Multivitamínico mujer', 'Vitaminas', ['vitaminas', 'salud']),
-    p('Té adelgazante detox', 'Bienestar'),
-    p('Omega 3 cápsulas', 'Vitaminas'),
-    p('Vitamina D3 gotas', 'Vitaminas'),
-  ]);
+  const r = classify([p('Vitamina C cápsulas'), p('Multivitamínico gomitas'), p('Té quemador')]);
   assert.equal(r.category, 'ok');
+  assert.equal(r.matches, 0);
 });
 
-test('regla del 20 %: 1 de 5 → blocked, 1 de 6 → review', () => {
-  assert.equal(classify([p('Pre-entreno Explosive'), ...filler(4)]).category, 'blocked');
-  assert.equal(classify([p('Pre-entreno Explosive'), ...filler(5)]).category, 'review');
+test('cosméticos con 1 suplemento → review', () => {
+  const r = classify([p('Crema facial'), p('Colágeno hidrolizado en polvo')]);
+  assert.equal(r.category, 'review');
+  assert.deepEqual(r.evidence, ['Colágeno hidrolizado en polvo']);
+});
+
+test('catálogo de 3 con 1 coincidencia → review (sin regla del 20 %)', () => {
+  const r = classify([p('Creatina monohidratada'), p('Camiseta 1', 'Ropa'), p('Gorra', 'Ropa')]);
+  assert.equal(r.category, 'review');
+  assert.equal(r.matches, 1);
+});
+
+test('suplementos que compiten → blocked', () => {
+  assert.equal(classify([p('Whey Protein 2 lb'), p('Creatina monohidratada 300 g')]).category, 'blocked');
+  assert.equal(classify([p('Proteína vegana en polvo'), p('Magnesio en cápsulas')]).category, 'blocked');
+});
+
+test('exclusión de cuidado personal → ok', () => {
+  const r = classify([p('Crema de colágeno'), p('Mascarilla de colágeno en sachet')]);
+  assert.equal(r.category, 'ok');
+  assert.equal(r.matches, 0);
+});
+
+test('"amino" suelto no cuenta; gramos/kg/lb/sabor no son señal', () => {
+  assert.equal(classify([p('Amino Energy'), p('Proteína 2 lb sabor vainilla'), p('Magnesio 1 kg')]).category, 'ok');
 });
 
 test('tildes, tags y product_type; la descripción no cuenta', () => {
-  assert.equal(classify([p('Bolsa 3 kg', 'PROTEÍNA'), p('Sabor fresa', '', ['BCAA']), ...filler(20)]).category, 'blocked');
-  const dogFood = { title: 'Alimento para perro adulto', product_type: 'Mascotas', tags: [], body_html: 'Alto en proteína y magnesio' };
+  assert.equal(classify([p('Bolsa 3 kg', 'PROTEÍNA', ['polvo']), p('Sabor fresa', '', ['BCAA']), ...filler(20)]).category, 'blocked');
+  const dogFood = { title: 'Alimento para perro adulto', product_type: 'Mascotas', tags: [], body_html: 'Whey en polvo y creatina' };
   assert.equal(classify([dogFood, ...filler(3)]).category, 'ok');
-});
-
-test('"termo aislado" no se confunde con aislado de proteína', () => {
-  assert.equal(classify([p('Termo aislado 1 L'), p('Vaso aislado 500 ml'), ...filler(3)]).category, 'ok');
 });
 
 test('catálogo vacío → ok', () => {
