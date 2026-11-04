@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google tag (gtag.js) — GA4. page_location sin query: /instalar/estado lleva un token privado. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-72HCHJBM1N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-72HCHJBM1N', { page_location: location.origin + location.pathname });
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instalar SuscripFy en tu tienda Shopify</title>
+  <meta name="description" content="Instala SuscripFy en tu tienda Shopify: verifica tu tienda, confirma tu correo y recibe el link de instalación en menos de 24 horas hábiles." />
+  <meta name="robots" content="noindex" />
+  <meta name="referrer" content="no-referrer" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect width='32' height='32' rx='8' fill='%232563EB'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='system-ui,-apple-system,sans-serif' font-size='19' font-weight='800' fill='white'%3ES%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/instalar/instalar.css" />
+</head>
+<body class="install-page">
+
+  <nav id="navbar" class="navbar is-scrolled" aria-label="Navegación">
+    <div class="container navbar__inner">
+      <a href="/" class="navbar__logo" aria-label="SuscripFy — inicio">
+        <img src="/assets/logos/logo-light.svg" alt="SuscripFy" width="160" height="35" />
+      </a>
+      <div class="install-nav">
+        <a href="/#demo" class="btn btn--outline btn--sm">Agenda una demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="install">
+    <div class="install__wrap">
+
+      <header class="install__header">
+        <div class="hero__badge">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          Exclusivo para tiendas Shopify en Colombia
+        </div>
+        <h1 class="install__title" id="install-title">Instala <em class="title-brand">SuscripFy</em> en tu tienda</h1>
+        <p class="install__subtitle" id="install-subtitle">Verificamos tu tienda, confirmas tu correo y te enviamos el link de instalación.</p>
+      </header>
+
+      <ol class="install-steps" aria-label="Pasos de la instalación">
+        <li class="install-steps__item is-active" data-indicator="1">
+          <span class="install-steps__num" aria-hidden="true">1</span>
+          <span class="install-steps__label">Tu tienda</span>
+        </li>
+        <li class="install-steps__item" data-indicator="2">
+          <span class="install-steps__num" aria-hidden="true">2</span>
+          <span class="install-steps__label">Tu correo</span>
+        </li>
+        <li class="install-steps__item" data-indicator="3">
+          <span class="install-steps__num" aria-hidden="true">3</span>
+          <span class="install-steps__label">Estado</span>
+        </li>
+      </ol>
+
+      <p class="install-banner" id="pending-banner" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>Ya tienes una solicitud en curso en este dispositivo. <a href="#" id="pending-link">Ver el estado</a></span>
+      </p>
+
+      <!-- PASO 1: TIENDA -->
+      <section class="install-card" id="step-shop" aria-labelledby="step-shop-title">
+        <h2 class="install-card__title" id="step-shop-title">¿Cuál es tu tienda?</h2>
+        <form id="shop-form" class="install-form" novalidate>
+          <label for="shop-input" class="install-label">Dirección de tu tienda</label>
+          <div class="install-row">
+            <input id="shop-input" name="shop" type="text" class="install-input"
+                   inputmode="url" autocomplete="url" autocapitalize="none" autocorrect="off" spellcheck="false"
+                   maxlength="300" placeholder="mitienda.com" required
+                   aria-describedby="shop-hint shop-error" />
+            <button type="submit" class="btn btn--primary install-row__btn" id="shop-submit">Verificar tienda</button>
+          </div>
+          <p class="install-hint" id="shop-hint">Puede ser tu dominio (mitienda.com), tu dirección mitienda.myshopify.com o el link de tu admin de Shopify.</p>
+          <p class="install-error" id="shop-error" role="alert" hidden></p>
+        </form>
+
+        <details class="install-help">
+          <summary>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+            ¿Dónde la encuentro?
+            <svg class="install-help__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <div class="install-help__body">
+            <p>Es la dirección que tus clientes escriben para entrar a tu tienda, por ejemplo <strong>mitienda.com</strong> o <strong>www.mitienda.com.co</strong>.</p>
+            <p>Si no la tienes a la mano, entra al admin de Shopify y copia la dirección que aparece en la barra del navegador: tiene la forma <strong>admin.shopify.com/store/NOMBRE</strong>. Puedes pegarla tal cual.</p>
+          </div>
+        </details>
+
+        <div class="install-result" id="shop-result" hidden>
+          <p class="install-result__store" id="shop-result-name"></p>
+          <ul class="install-checks" id="shop-checks">
+            <li class="install-checks__item" data-check="shopify"><span class="install-checks__icon" aria-hidden="true"></span><span class="install-checks__text">Tienda Shopify activa</span><span class="install-sr" data-sr></span></li>
+            <li class="install-checks__item" data-check="cop"><span class="install-checks__icon" aria-hidden="true"></span><span class="install-checks__text">Moneda en pesos colombianos (COP)</span><span class="install-sr" data-sr></span></li>
+            <li class="install-checks__item" data-check="no_suscripfy"><span class="install-checks__icon" aria-hidden="true"></span><span class="install-checks__text">SuscripFy aún no está instalada</span><span class="install-sr" data-sr></span></li>
+            <li class="install-checks__item" data-check="category"><span class="install-checks__icon" aria-hidden="true"></span><span class="install-checks__text">Categoría de productos permitida</span><span class="install-sr" data-sr></span></li>
+          </ul>
+          <div class="install-note" id="shop-message" role="status" hidden></div>
+          <button type="button" class="btn btn--primary btn--lg btn--full" id="shop-continue" hidden>
+            Continuar
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- PASO 2: CORREO + CÓDIGO -->
+      <section class="install-card" id="step-email" aria-labelledby="step-email-title" hidden>
+        <h2 class="install-card__title" id="step-email-title" tabindex="-1">Confirma tu correo</h2>
+        <p class="install-card__lead">
+          Tienda: <strong id="email-store"></strong>
+          <button type="button" class="install-link" id="change-store">Cambiar</button>
+        </p>
+
+        <form id="email-form" class="install-form" novalidate>
+          <label for="email-input" class="install-label">Correo electrónico</label>
+          <input id="email-input" name="email" type="email" class="install-input"
+                 inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false"
+                 maxlength="254" placeholder="tu@correo.com" required aria-describedby="email-hint email-error" />
+          <p class="install-hint" id="email-hint">Te enviaremos un código de 6 dígitos y, después, el link de instalación.</p>
+          <label class="install-terms">
+            <input type="checkbox" id="terms-input" name="terms" required />
+            <span>Acepto los <a href="/terminos-tiendas.html" target="_blank" rel="noopener">Términos y Condiciones para Tiendas</a></span>
+          </label>
+          <p class="install-error" id="email-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn--primary btn--lg btn--full" id="email-submit">Enviar código</button>
+        </form>
+
+        <form id="code-form" class="install-form" novalidate hidden>
+          <p class="install-card__lead">Enviamos un código de 6 dígitos a <strong id="code-email"></strong>. Si no lo ves en unos minutos, revisa tu carpeta de spam.</p>
+          <label for="code-input" class="install-label">Código de verificación</label>
+          <input id="code-input" name="code" type="text" class="install-input install-input--code"
+                 inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6"
+                 placeholder="000000" required aria-describedby="code-error" />
+          <p class="install-error" id="code-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn--primary btn--lg btn--full" id="code-submit">Confirmar código</button>
+          <div class="install-actions">
+            <button type="button" class="install-link" id="code-resend">Reenviar código</button>
+            <button type="button" class="install-link" id="code-change-email">Cambiar correo</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- PASO 3: ESTADO -->
+      <section class="install-card" id="step-status" aria-labelledby="status-title" aria-live="polite" hidden>
+        <div class="install-status" id="status-loading">
+          <span class="install-spinner" aria-hidden="true"></span>
+          <p class="install-hint">Consultando el estado de tu solicitud...</p>
+        </div>
+
+        <div class="install-status" id="status-body" hidden>
+          <span class="install-status__icon" id="status-icon" aria-hidden="true"></span>
+          <h2 class="install-card__title" id="status-title"></h2>
+          <p class="install-status__store" id="status-store" hidden></p>
+          <p class="install-status__text" id="status-text"></p>
+
+          <div class="install-status__install" id="status-install" hidden>
+            <a id="status-install-btn" class="btn btn--primary btn--lg btn--full" href="#" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+              Instalar en Shopify
+            </a>
+            <ol class="install-howto">
+              <li><span class="install-howto__num">1</span><span>Abre el link con la cuenta dueña de la tienda o con una cuenta con permiso para instalar apps.</span></li>
+              <li><span class="install-howto__num">2</span><span>Pulsa <strong>Instalar</strong>.</span></li>
+              <li><span class="install-howto__num">3</span><span>Sigue la guía de configuración dentro de SuscripFy.</span></li>
+            </ol>
+          </div>
+
+          <a class="btn btn--outline btn--full" id="status-restart" href="/instalar" hidden>Hacer una nueva solicitud</a>
+          <p class="install-status__updated" id="status-updated"></p>
+        </div>
+
+        <div class="install-save" id="status-save" hidden>
+          <p class="install-save__title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+            Guarda este link
+          </p>
+          <p class="install-hint">Con este link puedes volver a consultar el estado de tu solicitud cuando quieras. Guárdalo en tus favoritos o envíatelo; es personal, no lo compartas.</p>
+          <div class="install-row">
+            <input id="status-link" type="text" class="install-input install-input--link" readonly aria-label="Link de seguimiento de tu solicitud" />
+            <button type="button" class="btn btn--outline install-row__btn" id="status-copy">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="status-copy-label">Copiar</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <p class="install-aside">¿Prefieres que te acompañemos en la instalación? <a href="/#demo">Agenda una demo</a></p>
+    </div>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="/assets/logos/logo-dark.svg" alt="SuscripFy" width="160" height="35" class="footer__logo" />
+        <p class="footer__tagline">Hecho en Colombia para tiendas Shopify colombianas</p>
+        <a href="mailto:comercial@suscripfy.co" class="footer__contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          comercial@suscripfy.co
+        </a>
+      </div>
+      <div class="footer__nav">
+        <a href="/#features" class="footer__nav-link">Funcionalidades</a>
+        <a href="/#planes" class="footer__nav-link">Planes</a>
+        <a href="/#faq" class="footer__nav-link">FAQ</a>
+        <a href="/terminos-tiendas.html" class="footer__nav-link">Términos para tiendas</a>
+        <a href="/privacy.html" class="footer__nav-link">Política de privacidad</a>
+      </div>
+      <div class="footer__copy">
+        <p>&copy; 2026 SuscripFy. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/instalar/instalar.js" defer></script>
+</body>
+</html>
