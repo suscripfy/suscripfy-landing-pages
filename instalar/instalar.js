@@ -347,21 +347,7 @@
         }
         setLoading(codeSubmit, false);
         var d = r.data;
-        var msg;
-        if (d.error === 'expired' || r.status === 410) {
-          msg = 'El código venció. Pide uno nuevo con "Reenviar código".';
-        } else if (r.status === 400 || r.status === 409) {
-          msg = 'El código no es correcto.';
-          if (typeof d.attempts_left === 'number') {
-            msg += d.attempts_left > 0
-              ? ' Te quedan ' + d.attempts_left + (d.attempts_left === 1 ? ' intento.' : ' intentos.')
-              : ' Ya no quedan intentos: pide un código nuevo con "Reenviar código".';
-          }
-        } else if (r.status === 404) {
-          msg = 'Tu solicitud ya no está activa. Pide un código nuevo con "Reenviar código".';
-        } else {
-          msg = genericError(r.status, d);
-        }
+        var msg = window.SfyInstallMessages.codeErrorMessage(r.status, d) || genericError(r.status, d);
         setError(codeError, msg, codeInput);
         codeInput.select();
       });

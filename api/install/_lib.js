@@ -529,7 +529,9 @@ export function coreErrorResponse(r) {
     case 404: return { status: 404, body: { ok: false, error: code || 'not_found' } };
     case 409: return { status: 409, body: { ok: false, error: code || 'conflict' } };
     case 410: return { status: 410, body: { ok: false, error: code || 'expired' } };
-    case 429: return { status: 429, body: { ok: false, error: 'rate_limit' } };
+    case 429: return code === 'too_many_attempts'
+      ? { status: 429, body: { ok: false, error: code, attempts_left: 0 } }
+      : { status: 429, body: { ok: false, error: 'rate_limit' } };
     default: return { status: 502, body: { ok: false, error: 'upstream_unavailable' } };
   }
 }
