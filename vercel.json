@@ -4,13 +4,28 @@
     "api/lead.js": { "maxDuration": 10 },
     "api/staff/login.js": { "maxDuration": 10 },
     "api/staff/logout.js": { "maxDuration": 5 },
-    "api/staff/chat.js": { "maxDuration": 30 }
+    "api/staff/chat.js": { "maxDuration": 30 },
+    "api/install/check.js": { "maxDuration": 15 },
+    "api/install/request.js": { "maxDuration": 15 },
+    "api/install/verify.js": { "maxDuration": 10 },
+    "api/install/status.js": { "maxDuration": 10 }
   },
+  "rewrites": [
+    { "source": "/instalar", "destination": "/instalar/index.html" },
+    { "source": "/instalar/estado", "destination": "/instalar/index.html" }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/instalar(.*)",
+      "headers": [
+        { "key": "Referrer-Policy", "value": "no-referrer" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
       ]
     }
   ]

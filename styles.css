@@ -4000,3 +4000,69 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .fl-link.is-linked svg { transform: scale(1.12); }
 .fl-link.is-linked .fl-circle { fill: var(--c-primary-light); }
+
+/* ============================================================
+   CTA "INSTALAR AHORA" (hero, planes y navbar)
+   ============================================================ */
+.hero__actions--cta {
+  margin-top: calc(var(--s-6) - var(--s-10));
+  margin-bottom: 0;
+}
+.hero__actions--cta .btn { justify-content: center; }
+
+.pricing-card__alt {
+  align-self: center;
+  margin-top: calc(-1 * var(--s-3));
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--c-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--c-border);
+  padding: var(--s-1) var(--s-2);
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--t-fast), text-decoration-color var(--t-fast);
+}
+.pricing-card__alt:hover { color: var(--c-primary); text-decoration-color: currentColor; }
+.pricing-card__alt:focus-visible { outline: 3px solid var(--c-primary); outline-offset: 2px; border-radius: var(--r-sm); }
+
+/* Con el CTA extra los enlaces del navbar no caben entre 768 y 1099 px:
+   se usa el mismo menú desplegable de móvil (solo páginas con hamburguesa, #navLinks). */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .navbar__hamburger { display: inline-flex; }
+  #navLinks.navbar__links {
+    display: none;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0; right: 0;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--s-3) var(--container-pad) var(--s-6);
+    border-bottom: 1px solid var(--c-border);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    z-index: 99;
+  }
+  #navLinks.navbar__links.is-open { display: flex; }
+  #navLinks .navbar__link {
+    padding: var(--s-4) 0;
+    font-size: var(--text-base);
+    border-bottom: 1px solid var(--c-border);
+    color: var(--c-text);
+  }
+  #navLinks .btn {
+    margin-top: var(--s-4);
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .hero__actions--cta { flex-direction: column; }
+  .hero__actions--cta .btn { width: 100%; }
+}

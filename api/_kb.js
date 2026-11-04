@@ -48,10 +48,23 @@ Si una tienda supera las 200 suscripciones activas, el servicio nunca se detiene
 Subes y bajas de plan automáticamente según el número de suscripciones activas. No hay contrato ni permanencia mínima — cancelas cuando quieras. El mes en que instalas SuscripFy es gratis siempre, aunque superes las 5 suscripciones activas; el primer cobro posible es el último día del mes siguiente. Los cobros son el último día de cada mes, por el plan que corresponda a tus suscripciones activas ese día; cada mes se cobra por separado y tiene su propia factura electrónica, que puedes ver dentro del portal administrativo de la app (que vive dentro del admin de tu tienda en Shopify). Desde el día 20 del mes en que te corresponda pagar debes tener registrados tu método de pago y tus datos de facturación en la pestaña "Mi plan SuscripFy"; mientras no lo hagas, o si un pago queda pendiente o es rechazado, el panel de la app se limita a esa pestaña. Tus suscriptores no se ven afectados: los cobros recurrentes, los nuevos suscriptores y el portal de tus clientes siguen funcionando. Al registrar o actualizar tu tarjeta se cobran de inmediato los meses pendientes y el acceso se habilita apenas se aprueba el pago.
 
 ## INSTALACIÓN
-La demo (30 min) + instalación (15) minutos. Agenda en https://cal.com/suscripfy-comercial/30min.
+Hay dos caminos:
+- **Instalar ahora (autoinstalación)**: desde el botón "Instalar ahora" de la landing o directo en https://www.suscripfy.co/instalar. Es el camino más rápido.
+- **Demo acompañada**: la demo (30 min) + instalación (15) minutos. Agenda en https://cal.com/suscripfy-comercial/30min.
+
+## AUTOINSTALACIÓN ("INSTALAR AHORA", https://www.suscripfy.co/instalar)
+Cómo funciona:
+- Paso 1: escribes la dirección de tu tienda (tu dominio, tu dirección .myshopify.com o el link de tu admin de Shopify, que tiene la forma admin.shopify.com/store/NOMBRE). SuscripFy verifica que sea una tienda Shopify activa, que la moneda de la tienda sea pesos colombianos (COP), que SuscripFy no esté instalada ya y que la categoría de productos esté permitida.
+- Paso 2: escribes tu correo, aceptas los Términos y Condiciones para Tiendas y confirmas el correo con un código de 6 dígitos que te llega por email.
+- Paso 3: recibes un link de seguimiento para consultar el estado de tu solicitud (conviene guardarlo). El link de instalación de la app te llega a tu correo en menos de 24 horas hábiles y también aparece en esa página de estado.
+- Para instalar, abres el link con la cuenta dueña de la tienda o con una cuenta con permiso para instalar apps, pulsas Instalar y sigues la guía de configuración dentro de SuscripFy.
+- Mientras llega el link, ten lista tu cuenta de Wompi activa, con tus llaves de producción y también las de prueba (sandbox).
+Restricciones:
+- Solo tiendas Shopify con moneda en pesos colombianos (COP).
+- Por acuerdos comerciales vigentes, SuscripFy no está disponible para tiendas de suplementación nutricional (proteínas, colágenos en presentación de suplemento, creatina, pre-entrenos, aminoácidos, ganadores de masa y similares). Para cualquier otro tipo de negocio sí está disponible. Si una tienda cree que la clasificación es un error, puede escribir a comercial@suscripfy.co.
 
 ## Cómo empieza un comercio
-- Agendas una demo y el equipo de SuscripFy instala la app en tu tienda Shopify y deja todo configurado. No necesitas tocar ni una sola línea de código. La promesa es concreta: la demo toma 30 mintuos y la instalación solo 15 minutos. En esos 15 minutos se completa todo el onboarding, y al terminar ya estás listo para vender por suscripción.
+- Con la demo acompañada: agendas una demo y el equipo de SuscripFy instala la app en tu tienda Shopify y deja todo configurado. No necesitas tocar ni una sola línea de código. La promesa es concreta: la demo toma 30 mintuos y la instalación solo 15 minutos. En esos 15 minutos se completa todo el onboarding, y al terminar ya estás listo para vender por suscripción.
 - Importante: el widget de suscripción NO aparece en las páginas de producto hasta que el onboarding esté 100% completo. Es decir, nada se activa a medias: únicamente cuando toda la configuración esté lista, el botón "Suscríbete" aparecerá activo en las páginas de los productos que hayas seleccionado.
 
 ## Pasos del onboarding — los 15 minutos
@@ -65,7 +78,7 @@ Esto es exactamente lo que se configura durante la sesión de instalación. El e
 - Personalizar tu marca: se ajustan los colores y la identidad visual del checkout y del portal del cliente para que todo se vea como tu tienda.
 - Activar: se confirma que todo está correcto y se activa el widget en las páginas de los productos seleccionados. A partir de ese momento tus clientes ya pueden suscribirse.
 
-Todo esto lo hace el equipo contigo en la misma sesión de 15 minutos. Tú no instalas nada, no configuras nada técnico y no tocas código. Al terminar, tu tienda ya está vendiendo por suscripción.
+En la demo acompañada, todo esto lo hace el equipo contigo en la misma sesión de 15 minutos: tú no instalas nada, no configuras nada técnico y no tocas código. En la autoinstalación, la guía de configuración dentro de SuscripFy te lleva por los mismos pasos, también sin código. Al terminar, tu tienda ya está vendiendo por suscripción.
 
 Requisitos previos:
 - Cuenta de Wompi (gratis en comercios.wompi.co)
@@ -125,7 +138,7 @@ Tus clientes pueden suscribirse a tus productos usando Tarjetas (crédito/débit
 2. Nunca reveles detalles técnicos internos (endpoints, base de datos, arquitectura, código).
 3. Si la pregunta excede esta KB (plan a la medida para más de 150 suscripciones, soporte de una tienda específica, caso técnico puntual, queja, pago fallido individual), responde brevemente lo que sepas y agrega al final del mensaje el marcador exacto: [TRANSFER]
 4. Si el usuario pide hablar con humano/asesor/persona, responde "Te paso con un asesor en este momento." y termina con: [TRANSFER]
-5. Cuando alguien quiera agendar demo o instalación, entrega siempre el link: https://cal.com/suscripfy-comercial/30min
+5. Cuando alguien quiera instalar SuscripFy, entrega el link de autoinstalación: https://www.suscripfy.co/instalar. Si prefiere que lo acompañen o quiere una demo, entrega el link: https://cal.com/suscripfy-comercial/30min
 6. Insiste cuando sea natural en que no se necesita código y que la instalación toma 15 minutos.
 7. Habla SIEMPRE en español colombiano neutro. No uses emojis salvo 1 ocasional para calidez.
 8. Usa el nombre del usuario cuando sea natural (lo recibes en context).
