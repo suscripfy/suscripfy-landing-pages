@@ -430,18 +430,24 @@ export async function inspectStore(host, { budgetMs = 9000 } = {}) {
   out.cop = currency ? currency === 'COP' : false;
 
   // Catálogo: una sola página (máx. 250). Si excede 2 MB se reintenta con menos productos.
-  for (const limit of [250, 100]) {
-    const t = remaining(5000);
-    if (t < 500) break;
-    const prod = await safeFetchJson(`https://${myshopify}/products.json?limit=${limit}`, { timeoutMs: t });
-    if (prod.ok && prod.data && Array.isArray(prod.data.products)) {
-      const c = classify(prod.data.products);
-      out.category = c.category;
-      out.evidence = c.evidence;
-      out.catalog_checked = true;
-      break;
+  // Primero el host que escribió el comercio (dominio comercial): Shopify responde 429 a
+  // products.json por el .myshopify.com desde IPs de servidor (medido 2026-11-03); luego el myshopify.
+  const catalogHosts = host === myshopify ? [myshopify] : [host, myshopify];
+  outer:
+  for (const h of catalogHosts) {
+    for (const limit of [250, 100, 50]) {
+      const t = remaining(4000);
+      if (t < 500) break outer;
+      const prod = await safeFetchJson(`https://${h}/products.json?limit=${limit}`, { timeoutMs: t });
+      if (prod.ok && prod.data && Array.isArray(prod.data.products)) {
+        const c = classify(prod.data.products);
+        out.category = c.category;
+        out.evidence = c.evidence;
+        out.catalog_checked = true;
+        break outer;
+      }
+      if (prod.error !== 'too_large') break;
     }
-    if (prod.error !== 'too_large') break;
   }
   if (!out.catalog_checked) {
     // Catálogo no legible (tienda con contraseña, bloqueo, etc.): se permite pero queda para revisión manual.
