@@ -1,10 +1,10 @@
 // POST /api/install/request
-//   { myshopify_domain, email, terms_accepted, shop_input?, verdict, contact_name, phone, referral_source }
+//   { myshopify_domain, email, terms_accepted, shop_input?, verdict }
 // Valida el veredicto firmado de check.js (no reclasifica ni vuelve a leer el catálogo), repite en el
 // servidor Shopify/COP/precheck y registra la solicitud en el core, que envía el código de 6 dígitos.
 import {
   createRateLimiter, getClientIp, sendJson, readJsonBody, getCoreConfig,
-  inspectStore, precheckCore, callCore, coreErrorResponse, cleanStr, isValidEmail,
+  inspectStore, precheckCore, callCore, coreErrorResponse, cleanStr,
   maskEmail, logWarn, verifyVerdict, validateContact, RX_MYSHOPIFY, RX_TOKEN, STAGES,
 } from './_lib.js';
 
@@ -26,14 +26,10 @@ export default async function handler(req, res) {
   if (!body) return sendJson(res, 400, { ok: false, error: 'invalid_body' });
 
   const domain = typeof body.myshopify_domain === 'string' ? body.myshopify_domain.trim().toLowerCase() : '';
-  const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
   if (!RX_MYSHOPIFY.test(domain)) return sendJson(res, 400, { ok: false, error: 'invalid_shop' });
-  if (!isValidEmail(email)) return sendJson(res, 400, { ok: false, error: 'invalid_email' });
-  if (body.terms_accepted !== true) return sendJson(res, 400, { ok: false, error: 'terms_required' });
-  const c = validateContact({
-    nombre: body.contact_name, email, whatsapp: body.phone, referral: body.referral_source, terms_accepted: true,
-  });
+  const c = validateContact(body);
   if (!c.ok) return sendJson(res, 400, { ok: false, error: c.error });
+  const email = c.email;
   const verdict = verifyVerdict(cfg.secret, body.verdict, domain);
   if (!verdict) return sendJson(res, 400, { ok: false, error: 'verification_expired' });
   if (verdict.c === 'blocked') return sendJson(res, 422, { ok: false, error: 'category_blocked' });
@@ -62,9 +58,6 @@ export default async function handler(req, res) {
       category_evidence: verdict.e,
       category_source: verdict.s,
       category_reason: verdict.r,
-      contact_name: c.contact.name,
-      phone: c.contact.phone,
-      referral_source: c.contact.referral,
       client_ip: ip === 'unknown' ? '' : ip,
     };
     const r = await callCore(cfg, 'POST', '/public/install/request', {

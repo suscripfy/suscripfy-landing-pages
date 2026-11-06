@@ -2,7 +2,7 @@
 
 /* ============================================================
    /instalar — autoinstalación de SuscripFy
-   Paso 1: tus datos y tu tienda → POST /api/install/check (+ /api/install/request, o /api/install/resend si hay una solicitud en curso)
+   Paso 1: tu tienda y tu correo → POST /api/install/check (+ /api/install/request, o /api/install/resend si hay una solicitud en curso)
    Paso 2: código               → POST /api/install/verify
    Paso 3: estado             → GET  /api/install/status?t=... (cada 30 s con la pestaña visible)
    ============================================================ */
@@ -102,10 +102,7 @@
     var state = { shopInput: '', domain: '', storeName: '', verdict: '', contact: null, token: '' };
 
     var shopForm = $('shop-form');
-    var nameInput = $('name-input');
     var emailInput = $('email-input');
-    var phoneInput = $('phone-input');
-    var referralInput = $('referral-input');
     var shopInput = $('shop-input');
     var termsInput = $('terms-input');
     var shopSubmit = $('shop-submit');
@@ -119,14 +116,6 @@
     var codeError = $('code-error');
     var codeSubmit = $('code-submit');
     var codeResend = $('code-resend');
-
-    // "¿Dónde nos conociste?": única fuente en /instalar/referral.mjs
-    (window.SfyReferralOptions || []).forEach(function (o) {
-      var opt = document.createElement('option');
-      opt.value = o.value;
-      opt.textContent = o.label;
-      referralInput.appendChild(opt);
-    });
 
     // Prefill de la tienda (?shop=, p. ej. desde el recordatorio "Retomar la instalación")
     var preShop = (params.get('shop') || '').trim();
@@ -224,12 +213,6 @@
       shopResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function normalizePhone(v) {
-      var digits = String(v || '').replace(/\D/g, '');
-      if (digits.length === 12 && digits.indexOf('57') === 0) digits = digits.slice(2);
-      return /^3\d{9}$/.test(digits) ? digits : '';
-    }
-
     function fail(msg, input) {
       setError(shopError, msg, input || null);
       if (input) input.focus();
@@ -237,15 +220,10 @@
     }
 
     function readForm() {
-      [nameInput, emailInput, phoneInput, referralInput, shopInput].forEach(function (i) { i.setAttribute('aria-invalid', 'false'); });
+      [emailInput, shopInput].forEach(function (i) { i.setAttribute('aria-invalid', 'false'); });
       setError(shopError, '');
-      var name = nameInput.value.replace(/\s+/g, ' ').trim();
-      if (name.length < 2) return fail('Escribe tu nombre.', nameInput);
       var email = emailInput.value.trim().toLowerCase();
       if (!EMAIL_RX.test(email) || email.length > 254) return fail('Revisa tu correo electrónico.', emailInput);
-      var phone = normalizePhone(phoneInput.value);
-      if (!phone) return fail('Revisa tu celular: son 10 dígitos y empieza por 3.', phoneInput);
-      if (!referralInput.value) return fail('Cuéntanos dónde nos conociste.', referralInput);
       var shop = shopInput.value.trim();
       if (!shop) return fail('Escribe la dirección de tu tienda.', shopInput);
       if (!termsInput.checked) {
@@ -253,14 +231,11 @@
         termsInput.focus();
         return null;
       }
-      return { name: name, email: email, phone: phone, referral: referralInput.value, shop: shop };
+      return { email: email, shop: shop };
     }
 
     var FIELD_ERRORS = {
-      invalid_name: ['Escribe tu nombre.', 'name-input'],
       invalid_email: ['Revisa tu correo electrónico.', 'email-input'],
-      invalid_phone: ['Revisa tu celular: son 10 dígitos y empieza por 3.', 'phone-input'],
-      invalid_referral: ['Cuéntanos dónde nos conociste.', 'referral-input'],
       invalid_shop: ['Esa dirección no parece válida. Escribe algo como mitienda.com o mitienda.myshopify.com.', 'shop-input'],
       terms_required: ['Para continuar debes aceptar los Términos y Condiciones para Tiendas.', 'terms-input'],
     };
@@ -272,7 +247,7 @@
 
     function runCheck(f) {
       return api('POST', '/api/install/check', {
-        nombre: f.name, email: f.email, whatsapp: f.phone, referral: f.referral, terms_accepted: true, shop: f.shop,
+        email: f.email, terms_accepted: true, shop: f.shop,
       });
     }
 
@@ -345,9 +320,6 @@
         terms_accepted: true,
         shop_input: state.shopInput,
         verdict: state.verdict,
-        contact_name: c.name,
-        phone: c.phone,
-        referral_source: c.referral,
       }).then(function (r) {
         var d = r.data;
         // Veredicto vencido (30 min): se repite la verificación sola y se reintenta una vez.
@@ -390,9 +362,6 @@
         var msg;
         switch (d.error) {
           case 'invalid_email': msg = 'Revisa tu correo electrónico.'; break;
-          case 'invalid_name': msg = 'Escribe tu nombre.'; break;
-          case 'invalid_phone': msg = 'Revisa tu celular: son 10 dígitos y empieza por 3.'; break;
-          case 'invalid_referral': msg = 'Cuéntanos dónde nos conociste.'; break;
           case 'terms_required': msg = 'Para continuar debes aceptar los Términos y Condiciones para Tiendas.'; break;
           case 'already_installed': msg = 'SuscripFy ya está instalada en esta tienda.'; break;
           case 'not_cop': msg = 'Tu tienda no está en pesos colombianos (COP). Por ahora SuscripFy funciona solo con tiendas en COP.'; break;

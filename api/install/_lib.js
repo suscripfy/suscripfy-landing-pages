@@ -6,7 +6,6 @@ import https from 'node:https';
 import net from 'node:net';
 import { domainToASCII } from 'node:url';
 import { lookup as dnsLookup } from 'node:dns/promises';
-import { REFERRAL_OPTIONS } from '../../instalar/referral.mjs';
 
 /* ============================================================
    FILTRO DE CATEGORÍA — ajustar aquí
@@ -611,44 +610,25 @@ export function logWarn(scope, msg) {
 }
 
 /* ============================================================
-   CONTACTO DEL LEAD (paso 1 de /instalar)
+   PASO 1 DE /instalar (post-demo): solo correo + términos.
+   Nombre, celular y origen ya vienen de Cal.com; el core los trata como opcionales.
    ============================================================ */
-export { REFERRAL_OPTIONS };
-const REFERRAL_LABELS = new Map(REFERRAL_OPTIONS.map((o) => [o.value, o.label]));
-export const RX_PHONE_CO = /^3\d{9}$/;
-
-export function referralLabel(value) {
-  return REFERRAL_LABELS.get(value) || '';
-}
-
-/** Celular de Colombia: quita no-dígitos y el prefijo 57 (mismo criterio que el core). */
-export function normalizePhone(raw) {
-  let digits = String(raw == null ? '' : raw).replace(/\D/g, '');
-  if (digits.length === 12 && digits.startsWith('57')) digits = digits.slice(2);
-  return RX_PHONE_CO.test(digits) ? digits : null;
-}
 
 /**
- * Valida el contacto del paso 1.
- * @returns {{ok:true, contact:{name:string,email:string,phone:string,referral:string}} | {ok:false, error:string}}
+ * Valida el paso 1.
+ * @returns {{ok:true, email:string} | {ok:false, error:'invalid_email'|'terms_required'}}
  */
 export function validateContact(body) {
   const b = body && typeof body === 'object' ? body : {};
-  const name = cleanStr(b.nombre, 200);
-  if (name.length < 2 || name.length > 120) return { ok: false, error: 'invalid_name' };
   const email = typeof b.email === 'string' ? b.email.trim().toLowerCase() : '';
   if (!isValidEmail(email)) return { ok: false, error: 'invalid_email' };
-  const phone = normalizePhone(b.whatsapp);
-  if (!phone) return { ok: false, error: 'invalid_phone' };
-  const referral = typeof b.referral === 'string' && REFERRAL_LABELS.has(b.referral) ? b.referral : '';
-  if (!referral) return { ok: false, error: 'invalid_referral' };
   if (b.terms_accepted !== true) return { ok: false, error: 'terms_required' };
-  return { ok: true, contact: { name, email, phone, referral } };
+  return { ok: true, email };
 }
 
 /* ============================================================
    LEAD AL SHEET (Apps Script; kind "lead" = 9 columnas fijas)
-   Compartido con api/lead.js: mismo payload, mismo envío.
+   Lo usa api/lead.js (formulario de demo). /instalar ya no envía leads.
    ============================================================ */
 export function buildSheetLead(token, { nombre, email, whatsapp, shopify_url, session_id, origen, ip, user_agent }) {
   // Mismo orden de claves que api/lead.js (histórico).
@@ -672,47 +652,6 @@ export async function postSheet(url, payload, { timeoutMs = 0, fetchImpl = fetch
   let json = null;
   try { json = JSON.parse(text); } catch { /* no era JSON */ }
   return { ok: resp.ok, status: resp.status, text, json };
-}
-
-export const INSTALL_RESULT_LABELS = Object.freeze({
-  verified: 'verificada',
-  category_blocked: 'bloqueada por categoría',
-  not_cop: 'no usa COP',
-  not_shopify: 'no es Shopify',
-  unreachable: 'no responde',
-  already_installed: 'ya instalada',
-  open_request: 'solicitud en curso',
-  error: 'error',
-});
-
-export function installLeadOrigin(referral, result) {
-  const txt = `instalar | conoció: ${referralLabel(referral) || '-'} | resultado: ${INSTALL_RESULT_LABELS[result] || 'error'}`;
-  return txt.slice(0, 120);
-}
-
-/** Lead del flujo de instalación: nunca lanza, máx 2,5 s, no cambia la respuesta. */
-export async function sendInstallLead({ contact, shopInput, ip, userAgent, result }, { fetchImpl = fetch, timeoutMs = 2500 } = {}) {
-  const url = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  const token = process.env.GOOGLE_SHEETS_TOKEN;
-  if (!url || !token || !contact) return false;
-  try {
-    const payload = buildSheetLead(token, {
-      nombre: contact.name.slice(0, 80),
-      email: contact.email.slice(0, 120),
-      whatsapp: contact.phone,
-      shopify_url: cleanStr(shopInput, 200),
-      session_id: '',
-      origen: installLeadOrigin(contact.referral, result),
-      ip: ip === 'unknown' ? '' : ip,
-      user_agent: cleanStr(userAgent, 250),
-    });
-    const r = await postSheet(url, payload, { timeoutMs, fetchImpl });
-    if (!r.ok || !r.json || r.json.ok !== true) logWarn('lead', `sheet status ${r.status}`);
-    return r.ok;
-  } catch (err) {
-    logWarn('lead', `sheet error ${err && err.name ? err.name : 'unknown'}`);
-    return false;
-  }
 }
 
 /* ============================================================

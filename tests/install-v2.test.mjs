@@ -1,13 +1,14 @@
 // Ejecutar: node --test tests/
 // /instalar v2: clasificación de sector con IA (fetch inyectado), veredicto firmado,
-// contacto del paso 1 y helper del sheet (lead.js idéntico).
+// paso 1 post-demo (solo correo + términos, sin lead al sheet) y helper del sheet (lead.js idéntico).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import {
   classifyCatalog, decideCategory, catalogForModel, CATEGORY_MODEL, CATEGORY_SYSTEM_PROMPT,
-  signVerdict, verifyVerdict, validateContact, normalizePhone, installLeadOrigin, buildSheetLead,
-  sendInstallLead, REFERRAL_OPTIONS,
+  signVerdict, verifyVerdict, validateContact,
 } from '../api/install/_lib.js';
+import * as lib from '../api/install/_lib.js';
 
 const p = (title, product_type = '', tags = []) => ({ title, product_type, tags });
 const SPORTS = [p('Whey Protein Isolate 2 lb'), p('Creatina Monohidratada 300 g'), p('Shaker 600 ml'), p('Camiseta Gym')];
@@ -93,17 +94,90 @@ test('veredicto firmado: firma, dominio, vencimiento y manipulación', () => {
   assert.equal(verifyVerdict(S, 'basura', 'a.myshopify.com', now), null);
 });
 
-test('contacto del paso 1', () => {
-  const ok = { nombre: '  Ana   Pérez ', email: 'Ana@Tienda.CO', whatsapp: '+57 300 123 4567', referral: 'redes_sociales', terms_accepted: true };
-  assert.deepEqual(validateContact(ok).contact, { name: 'Ana Pérez', email: 'ana@tienda.co', phone: '3001234567', referral: 'redes_sociales' });
-  for (const [patch, err] of [[{ nombre: 'A' }, 'invalid_name'], [{ email: 'x@' }, 'invalid_email'], [{ whatsapp: '2001234567' }, 'invalid_phone'],
-    [{ whatsapp: '30012345' }, 'invalid_phone'], [{ referral: 'tiktok' }, 'invalid_referral'], [{ referral: 'ChatGPT' }, 'invalid_referral'],
-    [{ terms_accepted: 'true' }, 'terms_required']]) {
-    assert.equal(validateContact({ ...ok, ...patch }).error, err);
+test('paso 1 post-demo: validateContact solo exige correo + términos', () => {
+  assert.deepEqual(validateContact({ email: '  Ana@Tienda.CO ', terms_accepted: true }), { ok: true, email: 'ana@tienda.co' });
+  // sin nombre, celular ni origen → OK; si un cliente viejo (JS en caché) aún los manda, se ignoran
+  assert.deepEqual(validateContact({ email: 'a@b.co', terms_accepted: true, nombre: 'A', whatsapp: '1', referral: 'x' }), { ok: true, email: 'a@b.co' });
+  for (const [body, err] of [
+    [{ email: 'x@', terms_accepted: true }, 'invalid_email'],
+    [{ terms_accepted: true }, 'invalid_email'],
+    [{ email: 'a@b.co' }, 'terms_required'],
+    [{ email: 'a@b.co', terms_accepted: 'true' }, 'terms_required'],
+    [null, 'invalid_email'],
+  ]) {
+    assert.deepEqual(validateContact(body), { ok: false, error: err });
   }
-  assert.equal(normalizePhone('573001234567'), '3001234567');
-  assert.deepEqual(REFERRAL_OPTIONS.map((o) => o.value), ['chatgpt', 'claude', 'gemini', 'google', 'redes_sociales', 'recomendacion', 'otro']);
-  assert.deepEqual(REFERRAL_OPTIONS.map((o) => o.label), ['ChatGPT', 'Claude', 'Gemini', 'Google', 'Redes sociales', 'Recomendación', 'Otro']);
+  // lo que ya no existe
+  for (const gone of ['sendInstallLead', 'installLeadOrigin', 'normalizePhone', 'REFERRAL_OPTIONS', 'referralLabel']) {
+    assert.equal(lib[gone], undefined, gone);
+  }
+});
+
+// ---------- handlers check.js / request.js sin nombre, celular ni origen ----------
+const H_SECRET = 'secreto-handlers-de-prueba';
+let ipSeq = 0;
+async function callHandler(path, body) {
+  process.env.INSTALL_INTAKE_SECRET = H_SECRET;
+  process.env.CORE_API_BASE = 'https://core.invalid';
+  const { default: handler } = await import(path);
+  const res = { code: 0, body: null, headers: {}, setHeader(k, v) { this.headers[k] = v; }, status(c) { this.code = c; return this; }, json(b) { this.body = b; return this; } };
+  ipSeq += 1;
+  await handler({ method: 'POST', headers: { 'x-forwarded-for': `10.0.0.${ipSeq}`, 'user-agent': 'UA' }, body }, res);
+  return res;
+}
+// Espía de fetch: ningún camino de check/request antes de la red puede tocar el sheet.
+async function withFetchSpy(fn) {
+  process.env.GOOGLE_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/x/exec';
+  process.env.GOOGLE_SHEETS_TOKEN = 'tok';
+  const calls = [];
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => { calls.push(String(url)); return new Response('{"ok":true}'); };
+  try { await fn(); } finally { globalThis.fetch = realFetch; }
+  return calls;
+}
+
+test('check: body {email, terms_accepted, shop} pasa la validación; email inválido y sin términos fallan; sin lead al sheet', async () => {
+  const calls = await withFetchSpy(async () => {
+    // La validación pasa sin nombre/celular/origen: la siguiente barrera es la tienda (vacía → invalid_shop).
+    const ok = await callHandler('../api/install/check.js', { email: 'a@b.co', terms_accepted: true, shop: '' });
+    assert.deepEqual([ok.code, ok.body.error], [400, 'invalid_shop']);
+    const bad = await callHandler('../api/install/check.js', { email: 'x@', terms_accepted: true, shop: 'mitienda.com' });
+    assert.deepEqual([bad.code, bad.body], [400, { ok: false, error: 'invalid_email' }]);
+    const noTerms = await callHandler('../api/install/check.js', { email: 'a@b.co', shop: 'mitienda.com' });
+    assert.deepEqual([noTerms.code, noTerms.body], [400, { ok: false, error: 'terms_required' }]);
+  });
+  assert.deepEqual(calls, []);   // antes check.js enviaba el lead incluso en invalid_shop
+});
+
+test('request: body sin contact_name/phone/referral_source pasa la validación; email inválido y sin términos fallan', async () => {
+  const domain = 'a.myshopify.com';
+  const base = { myshopify_domain: domain, email: 'a@b.co', terms_accepted: true, shop_input: 'a.com' };
+  // Validación OK → el veredicto decide (vencido / bloqueado), sin llegar a la red.
+  const expired = await callHandler('../api/install/request.js', { ...base, verdict: 'basura' });
+  assert.deepEqual([expired.code, expired.body.error], [400, 'verification_expired']);
+  const blocked = signVerdict(H_SECRET, { d: domain, c: 'blocked', e: ['X', 'Y'], s: 'llm', r: '' });
+  const r = await callHandler('../api/install/request.js', { ...base, verdict: blocked });
+  assert.deepEqual([r.code, r.body.error], [422, 'category_blocked']);
+  const bad = await callHandler('../api/install/request.js', { ...base, email: 'x@', verdict: blocked });
+  assert.deepEqual([bad.code, bad.body], [400, { ok: false, error: 'invalid_email' }]);
+  const noTerms = await callHandler('../api/install/request.js', { ...base, terms_accepted: false, verdict: blocked });
+  assert.deepEqual([noTerms.code, noTerms.body], [400, { ok: false, error: 'terms_required' }]);
+});
+
+test('paso 1 sin nombre, celular ni origen: página, JS y funciones', () => {
+  const src = (f) => readFileSync(new URL(`../${f}`, import.meta.url), 'utf8');
+  const html = src('instalar/index.html');
+  for (const id of ['name-input', 'phone-input', 'referral-input', 'referral.mjs', 'Tus datos']) assert.ok(!html.includes(id), id);
+  for (const id of ['id="email-input"', 'id="shop-input"', 'id="terms-input"', 'Tu tienda y tu correo', '¿Dónde la encuentro?']) assert.ok(html.includes(id), id);
+  const js = src('instalar/instalar.js');
+  for (const s of ['contact_name', 'referral_source', 'whatsapp:', 'nombre:', 'invalid_name', 'invalid_phone', 'invalid_referral', 'SfyReferralOptions']) {
+    assert.ok(!js.includes(s), s);
+  }
+  assert.ok(js.includes("params.get('shop')"));   // prefill ?shop= intacto
+  for (const f of ['api/install/check.js', 'api/install/request.js']) {
+    const s = src(f);
+    for (const k of ['contact_name', 'referral_source', 'sendInstallLead', 'c.contact']) assert.ok(!s.includes(k), `${f}: ${k}`);
+  }
 });
 
 test('sheet: lead.js envía exactamente el mismo payload que antes', async () => {
@@ -128,23 +202,4 @@ test('sheet: lead.js envía exactamente el mismo payload que antes', async () =>
   } finally {
     globalThis.fetch = realFetch;
   }
-});
-
-test('sheet: lead del flujo de instalación (origen legible ≤120, nunca lanza)', async () => {
-  assert.equal(installLeadOrigin('redes_sociales', 'category_blocked'), 'instalar | conoció: Redes sociales | resultado: bloqueada por categoría');
-  for (const r of ['verified', 'category_blocked', 'not_cop', 'not_shopify', 'unreachable', 'already_installed', 'open_request', 'error']) {
-    assert.ok(installLeadOrigin('recomendacion', r).length <= 120);
-  }
-  assert.ok(installLeadOrigin('otro', 'nada').endsWith('resultado: error'));
-  const sent = [];
-  const contact = { name: 'Ana', email: 'a@b.co', phone: '3001234567', referral: 'chatgpt' };
-  const ok = await sendInstallLead({ contact, shopInput: 'mitienda.com', ip: '1.2.3.4', userAgent: 'UA', result: 'verified' },
-    { fetchImpl: async (u, o) => { sent.push(JSON.parse(o.body)); assert.ok(o.signal); return new Response('{"ok":true}'); } });
-  assert.equal(ok, true);
-  assert.deepEqual(Object.keys(sent[0]), Object.keys(buildSheetLead('t', {})));
-  assert.deepEqual(sent[0], { kind: 'lead', token: 'tok', nombre: 'Ana', email: 'a@b.co', whatsapp: '3001234567', shopify_url: 'mitienda.com',
-    session_id: '', origen: 'instalar | conoció: ChatGPT | resultado: verificada', ip: '1.2.3.4', user_agent: 'UA' });
-  const boom = await sendInstallLead({ contact, shopInput: 'x', ip: 'unknown', userAgent: '', result: 'error' },
-    { fetchImpl: async () => { throw new Error('caído'); } });
-  assert.equal(boom, false);
 });
